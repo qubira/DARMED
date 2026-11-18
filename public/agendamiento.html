@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Agenda Clínica | Grupo DARMED</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/base.css" />
+  <link rel="stylesheet" href="assets/admin.css" />
+  <style>
+    .view.is-on{display:block}
+    .content .card:not(.kpi){padding:18px}
+    .content .card:not(.kpi)>.card__head{padding:0 0 14px;border-bottom:0}
+    .content .card .feed-item{padding:10px 0}
+    .content .card ul{padding-left:18px!important}
+    .live-badge{font-size:.72rem}
+
+    .toolbar{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:14px}
+    .toolbar h3{font-size:1.05rem;min-width:220px}
+    .docs{display:flex;gap:8px;flex-wrap:wrap}
+    .dchip{display:flex;align-items:center;gap:8px;padding:4px 10px 4px 4px;border-radius:99px;border:1px solid var(--line);color:var(--text-2);background:var(--surface);font-size:.8rem;font-weight:600;transition:.2s}
+    .dchip .av-s{width:26px;height:26px;font-size:.66rem}
+    .dchip.off{opacity:.4}
+    .cal{display:grid;grid-template-columns:56px repeat(6,1fr);border:1px solid var(--line);border-radius:12px;overflow:hidden;background:var(--surface);min-width:820px}
+    .cal__h{z-index:4;padding:10px 8px;color:var(--muted);text-align:center;border-bottom:1px solid var(--line);border-left:1px solid var(--line);font-size:.78rem;background:var(--surface-2);position:sticky;top:0}
+    .cal__h b{display:block;font-size:1.3rem}
+    .cal__h.today b{background:var(--primary);color:#fff;border-radius:50%;width:38px;height:38px;display:grid;place-items:center;margin:2px auto 0}
+    .cal__t{font-size:.68rem;color:var(--muted);text-align:right;padding-right:8px}
+    .cal__t div{height:56px;transform:translateY(-6px)}
+    .cal__col{position:relative;border-left:1px solid var(--line);background:repeating-linear-gradient(180deg,transparent 0 55px,var(--line) 55px 56px);cursor:copy}
+    .cal__col:hover{background-color:var(--hover)}
+    .ev{position:absolute;left:4px;right:4px;border-radius:7px;color:var(--text);padding:6px 8px;font-size:.72rem;overflow:hidden;cursor:pointer;border-left:4px solid var(--c);background:color-mix(in srgb,var(--c) 14%,var(--surface));transition:.2s;z-index:1}
+    .ev:hover{transform:scale(1.03);box-shadow:0 10px 20px -10px rgba(0,0,0,.35);z-index:3}
+    .ev b{display:block;font-size:.76rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+    .ev small{opacity:.75}
+    .ev.web{box-shadow:0 0 0 2px var(--c);animation:glow 2s ease-in-out 3}
+    @keyframes glow{50%{box-shadow:0 0 0 5px color-mix(in srgb,var(--c) 30%,transparent)}}
+    .ev.st-cancel{opacity:.45;text-decoration:line-through}
+    .ev.st-done{background:#eefaf4;border-left-color:var(--ok)}
+    .now-line{position:absolute;left:0;right:0;height:2px;background:var(--danger);z-index:2}
+    .now-line::before{content:"";position:absolute;left:-5px;top:-4px;width:10px;height:10px;border-radius:50%;background:var(--danger)}
+    .cal-wrap{overflow:auto;max-height:640px;border-radius:18px}
+    .dcards{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:14px}
+    .dcard{border:1px solid var(--line);border-radius:12px;padding:18px;background:var(--surface);display:grid;gap:10px;border-top:4px solid var(--c)}
+    .dcard .acts{display:flex;gap:6px;flex-wrap:wrap}
+    .dcard .acts button{font-size:.74rem;font-weight:700;padding:7px 10px;border-radius:9px;border:1px solid var(--line)}
+    .dcard .acts button:hover{background:var(--soft)}
+    .modal .grid2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+    .prio{display:flex;gap:8px}.prio button{flex:1;height:42px;border-radius:12px;border:1.5px solid var(--line);font-weight:600;font-size:.82rem}
+    .prio button.is-on{border-color:var(--primary);background:var(--soft)}
+    .conflict{background:rgba(224,71,95,.08);color:var(--danger);border-radius:12px;padding:10px 14px;font-size:.82rem;display:none}
+    .conflict.show{display:block;animation:fadeUp .3s}
+    .detail-row{display:flex;justify-content:space-between;padding:10px 0;border-bottom:1px dashed var(--line);font-size:.88rem}
+    .detail-row span{color:var(--muted)}
+    .avail{display:grid;gap:8px}
+    .avail div{display:flex;align-items:center;gap:10px;font-size:.84rem}
+    .avail .meter{flex:1;margin:0}
+  </style>
+</head>
+<body>
+  <div class="app">
+    <aside class="side"></aside>
+
+    <div class="main">
+      <header class="topbar"></header>
+      <main class="content">
+      <div class="ph"><div><h1 id="pTitle">Panel del agendador</h1><p id="pSub">Crea, edita y reprograma citas sin sobreagendar.</p></div>
+        <div class="ph__act"><div class="seg"><button class="is-on" data-panel="agenda">Agendador <span class="tagx" id="pillWeb" style="margin-left:4px">0</span></button><button data-panel="doctor">Panel del doctor</button></div><button class="btn" data-open="newModal" id="newBtn">+ Nueva cita</button></div></div>
+<section class="view is-on" id="v-agenda">
+        <div class="kpis" id="kpis"></div>
+        <div class="g2">
+          <div class="card">
+            <div class="toolbar">
+              <button class="tbtn" id="prevW">◀</button><button class="tbtn" id="todayW">Hoy</button><button class="tbtn" id="nextW">▶</button>
+              <h3 id="wLabel"></h3>
+              <div class="docs" id="docFilter" style="margin-left:auto"></div>
+            </div>
+            <div class="cal-wrap"><div class="cal" id="cal"></div></div>
+            <p style="font-size:.76rem;color:var(--muted);margin-top:10px">💡 Haz clic en un espacio vacío para crear una cita ahí. Las citas con borde brillante llegaron desde la web de DARMED.</p>
+          </div>
+          <div style="display:grid;gap:16px;align-content:start">
+            <div class="card"><div class="card__head"><h3>Reservas desde la web</h3><span class="live-badge" style="font-size:.7rem;color:var(--ok);font-weight:700">● EN VIVO</span></div><div class="feed" id="webList"></div></div>
+            <div class="card"><div class="card__head"><h3>Ocupación hoy</h3></div><div class="avail" id="avail"></div></div>
+            <div class="card"><div class="card__head"><h3>Reglas del sistema</h3></div><ul style="font-size:.82rem;color:var(--muted);display:grid;gap:8px;padding-left:18px"><li>No se permite cruce de horario por doctor.</li><li>El agendador crea y edita; solo el doctor cierra el caso.</li><li>Las reservas web entran como <b>Programado</b>.</li></ul></div>
+          </div>
+        </div>
+      </section>
+
+      <section class="view" id="v-doctor">
+        <div class="toolbar"><h3>Selecciona doctor:</h3><div class="docs" id="docPick"></div></div>
+        <div class="kpis" id="docKpis"></div>
+        <div class="card" style="margin-bottom:16px"><div class="card__head"><div><h3>Programación de hoy</h3><small>Solo el doctor puede marcar culminado, no asistió o cancelado</small></div></div><div class="dcards" id="dToday"></div></div>
+        <div class="card"><div class="card__head"><h3>Mañana</h3></div><div class="dcards" id="dTomorrow"></div></div>
+      </section>
+      </main>
+    </div>
+  </div>
+
+  <!-- Nueva cita -->
+  <div class="modal" id="newModal"><div class="scrim"></div><div class="modal__box modal__box--sm" style="padding:30px;width:min(620px,100%)">
+    <button class="modal__close" data-close>✕</button>
+    <h3 style="font-size:1.4rem;font-weight:800;margin-bottom:4px">Nuevo agendamiento</h3><p style="color:var(--muted);font-size:.86rem;margin-bottom:18px">El sistema valida cruces de horario por doctor.</p>
+    <form id="newForm" style="display:grid;gap:12px">
+      <div class="grid2"><div class="field"><label>Paciente</label><input class="input" id="nClient" required placeholder="Nombre y apellido"></div><div class="field"><label>Celular</label><input class="input" id="nPhone" placeholder="9XX XXX XXX"></div></div>
+      <div class="grid2"><div class="field"><label>Tratamiento</label><select class="input" id="nTreat"></select></div><div class="field"><label>Doctor</label><select class="input" id="nDoc"></select></div></div>
+      <div class="grid2"><div class="field"><label>Fecha</label><input class="input" type="date" id="nDate" required></div><div class="grid2"><div class="field"><label>Inicio</label><input class="input" type="time" id="nStart" step="1800" required></div><div class="field"><label>Fin</label><input class="input" type="time" id="nEnd" step="1800" required></div></div></div>
+      <div class="field"><label>Prioridad</label><div class="prio" id="nPrio"><button type="button" data-p="Baja">🟢 Baja</button><button type="button" class="is-on" data-p="Media">🟡 Media</button><button type="button" data-p="Alta">🔴 Alta</button></div></div>
+      <div class="conflict" id="conflict"></div>
+      <button class="btn btn--block">Crear agendamiento</button>
+    </form>
+  </div></div>
+
+  <!-- Detalle -->
+  <div class="modal" id="detModal"><div class="scrim"></div><div class="modal__box modal__box--sm" style="padding:30px">
+    <button class="modal__close" data-close>✕</button><div id="detBody"></div>
+  </div></div>
+
+  <script src="assets/base.js"></script>
+  <script src="assets/admin.js"></script>
+  <script>
+    const { $, $$, toast, Group, esc } = UI;
+    const u = Group.user();
+    Admin.mount({ page: 'agenda', active: 'agenda', title: 'Agendamientos', onBrand: () => renderAll() });
+
+    const DOCS = [
+      { n: 'Dra. Daniela Armas', s: 'Medicina estética', c: '#b5487f', brand: 'darmed' },
+      { n: 'Dr. Martín Salazar', s: 'Dermatología', c: '#7a1a4f', brand: 'darmed' },
+      { n: 'Dra. Lucía Ferreyra', s: 'Armonización facial', c: '#c8a06a', brand: 'darmed' },
+      { n: 'Lic. Andrea Paredes', s: 'Cosmiatría corporal', c: '#5b6ef5', brand: 'darmed' },
+      { n: 'Lic. Paola Ríos', s: 'Láser DEPIZONE', c: '#0aa5e8', brand: 'depizone' }
+    ];
+    const TREATS = ['Evaluación facial', 'Toxina Botulínica', 'Ácido Hialurónico', 'Hydrafacial', 'Peeling químico', 'Bioestimuladores', 'Drenaje linfático', 'Reducción de medidas', 'Depilación láser', 'Plasma capilar'];
+    const PAC = ['Valeria Ríos', 'Carmen Paz', 'Lucía Torres', 'Andrea Vega', 'Rosa Medina', 'Diego León', 'Fernanda Soto', 'Camila Ruiz', 'Sofía Herrera', 'Renzo Castro', 'Mafer Quispe', 'Gabriela Núñez'];
+    const H0 = 8, H1 = 20, PX = 56;
+    const iso = d => { const z = new Date(d); z.setMinutes(z.getMinutes() - z.getTimezoneOffset()); return z.toISOString().slice(0, 10); };
+    const toMin = s => { const [h, m] = s.split(':').map(Number); return h * 60 + m; };
+    const fmt = m => `${String(Math.floor(m / 60)).padStart(2, '0')}:${String(m % 60).padStart(2, '0')}`;
+
+    // Citas semilla (por semana, determinísticas) + citas guardadas (web y creadas aquí)
+    const overrides = () => UI.store.get('gd-appt-status', {});
+    function seedFor(dateStr) {
+      let s = [...dateStr].reduce((a, c) => a + c.charCodeAt(0), 0);
+      const r = () => (s = (s * 9301 + 49297) % 233280) / 233280;
+      const day = new Date(dateStr + 'T12:00').getDay(); if (day === 0) return [];
+      const out = [];
+      DOCS.forEach((d, di) => { let t = H0 * 60 + Math.floor(r() * 3) * 30; while (t < (H1 - 1) * 60) { if (r() < .3) { const len = [30, 60, 60, 90][Math.floor(r() * 4)]; out.push({ id: `S-${dateStr}-${di}-${t}`, client: PAC[Math.floor(r() * PAC.length)], treat: d.brand === 'depizone' ? 'Depilación láser' : TREATS[Math.floor(r() * 8)], docIdx: di, date: dateStr, start: fmt(t), end: fmt(t + len), prio: ['Baja', 'Media', 'Alta'][Math.floor(r() * 3)], status: 'Programado', brand: d.brand }); t += len; } t += 60 + Math.floor(r() * 3) * 30; } });
+      return out;
+    }
+    function apptsFor(dateStr) {
+      const ov = overrides();
+      const saved = Group.bookings().filter(b => b.date === dateStr).map(b => ({ ...b, docIdx: b.docIdx ?? Math.max(0, DOCS.findIndex(d => d.n === b.doc)), prio: b.prio || 'Media', web: b.source === 'Web DARMED' }));
+      // las citas guardadas tienen prioridad: se eliminan semillas que choquen con ellas
+      const seeds = seedFor(dateStr).filter(s => !saved.some(b => b.docIdx === s.docIdx && toMin(b.start) < toMin(s.end) && toMin(s.start) < toMin(b.end)));
+      return [...seeds, ...saved].map(a => ({ ...a, status: ov[a.id] || a.status || 'Programado' }));
+    }
+
+    // Semana
+    let weekStart = (() => { const d = new Date(); d.setHours(0, 0, 0, 0); d.setDate(d.getDate() - ((d.getDay() + 6) % 7)); return d; })();
+    let docOn = new Set(DOCS.map((_, i) => i));
+    function renderAgenda() {
+      const days = Array.from({ length: 6 }, (_, i) => { const d = new Date(weekStart); d.setDate(d.getDate() + i); return d; });
+      $('#wLabel').textContent = `${days[0].toLocaleDateString('es-PE', { day: 'numeric', month: 'short' })} – ${days[5].toLocaleDateString('es-PE', { day: 'numeric', month: 'short', year: 'numeric' })}`;
+      $('#docFilter').innerHTML = DOCS.map((d, i) => `<button class="dchip ${docOn.has(i) ? '' : 'off'}" data-df="${i}"><span class="av-s" style="background:${d.c}">${d.n.split(' ')[1][0]}${d.n.split(' ')[2][0]}</span>${d.n.split(' ').slice(0, 2).join(' ')}</button>`).join('');
+      const todayS = iso(new Date());
+      let html = `<div class="cal__h" style="border-left:0"></div>` + days.map(d => `<div class="cal__h ${iso(d) === todayS ? 'today' : ''}">${d.toLocaleDateString('es-PE', { weekday: 'short' }).toUpperCase()}<b>${d.getDate()}</b></div>`).join('');
+      html += `<div class="cal__t">${Array.from({ length: H1 - H0 }, (_, i) => `<div>${H0 + i}:00</div>`).join('')}</div>`;
+      days.forEach(d => {
+        const ds = iso(d);
+        const list = apptsFor(ds).filter(a => docOn.has(a.docIdx));
+        // reparte en columnas por doctor si se superponen
+        // asigna carriles solo cuando las citas se superponen
+        list.sort((a, b) => toMin(a.start) - toMin(b.start));
+        const ends = []; list.forEach(a => { let l = ends.findIndex(e => e <= toMin(a.start)); if (l < 0) { l = ends.length; ends.push(0); } ends[l] = toMin(a.end); a._lane = l; });
+        const nL = Math.max(1, ends.length);
+        const evs = list.map(a => { const top = (toMin(a.start) - H0 * 60) / 60 * PX, h = Math.max(24, (toMin(a.end) - toMin(a.start)) / 60 * PX - 3); const lane = a._lane, w = 100 / nL;
+          return `<div class="ev ${a.web ? 'web' : ''} ${a.status === 'Cancelado' || a.status === 'No asistió' ? 'st-cancel' : ''} ${a.status === 'Culminado' ? 'st-done' : ''}" style="--c:${DOCS[a.docIdx].c};top:${top}px;height:${h}px;left:calc(${lane * w}% + 2px);right:auto;width:calc(${w}% - 4px)" data-ev="${esc(a.id)}" data-date="${ds}" title="${esc(a.client)} · ${esc(a.treat)}"><b>${a.web ? '🌐 ' : ''}${esc(a.client)}</b><small>${a.start} · ${esc(a.treat)}</small></div>`; }).join('');
+        const now = new Date(); const nowLine = ds === todayS && now.getHours() >= H0 && now.getHours() < H1 ? `<div class="now-line" style="top:${(now.getHours() * 60 + now.getMinutes() - H0 * 60) / 60 * PX}px"></div>` : '';
+        html += `<div class="cal__col" data-col="${ds}" style="height:${(H1 - H0) * PX}px">${evs}${nowLine}</div>`;
+      });
+      $('#cal').innerHTML = html;
+
+      // KPIs y paneles laterales
+      const today = apptsFor(todayS), week = days.flatMap(d => apptsFor(iso(d)));
+      const web = Group.bookings();
+      $('#kpis').innerHTML = [['Citas hoy', today.length, Admin.I('cal')], ['Citas en la semana', week.length, Admin.I('chart')], ['Prioridad alta hoy', today.filter(a => a.prio === 'Alta').length, Admin.I('alert')], ['Reservas web', web.length, '🌐']].map(k => `<div class="card kpi"><span class="ico">${k[2]}</span><small>${k[0]}</small><b>${k[1]}</b></div>`).join('');
+      $('#pillWeb').textContent = web.length;
+      $('#webList').innerHTML = web.length ? web.slice().reverse().slice(0, 6).map(b => `<div class="feed-item" style="cursor:pointer" data-jump="${b.date}"><span class="dot">🌐</span><div><b>${esc(b.client)}</b> · ${esc(b.treat)}<small>${new Date(b.date + 'T12:00').toLocaleDateString('es-PE', { weekday: 'short', day: 'numeric', month: 'short' })} · ${b.start} · ${esc(b.doc || '')}</small></div></div>`).join('')
+        : '<p style="color:var(--muted);font-size:.84rem">Aún no hay reservas web. <a href="darmed.html#reservar" target="_blank" style="color:var(--primary);font-weight:700">Haz una en DARMED ↗</a> y aparecerá aquí al instante.</p>';
+      $('#avail').innerHTML = DOCS.map((d, i) => { const mins = today.filter(a => a.docIdx === i).reduce((s, a) => s + toMin(a.end) - toMin(a.start), 0); const p = Math.round(mins / ((H1 - H0) * 60) * 100); return `<div><span class="av-s" style="background:${d.c};width:26px;height:26px;font-size:.6rem">${d.n.split(' ')[1][0]}${d.n.split(' ')[2][0]}</span><div class="meter"><span style="width:${p}%;background:${d.c}"></span></div><b style="font-size:.78rem;width:36px;text-align:right">${p}%</b></div>`; }).join('');
+    }
+    $('#prevW').onclick = () => { weekStart.setDate(weekStart.getDate() - 7); renderAgenda(); };
+    $('#nextW').onclick = () => { weekStart.setDate(weekStart.getDate() + 7); renderAgenda(); };
+    $('#todayW').onclick = () => { const d = new Date(); d.setHours(0, 0, 0, 0); d.setDate(d.getDate() - ((d.getDay() + 6) % 7)); weekStart = d; renderAgenda(); };
+
+    // Nueva cita
+    $('#nTreat').innerHTML = TREATS.map(t => `<option>${t}</option>`).join('');
+    $('#nDoc').innerHTML = DOCS.map((d, i) => `<option value="${i}">${d.n} · ${d.s}</option>`).join('');
+    let prio = 'Media';
+    $('#nPrio').onclick = e => { const b = e.target.closest('[data-p]'); if (!b) return; prio = b.dataset.p; $$('#nPrio button').forEach(x => x.classList.toggle('is-on', x === b)); };
+    function openNew(date, start, doc) {
+      $('#newForm').reset(); $('#conflict').classList.remove('show');
+      $('#nDate').value = date || iso(new Date()); $('#nStart').value = start || '10:00'; $('#nEnd').value = fmt(toMin(start || '10:00') + 60);
+      if (doc != null) $('#nDoc').value = doc; UI.openModal('newModal');
+    }
+    $('#newBtn').addEventListener('click', () => openNew());
+    $('#nStart').addEventListener('change', () => { $('#nEnd').value = fmt(toMin($('#nStart').value) + 60); });
+    $('#newForm').addEventListener('submit', e => {
+      e.preventDefault();
+      const di = +$('#nDoc').value, date = $('#nDate').value, s = $('#nStart').value, en = $('#nEnd').value;
+      if (toMin(en) <= toMin(s)) { $('#conflict').textContent = 'La hora de fin debe ser posterior al inicio.'; return $('#conflict').classList.add('show'); }
+      const clash = apptsFor(date).find(a => a.docIdx === di && a.status !== 'Cancelado' && toMin(a.start) < toMin(en) && toMin(s) < toMin(a.end));
+      if (clash) {
+        const free = DOCS.map((_, i) => i).filter(i => i !== di && !apptsFor(date).some(a => a.docIdx === i && toMin(a.start) < toMin(en) && toMin(s) < toMin(a.end)));
+        $('#conflict').innerHTML = `⚠️ ${DOCS[di].n} ya tiene a <b>${esc(clash.client)}</b> de ${clash.start} a ${clash.end}.${free.length ? ` Disponibles en ese horario: ${free.map(i => `<a href="#" data-alt="${i}" style="text-decoration:underline;font-weight:700">${DOCS[i].n}</a>`).join(', ')}` : ''}`;
+        return $('#conflict').classList.add('show');
+      }
+      Group.addBooking({ brand: DOCS[di].brand, client: esc($('#nClient').value.trim()), phone: $('#nPhone').value, treat: $('#nTreat').value, doc: DOCS[di].n, docIdx: di, date, start: s, end: en, prio, status: 'Programado', source: 'Agendador' });
+      UI.closeModals(); toast(`Cita creada para <b>${esc($('#nClient').value)}</b> · ${s}`, '📅');
+      const d = new Date(date + 'T12:00'); d.setDate(d.getDate() - ((d.getDay() + 6) % 7)); d.setHours(0, 0, 0, 0); weekStart = d; renderAgenda();
+    });
+    $('#conflict').addEventListener('click', e => { const a = e.target.closest('[data-alt]'); if (a) { e.preventDefault(); $('#nDoc').value = a.dataset.alt; $('#conflict').classList.remove('show'); toast('Doctor cambiado. Vuelve a confirmar.', '🔁'); } });
+
+    // Clic en calendario
+    let detail = null;
+    $('#cal').addEventListener('click', e => {
+      const ev = e.target.closest('[data-ev]');
+      if (ev) { detail = apptsFor(ev.dataset.date).find(a => a.id === ev.dataset.ev); return showDetail(); }
+      const col = e.target.closest('[data-col]');
+      if (col) { const y = e.clientY - col.getBoundingClientRect().top; const m = H0 * 60 + Math.floor(y / PX * 2) * 30; openNew(col.dataset.col, fmt(m)); }
+    });
+    function setStatus(id, st) { const ov = overrides(); ov[id] = st; UI.store.set('gd-appt-status', ov); }
+    function showDetail() {
+      const a = detail, d = DOCS[a.docIdx];
+      const role = u ? u.role : 'Agendador';
+      $('#detBody').innerHTML = `<span class="st ${a.prio === 'Alta' ? 'st--bad' : a.prio === 'Media' ? 'st--warn' : 'st--ok'}">Prioridad ${a.prio}</span>${a.web ? ' <span class="st st--info">Reserva web</span>' : ''}
+        <h3 style="font-size:1.5rem;font-weight:800;margin:10px 0 14px">${esc(a.client)}</h3>
+        <div class="detail-row"><span>Tratamiento</span><b>${esc(a.treat)}</b></div>
+        <div class="detail-row"><span>Doctor</span><b style="color:${d.c}">${d.n}</b></div>
+        <div class="detail-row"><span>Fecha</span><b>${new Date(a.date + 'T12:00').toLocaleDateString('es-PE', { weekday: 'long', day: 'numeric', month: 'long' })}</b></div>
+        <div class="detail-row"><span>Horario</span><b>${a.start} – ${a.end}</b></div>
+        <div class="detail-row"><span>Estado</span><b>${a.status}</b></div>
+        ${a.phone ? `<div class="detail-row"><span>Celular</span><b>${esc(a.phone)}</b></div>` : ''}
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:18px">
+          <a class="btn btn--ghost btn--sm" href="https://wa.me/51943387184?text=${encodeURIComponent('Hola ' + a.client + ', te recordamos tu cita de ' + a.treat + ' a las ' + a.start)}" target="_blank" rel="noopener">💬 Recordatorio</a>
+          <button class="btn btn--ghost btn--sm" data-st="Confirmado">✓ Confirmar</button>
+          ${role === 'Doctor' || role === 'Master' ? `<button class="btn btn--sm" data-st="Culminado" style="background:var(--ok)">Culminado</button><button class="btn btn--sm" data-st="No asistió" style="background:var(--warn)">No asistió</button>` : `<p style="grid-column:1/-1;font-size:.76rem;color:var(--muted)">🔒 Solo el doctor asignado puede cerrar el caso.</p>`}
+          <button class="btn btn--ghost btn--sm" data-st="Cancelado" style="grid-column:1/-1;color:var(--danger)">Cancelar cita</button>
+        </div>`;
+      UI.openModal('detModal');
+    }
+    $('#detBody').addEventListener('click', e => { const b = e.target.closest('[data-st]'); if (!b) return; setStatus(detail.id, b.dataset.st); UI.closeModals(); toast(`Cita de ${esc(detail.client)}: <b>${b.dataset.st}</b>`, '✓'); renderAll(); });
+    document.addEventListener('click', e => {
+      const f = e.target.closest('[data-df]'); if (f) { const i = +f.dataset.df; docOn.has(i) ? docOn.delete(i) : docOn.add(i); if (!docOn.size) docOn.add(i); renderAgenda(); }
+      const j = e.target.closest('[data-jump]'); if (j) { const d = new Date(j.dataset.jump + 'T12:00'); d.setDate(d.getDate() - ((d.getDay() + 6) % 7)); d.setHours(0, 0, 0, 0); weekStart = d; renderAgenda(); }
+      const p = e.target.closest('[data-panel]'); if (p) panel(p.dataset.panel);
+      const dp = e.target.closest('[data-dp]'); if (dp) { docSel = +dp.dataset.dp; renderDoctor(); }
+      const ds = e.target.closest('[data-dst]'); if (ds) { setStatus(ds.dataset.id, ds.dataset.dst); toast(`Caso actualizado: <b>${ds.dataset.dst}</b>`, '🩺'); renderDoctor(); }
+    });
+
+    // Panel doctor
+    let docSel = u && u.role === 'Doctor' ? Math.max(0, DOCS.findIndex(d => d.n.includes(u.name.split(' ')[1] || '#'))) : 0;
+    function cardsFor(dateStr, showActs) {
+      const list = apptsFor(dateStr).filter(a => a.docIdx === docSel).sort((a, b) => toMin(a.start) - toMin(b.start));
+      return list.length ? list.map(a => `<div class="dcard" style="--c:${a.prio === 'Alta' ? 'var(--danger)' : a.prio === 'Media' ? 'var(--warn)' : 'var(--ok)'}"><div style="display:flex;justify-content:space-between"><b>${a.start} – ${a.end}</b><span class="st ${a.status === 'Culminado' ? 'st--ok' : a.status === 'Programado' || a.status === 'Confirmado' ? 'st--info' : 'st--bad'}">${a.status}</span></div><div><b style="font-size:1.05rem">${a.web ? '🌐 ' : ''}${esc(a.client)}</b><br><small style="color:var(--muted)">${esc(a.treat)} · prioridad ${a.prio}</small></div>
+        ${showActs ? `<div class="acts"><button data-dst="Culminado" data-id="${esc(a.id)}">✅ Culminado</button><button data-dst="No asistió" data-id="${esc(a.id)}">🚫 No asistió</button><button data-dst="Cancelado" data-id="${esc(a.id)}">✕ Cancelado</button></div>` : ''}</div>`).join('') : '<p style="color:var(--muted);font-size:.86rem">Sin citas programadas.</p>';
+    }
+    function renderDoctor() {
+      $('#docPick').innerHTML = DOCS.map((d, i) => `<button class="dchip ${i === docSel ? '' : 'off'}" data-dp="${i}"><span class="av-s" style="background:${d.c}">${d.n.split(' ')[1][0]}${d.n.split(' ')[2][0]}</span>${d.n}</button>`).join('');
+      const t = iso(new Date()), tm = iso(new Date(Date.now() + 864e5));
+      const today = apptsFor(t).filter(a => a.docIdx === docSel);
+      $('#docKpis').innerHTML = [['Pacientes hoy', today.length, Admin.I('users')], ['Culminados', today.filter(a => a.status === 'Culminado').length, Admin.I('check')], ['Pendientes', today.filter(a => ['Programado', 'Confirmado'].includes(a.status)).length, Admin.I('hist')], ['Mañana', apptsFor(tm).filter(a => a.docIdx === docSel).length, '📆']].map(k => `<div class="card kpi"><span class="ico">${k[2]}</span><small>${k[0]}</small><b>${k[1]}</b></div>`).join('');
+      $('#dToday').innerHTML = cardsFor(t, true); $('#dTomorrow').innerHTML = cardsFor(tm, false);
+    }
+    function panel(p) {
+      $$('[data-panel]').forEach(b => b.classList.toggle('is-active', b.dataset.panel === p));
+      $('#v-agenda').classList.toggle('is-on', p === 'agenda'); $('#v-doctor').classList.toggle('is-on', p === 'doctor');
+      $('#pTitle').textContent = p === 'agenda' ? 'Panel del agendador' : 'Panel del doctor';
+      $('#pSub').textContent = p === 'agenda' ? 'Crea, edita y reprograma citas sin sobreagendar.' : 'Tu programación de hoy, mañana y cierre de casos.';
+      $('#newBtn').style.display = p === 'agenda' ? '' : 'none';
+      
+      p === 'agenda' ? renderAgenda() : renderDoctor();
+    }
+    function renderAll() { $('#v-doctor').classList.contains('is-on') ? renderDoctor() : renderAgenda(); }
+    Group.onChange(k => { if (k === 'gd-bookings') toast('Nueva reserva recibida desde la web 🌐', '📅'); renderAll(); });
+    panel(new URLSearchParams(location.search).get('panel') === 'doctor' ? 'doctor' : 'agenda');
+      </script>
+</body>
+</html>

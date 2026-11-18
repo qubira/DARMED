@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Master | Grupo DARMED</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/base.css" />
+  <link rel="stylesheet" href="assets/admin.css" />
+</head>
+<body>
+  <div class="app">
+    <aside class="side"></aside>
+    <div class="main">
+      <header class="topbar"></header>
+      <main class="content">
+        <section class="view" id="v-dashboard"></section>
+        <section class="view" id="v-reportes"></section>
+        <section class="view" id="v-caja"></section>
+        <section class="view" id="v-clientes"></section>
+        <section class="view" id="v-inventario"></section>
+        <section class="view" id="v-usuarios"></section>
+        <section class="view" id="v-roles"></section>
+        <section class="view" id="v-sedes"></section>
+        <section class="view" id="v-historial"></section>
+        <section class="view" id="v-config"></section>
+      </main>
+    </div>
+  </div>
+
+  <div class="modal" id="mInvite"><div class="scrim"></div><div class="modal__box modal__box--sm" style="padding:24px">
+    <button class="modal__close" data-close>✕</button>
+    <h3 style="font-size:1.1rem;font-weight:700">Invitar usuario</h3><p style="color:var(--muted);font-size:.84rem;margin:4px 0 18px">Recibirá un correo para activar su cuenta.</p>
+    <form id="fInvite" style="display:grid;gap:12px">
+      <div class="field"><label>Nombre completo</label><input class="input" id="iName" required placeholder="Ej. Karla Mendoza"></div>
+      <div class="field"><label>Correo corporativo</label><input class="input" id="iMail" type="email" required placeholder="nombre@grupodarmed.pe"></div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px"><div class="field"><label>Rol</label><select class="input" id="iRole"></select></div><div class="field"><label>Sede</label><select class="input" id="iSede"></select></div></div>
+      <div style="display:flex;gap:8px;justify-content:flex-end;margin-top:6px"><button type="button" class="btn btn--ghost" data-close>Cancelar</button><button class="btn">Enviar invitación</button></div>
+    </form>
+  </div></div>
+
+  <div class="modal" id="mCierre"><div class="scrim"></div><div class="modal__box modal__box--sm" style="padding:24px">
+    <button class="modal__close" data-close>✕</button><div id="cierreB"></div>
+  </div></div>
+
+  <script src="assets/base.js"></script>
+  <script src="assets/admin.js"></script>
+  <script src="master.js"></script>
+</body>
+</html>

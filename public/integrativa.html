@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>INTEGRATIVA | Medicina integrativa y bienestar</title>
+  <meta name="description" content="INTEGRATIVA by Grupo DARMED: sueroterapia, nutrición funcional, longevidad y bienestar. Únete a la lista de espera." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/base.css" />
+  <style>
+    :root{--primary:#2f6b4f;--primary-2:#7fb48f;--primary-ink:#fff;--accent:#cfe6d5;--soft:#eef5ef;--bg:#f8f6f0;--surface:#fff;--text:#18291f;--muted:#66796c;--line:#e3ebe2;--sand:#efe6d4;--clay:#c98b5e;
+      --font-display:'DM Serif Display',Georgia,serif;--font-body:'Inter',system-ui,sans-serif}
+    .sec-head h2,.display{font-weight:400}
+    .logo__mark{border-radius:50%;background:conic-gradient(from 200deg,#2f6b4f,#7fb48f,#c98b5e,#2f6b4f)}
+    .logo__name{letter-spacing:.02em}
+    /* Hero */
+    .hero{min-height:calc(100vh - 116px);display:grid;place-items:center;position:relative;overflow:hidden;padding:60px 0;background:radial-gradient(800px 500px at 15% 20%,#dcebdc,transparent 60%),radial-gradient(700px 500px at 90% 80%,#f1dfc8,transparent 60%),var(--bg)}
+    .blob{position:absolute;border-radius:50%;filter:blur(40px);opacity:.55;animation:drift 18s ease-in-out infinite}
+    .blob--1{width:380px;height:380px;background:#a9d1b4;left:-80px;top:20%}
+    .blob--2{width:300px;height:300px;background:#f0c9a5;right:-60px;top:10%;animation-delay:-6s}
+    .blob--3{width:240px;height:240px;background:#c7dcc0;right:20%;bottom:-60px;animation-delay:-12s}
+    @keyframes drift{50%{transform:translate(40px,-30px) scale(1.1)}}
+    .hero__inner{position:relative;text-align:center;max-width:860px}
+    .hero h1{font-family:var(--font-display);font-size:clamp(3rem,8vw,6.6rem);line-height:.95;font-weight:400;letter-spacing:-.02em;margin:22px 0}
+    .hero h1 em{color:var(--primary)}
+    .hero p{color:var(--muted);font-size:1.1rem;max-width:600px;margin:0 auto}
+    .launch{display:inline-flex;align-items:center;gap:10px;background:var(--surface);border:1px solid var(--line);border-radius:999px;padding:8px 16px;font-size:.82rem;font-weight:600}
+    .launch .dot{width:8px;height:8px;border-radius:50%;background:var(--clay);animation:livep 1.4s infinite}
+    @keyframes livep{50%{opacity:.25}}
+    .hero .countdown{justify-content:center;margin:34px 0}
+    .hero .countdown div{background:var(--surface);border-color:var(--line);min-width:84px;padding:16px 10px;box-shadow:var(--shadow-sm)}
+    .hero .countdown b{font-size:2.4rem;font-family:var(--font-display);font-weight:400;color:var(--primary)}
+    .wait{display:flex;gap:8px;max-width:520px;margin:0 auto;background:var(--surface);border-radius:999px;padding:6px;border:1px solid var(--line);box-shadow:var(--shadow)}
+    .wait input{flex:1;border:0;outline:0;background:none;padding:0 18px;min-width:0}
+    .wait-meta{margin-top:16px;font-size:.84rem;color:var(--muted);display:flex;align-items:center;justify-content:center;gap:10px}
+    .avatars{display:flex}.avatars span{width:30px;height:30px;border-radius:50%;border:2px solid var(--bg);margin-left:-8px;display:grid;place-items:center;font-size:.7rem;font-weight:700;color:#fff}
+    /* Pilares */
+    .pillars{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+    .pillar{border-radius:28px;padding:30px;background:var(--surface);border:1px solid var(--line);transition:.4s var(--ease);position:relative;overflow:hidden;min-height:260px;display:flex;flex-direction:column}
+    .pillar:hover{transform:translateY(-8px);box-shadow:var(--shadow)}
+    .pillar .ic{font-size:2.2rem;width:70px;height:70px;border-radius:22px;display:grid;place-items:center;background:var(--soft);margin-bottom:auto}
+    .pillar h3{font-family:var(--font-display);font-weight:400;font-size:1.8rem;margin-top:24px}
+    .pillar p{color:var(--muted);font-size:.9rem;margin-top:6px}
+    .pillar .from{margin-top:14px;font-weight:700;color:var(--primary);font-size:.86rem}
+    @media(max-width:900px){.pillars{grid-template-columns:1fr 1fr}}@media(max-width:560px){.pillars{grid-template-columns:1fr}}
+    /* Drip builder */
+    .drip{display:grid;grid-template-columns:1fr 340px 1fr;gap:30px;align-items:center}
+    .bag-wrap{display:grid;place-items:center;position:relative}
+    .bag{width:200px;height:300px;border-radius:40px 40px 70px 70px;border:3px solid rgba(47,107,79,.25);background:rgba(255,255,255,.6);position:relative;overflow:hidden;box-shadow:inset 0 0 30px rgba(255,255,255,.8),var(--shadow)}
+    .bag__fill{position:absolute;left:0;right:0;bottom:0;transition:height .8s var(--ease),background .8s}
+    .bag__fill::before{content:"";position:absolute;left:-50%;top:-12px;width:200%;height:24px;background:inherit;border-radius:45%;animation:wave 4s linear infinite;opacity:.7}
+    @keyframes wave{to{transform:translateX(25%)}}
+    .bag__label{position:absolute;inset:30% 18px auto;background:#fff;border-radius:12px;padding:10px;text-align:center;font-size:.72rem;z-index:2;box-shadow:var(--shadow-sm)}
+    .bag__label b{font-family:var(--font-display);font-size:1.15rem;font-weight:400;display:block}
+    .tube{width:4px;height:80px;background:linear-gradient(var(--primary-2),transparent);margin-top:-2px}
+    .drop{width:12px;height:16px;border-radius:50% 50% 50% 50%/60% 60% 40% 40%;background:var(--primary-2);animation:drip 1.4s ease-in infinite}
+    @keyframes drip{from{transform:translateY(-10px);opacity:0}30%{opacity:1}to{transform:translateY(40px);opacity:0}}
+    .ingr{display:grid;gap:10px}
+    .ing{display:flex;align-items:center;gap:14px;padding:14px 16px;border-radius:18px;background:var(--surface);border:1.5px solid var(--line);text-align:left;transition:.25s}
+    .ing:hover{border-color:var(--primary-2)}
+    .ing.is-on{border-color:var(--primary);background:var(--soft)}
+    .ing .sw{width:34px;height:34px;border-radius:50%;flex-shrink:0;box-shadow:inset 0 -6px 10px rgba(0,0,0,.12)}
+    .ing b{display:block;font-size:.9rem}
+    .ing small{color:var(--muted);font-size:.76rem}
+    .ing .chk{margin-left:auto;width:24px;height:24px;border-radius:50%;border:2px solid var(--line);display:grid;place-items:center;font-size:.7rem;color:#fff}
+    .ing.is-on .chk{background:var(--primary);border-color:var(--primary)}
+    .drip-sum{background:var(--text);color:#fff;border-radius:28px;padding:28px;display:grid;gap:14px}
+    .drip-sum h3{font-family:var(--font-display);font-weight:400;font-size:1.8rem}
+    .benefit-bars{display:grid;gap:10px}
+    .bb{font-size:.78rem}.bb div{height:6px;border-radius:9px;background:rgba(255,255,255,.12);margin-top:5px;overflow:hidden}
+    .bb span{display:block;height:100%;background:linear-gradient(90deg,#7fb48f,#f0c9a5);transition:width .7s var(--ease)}
+    @media(max-width:1000px){.drip{grid-template-columns:1fr}.bag-wrap{order:-1}}
+    /* Programas */
+    .programs{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+    .prog{border-radius:30px;overflow:hidden;background:var(--surface);border:1px solid var(--line);display:flex;flex-direction:column}
+    .prog__img{height:220px;position:relative;background:var(--accent)}
+    .prog__img img{width:100%;height:100%;object-fit:cover}
+    .prog__img .tag{position:absolute;top:16px;left:16px}
+    .prog__body{padding:26px;display:flex;flex-direction:column;gap:10px;flex:1}
+    .prog__body h3{font-family:var(--font-display);font-weight:400;font-size:1.7rem}
+    .prog__body ul{list-style:none;font-size:.86rem;color:var(--muted);display:grid;gap:6px}
+    .prog__body li::before{content:"🌿 "}
+    .prog__price{display:flex;justify-content:space-between;align-items:center;margin-top:auto;padding-top:14px;border-top:1px dashed var(--line)}
+    @media(max-width:900px){.programs{grid-template-columns:1fr}}
+    /* Wellness score */
+    .score{display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:center;background:var(--sand);border-radius:36px;padding:50px}
+    .sliders{display:grid;gap:22px}
+    .sl label{display:flex;justify-content:space-between;font-weight:600;font-size:.9rem}
+    .sl input{width:100%;accent-color:var(--primary);margin-top:8px}
+    .ring{width:260px;height:260px;margin:0 auto;position:relative}
+    .ring svg{transform:rotate(-90deg)}
+    .ring circle{fill:none;stroke-width:16;stroke-linecap:round}
+    .ring__txt{position:absolute;inset:0;display:grid;place-items:center;text-align:center}
+    .ring__txt b{font-family:var(--font-display);font-size:4.4rem;font-weight:400;line-height:1;display:block;color:var(--primary)}
+    @media(max-width:860px){.score{grid-template-columns:1fr;padding:28px}}
+    .team-mini{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
+    .tm{text-align:center}.tm img{width:100%;aspect-ratio:1;border-radius:50%;object-fit:cover;background:var(--accent);margin-bottom:12px;transition:.4s}
+    .tm:hover img{transform:scale(1.05) rotate(-2deg)}
+    .tm small{color:var(--muted);display:block}
+    @media(max-width:800px){.team-mini{grid-template-columns:1fr 1fr}}
+  </style>
+</head>
+<body>
+  <div data-group-bar></div>
+  <header class="site-header">
+    <div class="container site-header__inner">
+      <button class="icon-btn menu-btn" data-menu-open aria-label="Menú"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 7h16M4 12h16M4 17h10"/></svg></button>
+      <a href="integrativa.html" class="logo"><span class="logo__mark"></span><span class="logo__text"><span class="logo__name">Integrativa</span><span class="logo__tag">Medicina &amp; Longevidad</span></span></a>
+      <nav class="nav"><a href="#pilares">Especialidades</a><a href="#sueros">Arma tu suero</a><a href="#programas">Programas</a><a href="#score">Wellness score</a><a href="#equipo">Equipo</a></nav>
+      <div class="header-actions"><button class="icon-btn" data-cart-btn aria-label="Reservas"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M5 8h14l-1 12H6L5 8Z"/><path d="M9 8V6a3 3 0 0 1 6 0v2"/></svg><span class="badge-count" data-cart-count>0</span></button><a href="#top" class="btn btn--sm">Lista de espera</a></div>
+    </div>
+  </header>
+  <div class="mobile-nav"><div class="scrim"></div><div class="mobile-nav__panel"><b style="font-family:var(--font-display);font-size:1.6rem;margin-bottom:10px">Integrativa</b><a href="#pilares">Especialidades</a><a href="#sueros">Arma tu suero</a><a href="#programas">Programas</a><a href="#score">Wellness score</a><a href="#equipo">Equipo</a></div></div>
+
+  <main id="top">
+    <section class="hero">
+      <span class="blob blob--1"></span><span class="blob blob--2"></span><span class="blob blob--3"></span>
+      <div class="container hero__inner">
+        <span class="launch" data-reveal><span class="dot"></span> Gran apertura · Enero 2027 · San Isidro</span>
+        <h1 data-reveal data-delay="100">Medicina que mira<br>a la persona <em>completa</em></h1>
+        <p data-reveal data-delay="200">Sueroterapia, nutrición funcional, medicina regenerativa y longevidad en un solo espacio. Únete a la lista de espera y obtén tu primera consulta gratis.</p>
+        <div data-countdown="1200" data-reveal data-delay="300"></div>
+        <form class="wait" id="waitForm" data-reveal data-delay="400"><input type="email" required placeholder="Tu correo electrónico" id="waitMail"><button class="btn">Quiero mi lugar</button></form>
+        <div class="wait-meta" data-reveal data-delay="500"><div class="avatars"><span style="background:#2f6b4f">VR</span><span style="background:#c98b5e">MC</span><span style="background:#7fb48f">AL</span><span style="background:#18291f">+</span></div><span><b id="waitN">1,284</b> personas ya están en la lista</span></div>
+      </div>
+    </section>
+
+    <section class="section" id="pilares">
+      <div class="container">
+        <div class="sec-head" data-reveal><div><span class="eyebrow">Especialidades</span><h2>Seis caminos hacia tu <em>equilibrio</em></h2></div><p>Un equipo médico multidisciplinario que integra evidencia científica con terapias complementarias.</p></div>
+        <div class="pillars" id="pillars"></div>
+      </div>
+    </section>
+
+    <section class="section section--soft" id="sueros">
+      <div class="container">
+        <div class="sec-head sec-head--center" data-reveal><span class="eyebrow">IV Drip Bar</span><h2>Arma tu <em>suero vitamínico</em></h2><p>Elige hasta 4 activos y mira cómo se compone tu fórmula personalizada.</p></div>
+        <div class="drip">
+          <div class="ingr" id="ingrA"></div>
+          <div class="bag-wrap" data-reveal="zoom"><div class="bag"><div class="bag__fill" id="fill"></div><div class="bag__label"><small>FÓRMULA</small><b id="formName">Elige activos</b><small id="formMl">0 ml</small></div></div><div class="tube"></div><div class="drop"></div></div>
+          <div class="ingr" id="ingrB"></div>
+        </div>
+        <div class="drip-sum" style="margin-top:34px" data-reveal>
+          <div style="display:grid;grid-template-columns:1fr 1.4fr auto;gap:30px;align-items:center" id="dripSumGrid">
+            <div><span class="eyebrow" style="color:#f0c9a5">Tu fórmula</span><h3 id="dTitle">Suero personalizado</h3><small style="opacity:.6" id="dTime">Duración: 30 min</small></div>
+            <div class="benefit-bars" id="bars"></div>
+            <div style="text-align:right"><div style="font-size:2.2rem;font-weight:800" id="dPrice">S/ 0</div><button class="btn btn--light btn--sm" id="dAdd" style="margin-top:8px">Pre-reservar</button></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="programas">
+      <div class="container">
+        <div class="sec-head" data-reveal><div><span class="eyebrow">Programas</span><h2>Planes de <em>90 días</em></h2></div><span class="tag tag--pri">Pre-venta -25%</span></div>
+        <div class="programs" id="programs"></div>
+      </div>
+    </section>
+
+    <section class="section" id="score">
+      <div class="container">
+        <div class="score" data-reveal>
+          <div><span class="eyebrow">Autoevaluación</span><h2 class="display" style="font-size:clamp(2rem,4vw,3rem)">Tu <em>wellness score</em></h2><p style="color:var(--muted);margin:10px 0 26px">Mueve los controles según cómo te sentiste esta semana.</p>
+            <div class="sliders" id="sliders"></div></div>
+          <div style="text-align:center"><div class="ring"><svg viewBox="0 0 260 260" width="260" height="260"><circle cx="130" cy="130" r="110" stroke="rgba(47,107,79,.12)"/><circle cx="130" cy="130" r="110" stroke="url(#rg)" id="ringC" stroke-dasharray="691" stroke-dashoffset="691" style="transition:stroke-dashoffset .8s var(--ease)"/><defs><linearGradient id="rg"><stop offset="0" stop-color="#2f6b4f"/><stop offset="1" stop-color="#c98b5e"/></linearGradient></defs></svg>
+            <div class="ring__txt"><div><b id="scoreN">0</b><small style="color:var(--muted)">de 100</small></div></div></div>
+            <p id="scoreTxt" style="margin-top:18px;font-weight:600"></p><p id="scoreRec" style="color:var(--muted);font-size:.9rem;margin-top:6px"></p></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section--soft" id="equipo">
+      <div class="container">
+        <div class="sec-head sec-head--center" data-reveal><span class="eyebrow">Equipo fundador</span><h2>Ciencia con <em>calidez humana</em></h2></div>
+        <div class="team-mini" id="teamMini"></div>
+      </div>
+    </section>
+    <section class="cross-sec"><div class="container"><div class="sec-head" style="margin-bottom:20px"><div><span class="eyebrow">Grupo DARMED</span><h2>Sigue explorando <em>nuestras marcas</em></h2></div></div></div><div id="cross"></div></section>
+  </main>
+
+  <footer class="footer"><div class="container">
+    <div class="footer__grid">
+      <div class="footer__brand"><span class="logo__name" style="color:#fff;font-family:var(--font-display);font-size:1.8rem">Integrativa</span><p style="margin-top:14px;max-width:320px">Medicina integrativa y longevidad. Una marca del Grupo DARMED.</p><div class="socials"><a href="#">IG</a><a href="#">TK</a><a href="#">YT</a></div></div>
+      <div><h4>Especialidades</h4><ul><li>Sueroterapia</li><li>Nutrición funcional</li><li>Medicina regenerativa</li><li>Longevidad</li></ul></div>
+      <div><h4>Grupo</h4><ul><li><a href="darmed.html">DARMED</a></li><li><a href="renace.html">RENACE</a></li><li><a href="depizone.html">DEPIZONE</a></li></ul></div>
+      <div><h4>Próxima sede</h4><ul><li>Av. Camino Real 1120, San Isidro</li><li>WhatsApp: 943 387 184</li></ul></div>
+    </div>
+    <div class="footer__bottom"><span>© 2026 INTEGRATIVA · Grupo DARMED</span><span>Maqueta de diseño · datos de ejemplo</span></div>
+  </div></footer>
+
+  <script src="assets/base.js"></script>
+  <script>
+    const { $, $$, money, toast } = UI;
+    const IMG = (id, w = 700) => `https://images.unsplash.com/photo-${id}?auto=format&fit=crop&w=${w}&q=80`;
+    UI.init({ brand: 'integrativa', waText: 'Hola INTEGRATIVA, quiero unirme a la lista de espera', waBubble: '¿Te guardamos un lugar? 🌿' });
+    const cart = UI.Cart({ brand: 'integrativa', title: 'Tus pre-reservas', freeShip: 400, shipCost: 0, extraLabel: 'Consulta inicial', freeLabel: 'una consulta nutricional gratis', checkoutLabel: 'Confirmar pre-reserva', checkoutMsg: '¡Pre-reserva confirmada! Te avisamos en la apertura 🌿' });
+
+    // Lista de espera
+    let n = 1284;
+    setInterval(() => { n += Math.random() < .5 ? 1 : 0; $('#waitN').textContent = n.toLocaleString('es-PE'); }, 3500);
+    $('#waitForm').addEventListener('submit', e => { e.preventDefault(); n++; $('#waitN').textContent = n.toLocaleString('es-PE'); UI.Group.log('lead','integrativa',{label:'Lista de espera · '+UI.esc($('#waitMail').value)}); e.target.reset(); toast(`¡Estás dentro! Eres el número <b>${n.toLocaleString('es-PE')}</b> de la lista 🌿`, '🎉'); });
+
+    // Pilares
+    const PIL = [['💧', 'Sueroterapia', 'Vitaminas y minerales intravenosos para energía, inmunidad y recuperación.', 'Desde S/ 180'], ['🥗', 'Nutrición funcional', 'Planes basados en tu microbiota, analítica y estilo de vida.', 'Desde S/ 150'], ['🧬', 'Longevidad', 'Medición de edad biológica, hormonas y protocolos anti-aging.', 'Desde S/ 450'], ['🩸', 'Medicina regenerativa', 'Plasma rico en plaquetas y ozonoterapia para articulaciones.', 'Desde S/ 320'], ['🧘', 'Mente y sueño', 'Mindfulness clínico, manejo del estrés e higiene del sueño.', 'Desde S/ 120'], ['🪡', 'Acupuntura', 'Medicina tradicional china para dolor, ansiedad y digestión.', 'Desde S/ 110']];
+    $('#pillars').innerHTML = PIL.map((p, i) => `<div class="pillar" data-reveal data-delay="${i * 70}"><div class="ic">${p[0]}</div><h3>${p[1]}</h3><p>${p[2]}</p><span class="from">${p[3]} →</span></div>`).join('');
+
+    // Drip builder
+    const ING = [
+      { k: 'c', n: 'Vitamina C', d: 'Antioxidante · inmunidad', c: '#f4b740', p: 60, b: { Energía: 20, Inmunidad: 45, Piel: 30 } },
+      { k: 'b', n: 'Complejo B', d: 'Energía · sistema nervioso', c: '#e8603c', p: 45, b: { Energía: 45, Enfoque: 25 } },
+      { k: 'g', n: 'Glutatión', d: 'Detox · luminosidad', c: '#b8c9f0', p: 90, b: { Piel: 50, Detox: 45 } },
+      { k: 'm', n: 'Magnesio', d: 'Relajación · sueño', c: '#7fb48f', p: 40, b: { Sueño: 45, Recuperación: 30 } },
+      { k: 'z', n: 'Zinc', d: 'Defensas · cabello', c: '#9aa7b0', p: 35, b: { Inmunidad: 30, Piel: 15 } },
+      { k: 'n', n: 'NAD+', d: 'Longevidad celular', c: '#c98bc9', p: 220, b: { Energía: 35, Enfoque: 40, Longevidad: 60 } },
+      { k: 'a', n: 'Aminoácidos', d: 'Músculo · recuperación', c: '#e9a2a2', p: 70, b: { Recuperación: 50, Energía: 15 } },
+      { k: 'h', n: 'Hidratación', d: 'Suero base electrolitos', c: '#8fd0e8', p: 80, b: { Recuperación: 20, Energía: 10, Detox: 20 } }
+    ];
+    let pick = new Set(['h', 'c']);
+    function renderDrip() {
+      const ingHTML = list => list.map(i => `<button class="ing ${pick.has(i.k) ? 'is-on' : ''}" data-ing="${i.k}"><span class="sw" style="background:${i.c}"></span><span><b>${i.n}</b><small>${i.d} · S/ ${i.p}</small></span><span class="chk">✓</span></button>`).join('');
+      $('#ingrA').innerHTML = ingHTML(ING.slice(0, 4)); $('#ingrB').innerHTML = ingHTML(ING.slice(4));
+      const sel = ING.filter(i => pick.has(i.k));
+      const cols = sel.map(i => i.c);
+      $('#fill').style.height = (sel.length / 4 * 78) + '%';
+      $('#fill').style.background = cols.length > 1 ? `linear-gradient(180deg,${cols.join(',')})` : (cols[0] || 'transparent');
+      const names = { Energía: 'Energy Boost', Inmunidad: 'Immune Shield', Piel: 'Glow Drip', Detox: 'Detox Reset', Sueño: 'Deep Sleep', Recuperación: 'Recovery', Enfoque: 'Brain Focus', Longevidad: 'Longevity' };
+      const tot = {}; sel.forEach(i => Object.entries(i.b).forEach(([k, v]) => tot[k] = (tot[k] || 0) + v));
+      const top = Object.entries(tot).sort((a, b) => b[1] - a[1]);
+      const title = top.length ? names[top[0][0]] : 'Elige activos';
+      $('#formName').textContent = title; $('#dTitle').textContent = top.length ? 'Suero ' + title : 'Suero personalizado';
+      $('#formMl').textContent = (sel.length ? 250 + sel.length * 50 : 0) + ' ml';
+      $('#dTime').textContent = `Duración: ${30 + sel.length * 10} min · ${sel.map(i => i.n).join(' + ') || 'sin activos'}`;
+      $('#bars').innerHTML = (top.length ? top.slice(0, 4) : [['Energía', 0], ['Inmunidad', 0], ['Piel', 0]]).map(([k, v]) => `<div class="bb">${k}<div><span style="width:${Math.min(100, v)}%"></span></div></div>`).join('');
+      const price = sel.reduce((a, i) => a + i.p, 0);
+      $('#dPrice').textContent = 'S/ ' + price;
+    }
+    document.addEventListener('click', e => {
+      const b = e.target.closest('[data-ing]'); if (!b) return;
+      const k = b.dataset.ing;
+      if (pick.has(k)) pick.delete(k); else if (pick.size >= 4) return toast('Máximo 4 activos por suero', '💧'); else pick.add(k);
+      renderDrip();
+    });
+    $('#dAdd').addEventListener('click', () => {
+      const sel = ING.filter(i => pick.has(i.k)); if (!sel.length) return toast('Elige al menos un activo', '💧');
+      cart.add({ id: 'iv-' + [...pick].sort().join(''), name: $('#dTitle').textContent, brand: 'IV Drip Bar', variant: sel.map(i => i.n).join(' + '), price: sel.reduce((a, i) => a + i.p, 0), shape: 'syringe', c1: sel[0].c, c2: '#2f6b4f', bg: '#eef5ef' });
+    });
+    renderDrip();
+    if (matchMedia('(max-width:900px)').matches) $('#dripSumGrid').style.gridTemplateColumns = '1fr';
+
+    // Programas
+    const PROG = [
+      { n: 'Reset Metabólico', img: '1490645935967-10de6ba17061', t: 'Más elegido', l: ['3 consultas de nutrición funcional', 'Panel de laboratorio completo', '4 sueros detox', 'App de seguimiento'], p: 1490, o: 1990 },
+      { n: 'Longevidad 360', img: '1544367567-0f2fcb009e0b', t: 'Premium', l: ['Test de edad biológica', 'Protocolo hormonal', '6 sueros NAD+', 'Coach de bienestar'], p: 3890, o: 5190 },
+      { n: 'Calma & Sueño', img: '1506126613408-eca07ce68773', t: 'Nuevo', l: ['8 sesiones de mindfulness', '4 sesiones de acupuntura', '4 sueros de magnesio', 'Estudio del sueño'], p: 1190, o: 1590 }
+    ];
+    $('#programs').innerHTML = PROG.map((p, i) => `<div class="prog" data-reveal data-delay="${i * 100}"><div class="prog__img"><img src="${IMG(p.img)}" alt="" loading="lazy"><span class="tag tag--pri">${p.t}</span></div>
+      <div class="prog__body"><h3>${p.n}</h3><ul>${p.l.map(x => `<li>${x}</li>`).join('')}</ul>
+      <div class="prog__price"><div><b style="font-size:1.5rem">S/ ${p.p.toLocaleString('es-PE')}</b> <s style="color:var(--muted)">S/ ${p.o.toLocaleString('es-PE')}</s></div><button class="btn btn--sm" data-prog="${i}">Pre-reservar</button></div></div></div>`).join('');
+    $('#programs').addEventListener('click', e => { const b = e.target.closest('[data-prog]'); if (!b) return; const p = PROG[b.dataset.prog]; cart.add({ id: 'pg' + b.dataset.prog, name: 'Programa ' + p.n, brand: 'INTEGRATIVA · 90 días', price: p.p, shape: 'jar', c1: '#cfe6d5', c2: '#2f6b4f', bg: '#eef5ef' }); });
+
+    // Wellness score
+    const SL = [['😴 Calidad de sueño', 6], ['⚡ Energía diaria', 5], ['🧠 Manejo del estrés', 4], ['🥦 Alimentación', 6], ['🏃 Actividad física', 3]];
+    $('#sliders').innerHTML = SL.map((s, i) => `<div class="sl"><label>${s[0]} <span id="slv${i}">${s[1]}/10</span></label><input type="range" min="0" max="10" value="${s[1]}" data-sl="${i}"></div>`).join('');
+    function renderScore() {
+      const v = $$('[data-sl]').map(x => +x.value); v.forEach((x, i) => $('#slv' + i).textContent = x + '/10');
+      const s = Math.round(v.reduce((a, b) => a + b, 0) / 50 * 100);
+      $('#scoreN').textContent = s; $('#ringC').style.strokeDashoffset = 691 - 691 * s / 100;
+      const low = SL[v.indexOf(Math.min(...v))][0];
+      $('#scoreTxt').textContent = s >= 75 ? '¡Excelente! Vas por gran camino 🌟' : s >= 50 ? 'Buen equilibrio, con espacio para mejorar 🌱' : 'Tu cuerpo te pide una pausa 🍃';
+      $('#scoreRec').innerHTML = `Tu área a trabajar: <b>${low}</b>. Te recomendamos el programa <b>${/sueño|estrés/i.test(low) ? 'Calma & Sueño' : /Energía|física/i.test(low) ? 'Longevidad 360' : 'Reset Metabólico'}</b>.`;
+    }
+    $('#sliders').addEventListener('input', renderScore); renderScore();
+
+    // Equipo
+    const TM = [['Dra. Sofía Benavides', 'Medicina funcional', '1494790108377-be9c29b29330'], ['Dr. Andrés Quiroga', 'Longevidad y hormonas', '1500648767791-00dcc994a43e'], ['Lic. Mariana Tello', 'Nutrición clínica', '1544005313-94ddf0286df2'], ['Dr. Kenji Watanabe', 'Acupuntura', '1517841905240-472988babdf9']];
+    $('#teamMini').innerHTML = TM.map((t, i) => `<div class="tm" data-reveal data-delay="${i * 90}"><img src="${IMG(t[2], 400)}" alt="${t[0]}" loading="lazy"><b>${t[0]}</b><small>${t[1]}</small></div>`).join('');
+    UI.crossSell($('#cross'), 'integrativa');
+    UI.reveal();
+  </script>
+</body>
+</html>

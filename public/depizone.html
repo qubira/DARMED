@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>DEPIZONE | Depilación láser y tratamientos de piel</title>
+  <meta name="description" content="DEPIZONE: depilación láser diodo triple onda, blanqueamiento láser y faciales. Cotiza tus zonas online." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/base.css" />
+  <link rel="stylesheet" href="depizone.css" />
+</head>
+<body>
+  <div data-group-bar></div>
+  <div class="ticker"><div class="ticker__track">
+    <span>Hasta 6 CUOTAS SIN INTERESES</span><span>Axilas desde S/ 49 la sesión</span><span>Evaluación de piel gratis</span><span>Láser diodo triple onda · casi indoloro</span><span>Paga 6 sesiones y llévate 8</span>
+    <span>Hasta 6 CUOTAS SIN INTERESES</span><span>Axilas desde S/ 49 la sesión</span><span>Evaluación de piel gratis</span><span>Láser diodo triple onda · casi indoloro</span><span>Paga 6 sesiones y llévate 8</span>
+  </div></div>
+
+  <header class="site-header">
+    <div class="container site-header__inner">
+      <button class="icon-btn menu-btn" data-menu-open aria-label="Menú"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 7h16M4 12h16M4 17h10"/></svg></button>
+      <a href="depizone.html" class="logo"><span class="logo__mark">✦</span><span class="logo__text"><span class="logo__name">Depi<b>ZONE</b></span><span class="logo__tag">Laser &amp; Skin Center</span></span></a>
+      <nav class="nav">
+        <a href="#cotizador">Cotizador</a><a href="#servicios">Tratamientos</a><a href="#tecnologia">Tecnología</a><a href="#productos">BLUESKIN</a><a href="#sedes">Sedes</a><a href="#corporativo">Corporativo</a>
+      </nav>
+      <div class="header-actions">
+        <button class="icon-btn" aria-label="Favoritos"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.6-7 10-7 10Z"/></svg><span class="badge-count" data-fav-count>0</span></button>
+        <button class="icon-btn" data-cart-btn aria-label="Carrito"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M5 8h14l-1 12H6L5 8Z"/><path d="M9 8V6a3 3 0 0 1 6 0v2"/></svg><span class="badge-count" data-cart-count>0</span></button>
+        <a href="#cotizador" class="btn btn--sm">Cotiza gratis</a>
+      </div>
+    </div>
+  </header>
+  <div class="mobile-nav"><div class="scrim"></div><div class="mobile-nav__panel">
+    <span class="logo__name" style="margin-bottom:12px">Depi<b style="color:var(--primary)">ZONE</b></span>
+    <a href="#cotizador">Cotizador por zonas</a><a href="#servicios">Tratamientos</a><a href="#calculadora">¿Cuántas sesiones necesito?</a><a href="#tecnologia">Tecnología</a><a href="#productos">BLUESKIN</a><a href="#sedes">Sedes</a><a href="#corporativo">Ventas corporativas</a>
+  </div></div>
+
+  <main>
+    <section class="hero">
+      <div class="container hero__grid">
+        <div>
+          <span class="tag tag--pri" data-reveal>⚡ Promo de temporada</span>
+          <h1 data-reveal data-delay="100">Piel suave,<br><span class="laser">para siempre.</span></h1>
+          <p class="hero__lead" data-reveal data-delay="200">Depilación láser diodo triple onda, casi indolora y apta para todo tipo de piel. Resultados desde la primera sesión con especialistas certificadas.</p>
+          <div style="display:flex;gap:12px;margin-top:30px;flex-wrap:wrap" data-reveal data-delay="300"><a href="#cotizador" class="btn">Arma tu paquete</a><a href="#calculadora" class="btn btn--ghost">¿Cuántas sesiones necesito?</a></div>
+          <div class="hero__badges" data-reveal data-delay="400">
+            <div class="hb">⭐<div><b>4.9/5</b>3,140 reseñas</div></div>
+            <div class="hb">👩‍⚕️<div><b data-count="85000" data-prefix="+">0</b>sesiones realizadas</div></div>
+            <div class="hb">🏥<div><b>6 sedes</b>Lima y Arequipa</div></div>
+          </div>
+        </div>
+        <div class="hero__card" data-reveal="zoom">
+          <span class="tag tag--hot">Hasta -49%</span>
+          <h3 style="margin-top:14px">Elige tu zona favorita</h3>
+          <div class="zone-pills" id="heroZones"></div>
+          <small style="color:var(--muted)">Precio por sesión desde</small>
+          <div class="price-hero"><b id="heroPrice">S/ 49</b><s style="color:var(--muted)" id="heroOld">S/ 96</s></div>
+          <small style="color:var(--muted)" id="heroNote">Pack de 8 sesiones · 6 cuotas sin intereses</small>
+          <div style="display:flex;gap:10px;margin-top:20px"><button class="btn" style="flex:1" id="heroAdd">Separar pack</button><a href="#cotizador" class="btn btn--ghost">Más zonas</a></div>
+          <div style="margin-top:20px;display:flex;align-items:center;gap:10px;font-size:.8rem;color:var(--muted)"><span>⏱ Termina en</span><div data-countdown="20" data-parts="h,m,s" style="--x:1"></div></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="cotizador">
+      <div class="container">
+        <div class="sec-head" data-reveal><div><span class="eyebrow">Cotizador interactivo</span><h2>Toca las zonas y <em>arma tu plan</em></h2><p>Selecciona en el cuerpo las zonas que quieres tratar. Mientras más zonas, mayor descuento.</p></div></div>
+        <div class="bodymap">
+          <div class="bm-stage" data-reveal>
+            <div class="bm-toggles">
+              <div class="seg" id="segView"><button class="is-on" data-v="front">Frente</button><button data-v="back">Espalda</button></div>
+              <div class="seg" id="segSex"><button class="is-on" data-s="f">Mujer</button><button data-s="m">Hombre</button></div>
+            </div>
+            <div class="bm-tip" id="bmTip"></div>
+            <svg class="bm-svg" id="bmSvg" viewBox="0 0 200 440"></svg>
+            <p class="bm-legend">👆 Toca una zona para agregarla · <b id="bmCount">0</b> zonas seleccionadas</p>
+          </div>
+          <div class="quote" data-reveal data-delay="120">
+            <div><h4 style="font-size:.78rem;letter-spacing:.14em;color:var(--muted)">ZONAS SELECCIONADAS</h4><div class="quote__zones" id="qZones" style="margin-top:10px"></div></div>
+            <div><h4 style="font-size:.78rem;letter-spacing:.14em;color:var(--muted);margin-bottom:10px">ELIGE TU PLAN</h4><div class="plans" id="plans"></div></div>
+            <div id="multi" style="font-size:.84rem;background:var(--soft);border-radius:16px;padding:12px 16px"></div>
+            <div class="quote__total"><div><small style="opacity:.7">Total del plan</small><big id="qTotal">S/ 0</big><s id="qOld"></s> <small id="qCuota" style="opacity:.8"></small></div><button class="btn btn--light" id="qAdd">Agregar al carrito</button></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section--soft" id="servicios">
+      <div class="container">
+        <div class="sec-head" data-reveal><div><span class="eyebrow">Tratamientos</span><h2>Más que <em>depilación</em></h2></div><a href="#promos" class="btn btn--ghost">Ver promociones</a></div>
+        <div class="services" id="services"></div>
+      </div>
+    </section>
+
+    <section class="section" id="promos">
+      <div class="container">
+        <div class="sec-head" data-reveal><div><span class="eyebrow">Promos del momento</span><h2>De la campaña <em>al carrito</em></h2></div>
+          <div class="rail-nav"><button data-rail-prev="#promoRail">‹</button><button data-rail-next="#promoRail">›</button></div></div>
+        <div class="rail" id="promoRail"></div>
+      </div>
+    </section>
+
+    <section class="section tech-sec" id="tecnologia">
+      <div class="container">
+        <div class="tech-grid">
+          <div class="device" data-reveal="zoom"><span class="ring"></span><span class="ring"></span><span class="ring"></span><div class="device__core">TRIPLE<br>ONDA<br><small style="font-weight:500;font-size:.7rem">755 · 808 · 1064 nm</small></div></div>
+          <div>
+            <div class="sec-head" style="margin-bottom:24px" data-reveal><div><span class="eyebrow" style="color:#5ad1ff">Tecnología</span><h2 style="color:#fff">Láser diodo de <em>última generación</em></h2><p>Tres longitudes de onda en un solo disparo para eliminar el vello en todos los fototipos, con enfriamiento a -4 °C.</p></div></div>
+            <div class="tfeat" data-reveal>
+              <div><i>❄️</i><div><b>Enfriamiento zafiro -4 °C</b><small>Sesiones prácticamente indoloras</small></div></div>
+              <div><i>⚡</i><div><b>Disparo de alta velocidad</b><small>Piernas completas en solo 25 minutos</small></div></div>
+              <div><i>🌍</i><div><b>Apto para todo fototipo</b><small>De piel muy clara a piel morena (I–VI)</small></div></div>
+              <div><i>🛡️</i><div><b>Certificación FDA y CE</b><small>Equipos importados con registro DIGEMID</small></div></div>
+            </div>
+            <div class="stats" style="margin-top:34px;grid-template-columns:repeat(3,1fr)">
+              <div class="stat"><b data-count="90" data-suffix="%">0</b><span>reducción del vello</span></div>
+              <div class="stat"><b data-count="25" data-suffix=" min">0</b><span>piernas completas</span></div>
+              <div class="stat"><b data-count="0" data-suffix=" días">0</b><span>de recuperación</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="calculadora">
+      <div class="container">
+        <div class="calc" data-reveal>
+          <div class="calc__form">
+            <div><span class="eyebrow">Calculadora</span><h2 class="display" style="font-size:clamp(1.8rem,3.4vw,2.6rem);margin-top:8px">¿Cuántas sesiones <em>necesito</em>?</h2></div>
+            <div><label style="font-size:.76rem;font-weight:700;letter-spacing:.12em;color:var(--muted)">TU FOTOTIPO DE PIEL</label><div class="fototipos" id="fototipos" style="margin-top:10px"></div></div>
+            <div><label style="font-size:.76rem;font-weight:700;letter-spacing:.12em;color:var(--muted)">GROSOR DEL VELLO</label><input type="range" min="1" max="3" value="2" id="grosor" style="margin-top:10px"><div class="range-out"><span>Fino</span><span>Medio</span><span>Grueso</span></div></div>
+            <div><label style="font-size:.76rem;font-weight:700;letter-spacing:.12em;color:var(--muted)">ZONA</label><select class="input" id="calcZone" style="margin-top:10px"></select></div>
+          </div>
+          <div class="calc__res">
+            <small style="letter-spacing:.2em;opacity:.8">TE RECOMENDAMOS</small>
+            <big id="cSes">6</big><b style="font-size:1.2rem">sesiones aprox.</b>
+            <div class="sess-bar" id="sessBar"></div>
+            <p id="cTxt" style="opacity:.85;font-size:.9rem"></p>
+            <button class="btn btn--light" id="cAdd" style="align-self:flex-start">Separar este plan</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section--soft">
+      <div class="container">
+        <div class="sec-head sec-head--center" data-reveal><span class="eyebrow">Resultados reales</span><h2>Antes y <em>después</em></h2><p>Arrastra para comparar · Resultados tras 6 sesiones.</p></div>
+        <div class="results-row" id="baRow"></div>
+      </div>
+    </section>
+
+    <section class="section" id="productos">
+      <div class="container">
+        <div class="sec-head" data-reveal><div><span class="eyebrow">BLUESKIN by DEPIZONE</span><h2>Cuidado <em>post láser</em> en casa</h2></div></div>
+        <div class="grid grid--4" id="prodGrid"></div>
+      </div>
+    </section>
+
+    <section class="section section--soft" id="sedes">
+      <div class="container">
+        <div class="sec-head" data-reveal><div><span class="eyebrow">Nuestras sedes</span><h2>Siempre <em>cerca de ti</em></h2></div></div>
+        <div class="sedes" id="sedesGrid"></div>
+      </div>
+    </section>
+
+    <section class="section" id="corporativo">
+      <div class="container">
+        <div class="corp" data-reveal>
+          <div><span class="eyebrow">Ventas corporativas</span><h2 class="display" style="font-size:clamp(1.8rem,3.4vw,2.8rem)">Beneficios de bienestar para <em>tu equipo</em></h2>
+            <ul><li>Tarifas preferenciales desde 10 colaboradores</li><li>Descuento por planilla y facturación electrónica</li><li>Activaciones en oficina y evaluaciones gratuitas</li><li>Ejecutiva de cuenta dedicada</li></ul></div>
+          <form style="display:grid;gap:12px" onsubmit="event.preventDefault();UI.Group.log('lead','depizone',{label:'Venta corporativa · '+UI.esc(this.querySelector('input').value)});UI.toast('¡Solicitud enviada! Una ejecutiva te contactará en 24 h','💼');this.reset()">
+            <div class="field"><label>Empresa</label><input class="input" required placeholder="Razón social"></div>
+            <div class="form-row" style="display:grid;grid-template-columns:1fr 1fr;gap:12px"><div class="field"><label>Contacto</label><input class="input" required placeholder="Nombre"></div><div class="field"><label>N° colaboradores</label><select class="input"><option>10 – 50</option><option>51 – 200</option><option>200+</option></select></div></div>
+            <div class="field"><label>Correo</label><input class="input" type="email" required placeholder="rrhh@empresa.com"></div>
+            <button class="btn">Solicitar propuesta</button>
+          </form>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section--soft">
+      <div class="container" style="max-width:860px">
+        <div class="sec-head sec-head--center" data-reveal><span class="eyebrow">FAQ</span><h2>Resolvemos tus <em>dudas</em></h2></div>
+        <div class="faq" id="faq" data-reveal></div>
+      </div>
+    </section>
+    <section class="cross-sec"><div class="container"><div class="sec-head" style="margin-bottom:20px"><div><span class="eyebrow">Grupo DARMED</span><h2>Sigue explorando <em>nuestras marcas</em></h2></div></div></div><div id="cross"></div></section>
+  </main>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer__grid">
+        <div class="footer__brand"><span class="logo__name" style="color:#fff">Depi<b style="color:var(--primary-2)">ZONE</b></span><p style="margin-top:14px;max-width:320px">Centro especializado en depilación láser y cuidado de la piel. Parte del Grupo DARMED.</p>
+          <form class="newsletter" onsubmit="event.preventDefault();UI.Group.log('lead','depizone',{label:'Newsletter · '+UI.esc(this.querySelector('input').value)});UI.toast('¡Te enviamos un cupón de S/ 30! 💙');this.reset()"><input type="email" placeholder="Tu correo" required><button class="btn btn--sm">Quiero mi cupón</button></form>
+          <div class="socials"><a href="#">IG</a><a href="#">TK</a><a href="#">FB</a></div></div>
+        <div><h4>DEPIZONE</h4><ul><li><a href="#">Quiénes somos</a></li><li><a href="#sedes">Sedes</a></li><li><a href="#promos">Promociones</a></li><li><a href="#corporativo">Corporativo</a></li></ul></div>
+        <div><h4>Ayuda</h4><ul><li><a href="#">Cómo comprar</a></li><li><a href="#faq">Preguntas frecuentes</a></li><li><a href="#">Cambios y devoluciones</a></li><li><a href="#">Libro de reclamaciones</a></li></ul></div>
+        <div><h4>Pagos</h4><div class="pay-icons"><span>VISA</span><span>MC</span><span>AMEX</span><span>YAPE</span><span>PLIN</span></div></div>
+      </div>
+      <div class="footer__bottom"><span>© 2026 DEPIZONE · Grupo DARMED</span><span>Maqueta de diseño · datos de ejemplo</span></div>
+    </div>
+  </footer>
+
+  <script src="assets/base.js"></script>
+  <script src="depizone.js"></script>
+</body>
+</html>
