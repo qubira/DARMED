@@ -313,3 +313,55 @@ td b{color:var(--text);font-weight:600}
 /* KPI: minigráfico alineado con el valor, sin pisar el pie */
 .kpi svg.spark{top:44px;bottom:auto;right:16px;width:88px;height:34px}
 .kpi b{max-width:calc(100% - 100px)}
+
+/* ---------- Adaptación a pantallas ---------- */
+.grid-2>*,.grid-2e>*,.grid-3>*,.set>*,.pos>*,.kpis>*,.brand-row>*,.sede-g>*{min-width:0}
+.grid-roles{grid-template-columns:300px 1fr}
+@media(max-width:1100px){.grid-roles{grid-template-columns:1fr}}
+.seg{max-width:100%;overflow-x:auto;scrollbar-width:none}
+.seg::-webkit-scrollbar{display:none}
+.toolbar .inp-ic{flex:1 1 200px}
+.toolbar .inp-ic .inp{width:100%!important}
+@media(max-width:700px){
+  .ph{align-items:flex-start}
+  .ph h1{font-size:1.25rem}
+  .ph__act{width:100%}
+  .ph__act>.btn,.ph__act>select{flex:1}
+  .card__head{padding:14px}
+  .card__body{padding:14px}
+  .toolbar{padding:10px 14px}
+  .kpi b{font-size:1.35rem}
+  .dl{grid-template-columns:110px 1fr}
+  .set-row{gap:12px}
+  .set-row>div>div[style*="grid-template-columns:1fr 1fr"]{grid-template-columns:1fr!important}
+  .card__foot{justify-content:center}
+  .card__foot>span{width:100%;text-align:center}
+  .topbar .crumbs span:not(:last-child){display:none}
+  #collapseB{display:none}
+  .sheet__p{width:100vw}
+  .pos-grid{grid-template-columns:repeat(2,1fr)}
+}
+@media(max-width:420px){.kpi svg.spark{display:none}.kpi b{max-width:none}.hbar__row{grid-template-columns:minmax(0,1fr) 70px 44px}}
+.donut-row{display:grid;grid-template-columns:150px 1fr;gap:18px;align-items:center}
+@media(max-width:420px){.donut-row{grid-template-columns:1fr;justify-items:center}.donut-row .hbar{width:100%}}
+.sede__top>div{min-width:0}
+.sede__top>div>div{flex-wrap:wrap}
+.sede__stats b{font-size:.86rem;white-space:nowrap}
+@media(max-width:420px){.sede__stats{grid-template-columns:1fr 1fr}.sede{padding:14px}}
+.set-row>*{min-width:0}
+.set-row .inp{width:100%;min-width:0}
+@media(max-width:700px){.set-row>div[style*="grid-template-columns"]{grid-template-columns:1fr!important}}
+@media(max-width:700px){
+  .banner{flex-direction:column;align-items:flex-start}
+  .banner p{flex:none!important;width:100%}
+  .kpis{grid-template-columns:1fr 1fr;gap:10px}
+  .kpi{padding:14px}
+  .kpi b{font-size:1.15rem;margin:8px 0 4px}
+  .kpi .foot{font-size:0}
+  .kpi .foot .delta{font-size:.72rem}
+  .kpi .lbl{font-size:.74rem}
+  .kpi .lbl .ico,.kpi .ico{display:none}
+  .kpi svg.spark{display:none}
+  .kpi b{max-width:none}
+}
+@media(max-width:340px){.kpis{grid-template-columns:1fr}}

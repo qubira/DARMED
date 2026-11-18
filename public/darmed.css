@@ -227,3 +227,7 @@
 .rotator span{transition:opacity .5s var(--ease),transform .6s var(--ease)}
 .rotator span.off{transition-duration:.35s}
 .nav a{white-space:nowrap}
+.explorer>*,.booking>*,.contact>*,.quiz>*{min-width:0}
+@media(max-width:620px){.hero{padding:32px 0 60px}.hero__cta .btn{flex:1 1 100%}.promo-banner{padding:26px 20px;border-radius:24px}.promo-banner>div:last-child{justify-self:start}.days{grid-template-columns:repeat(7,minmax(0,1fr))}.summary{padding:24px}.map{min-height:300px}}
+.rotator span{transition:opacity .35s ease .25s,transform .6s var(--ease) .25s}
+.rotator span.off{transition:opacity .2s ease,transform .3s ease}

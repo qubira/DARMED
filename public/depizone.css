@@ -130,3 +130,5 @@ input[type=range]{accent-color:var(--primary);width:100%}
 .hero__card .countdown div{background:var(--soft);border-color:var(--line);min-width:52px;padding:6px}
 .hero__card .countdown b{font-size:1.1rem}
 .hero h1 .laser::after{top:auto;bottom:-6px}
+.bodymap>*,.calc>*,.corp>*,.tech-grid>*,.hero__grid>*{min-width:0}
+@media(max-width:620px){.hero__card{padding:22px}.price-hero b{font-size:3.2rem}.fototipos{grid-template-columns:repeat(3,1fr)}.calc__res big{font-size:3.6rem}.corp .form-row{grid-template-columns:1fr!important}}

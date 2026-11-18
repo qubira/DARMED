@@ -42,7 +42,7 @@
     .now-line{position:absolute;left:0;right:0;height:2px;background:var(--danger);z-index:2}
     .now-line::before{content:"";position:absolute;left:-5px;top:-4px;width:10px;height:10px;border-radius:50%;background:var(--danger)}
     .cal-wrap{overflow:auto;max-height:640px;border-radius:18px}
-    .dcards{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:14px}
+    .dcards{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(280px,100%),1fr));gap:14px}
     .dcard{border:1px solid var(--line);border-radius:12px;padding:18px;background:var(--surface);display:grid;gap:10px;border-top:4px solid var(--c)}
     .dcard .acts{display:flex;gap:6px;flex-wrap:wrap}
     .dcard .acts button{font-size:.74rem;font-weight:700;padding:7px 10px;border-radius:9px;border:1px solid var(--line)}
