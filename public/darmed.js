@@ -160,12 +160,18 @@ function renderQuiz() {
       <div style="display:flex;gap:10px;flex-wrap:wrap"><button class="btn" id="qAddAll">Agregar rutina · ${money(prods.reduce((a, p) => a + p.price, 0))}</button><a href="#reservar" class="btn btn--ghost" id="qBook">Reservar ${r[0]}</a><button class="btn btn--ghost" id="qRestart">↺ Repetir</button></div></div>`;
     $('#qAddAll').onclick = () => prods.forEach(p => cart.add(p));
     $('#qBook').onclick = () => { $('#bTreat').value = r[0]; updateSummary(); };
-    $('#qRestart').onclick = () => { qStep = 0; answers = []; renderQuiz(); };
+    $('#qRestart').onclick = () => { qStep = 0; answers = []; showQuizStep(); };
   }
 }
+function showQuizStep() {
+  renderQuiz();
+  const heading = $('#quizMain h4');
+  heading.tabIndex = -1;
+  heading.focus({ preventScroll: true });
+}
 $('#quizMain').addEventListener('click', e => {
-  const b = e.target.closest('[data-ans]'); if (b) { answers[qStep] = b.dataset.ans; qStep++; renderQuiz(); }
-  if (e.target.id === 'qBack') { qStep--; renderQuiz(); }
+  const b = e.target.closest('[data-ans]'); if (b) { answers[qStep] = b.dataset.ans; qStep++; showQuizStep(); }
+  if (e.target.id === 'qBack') { qStep--; showQuizStep(); }
 });
 renderQuiz();
 
@@ -197,10 +203,17 @@ function renderBooking() {
 function updateSummary() {
   const t = allT.find(x => x.n === $('#bTreat').value) || allT[0];
   const d = new Date(today); d.setDate(d.getDate() + bDay);
-  $('#sTreat').textContent = t.n; $('#sDoc').textContent = TEAM[bDoc].n;
-  $('#sDate').textContent = d.toLocaleDateString('es-PE', { weekday: 'long', day: 'numeric', month: 'long' });
-  $('#sTime').textContent = bSlot || 'Elige un horario';
-  $('#sPrice').textContent = t.price ? 'S/ ' + t.price.toLocaleString('es-PE') : 'Gratis';
+  const values = {
+    sTreat: t.n,
+    sDoc: TEAM[bDoc].n,
+    sDate: d.toLocaleDateString('es-PE', { weekday: 'long', day: 'numeric', month: 'long' }),
+    sTime: bSlot || 'Elige un horario',
+    sPrice: t.price ? 'S/ ' + t.price.toLocaleString('es-PE') : 'Gratis'
+  };
+  for (const [id, value] of Object.entries(values)) {
+    const field = document.getElementById(id);
+    if (field.textContent !== value) field.textContent = value;
+  }
 }
 document.addEventListener('click', e => {
   const a = e.target.closest('[data-bdoc]'); if (a) { bDoc = +a.dataset.bdoc; bSlot = null; renderBooking(); }

@@ -111,6 +111,46 @@ main [id] { scroll-margin-top: 94px; }
 .clinic #areaTabs .chip { min-height: 44px; }
 .clinic .titem { min-height: 60px; border-radius: 12px; }
 .clinic .titem:hover { transform: none; border-color: #b28c72; }
+.clinic .tdetail { animation: none; }
+.clinic-progress {
+  position: fixed;
+  z-index: 61;
+  inset: 0 0 auto;
+  height: 3px;
+  background: #d3a86c;
+  transform: scaleX(0);
+  transform-origin: left;
+  pointer-events: none;
+}
+.visit {
+  background: #2c1020;
+  color: #fff5e9;
+}
+.visit__grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, .9fr);
+  align-items: center;
+  gap: clamp(30px, 7vw, 105px);
+}
+.visit__media {
+  margin: 0;
+  aspect-ratio: 1.18;
+  border-radius: 12px 112px 12px 12px;
+  overflow: hidden;
+  background: #704536;
+}
+.visit__media img { width: 100%; height: 100%; object-fit: cover; }
+.clinic .visit .display { font: 400 clamp(3rem, 6.7vw, 6.2rem)/.9 var(--editorial); margin: 0 0 24px; }
+.clinic .visit .display em { color: #f2d39f; }
+.visit__steps { position: relative; list-style: none; border-top: 1px solid #906754; }
+.visit__steps li { border-bottom: 1px solid #906754; }
+.visit__steps a { display: grid; gap: 4px; padding: 15px 16px; transition: background-color .22s; }
+.visit__steps a:hover, .visit__steps a:focus-visible { background: #593248; }
+.visit__steps a:focus-visible { outline-color: #f2d39f; }
+.visit__steps strong { font-size: 1.06rem; }
+.visit__steps span { color: #eddacf; }
+.clinic .summary { border: 1px solid #7b465d; box-shadow: 0 26px 45px -30px #2b0b1d9c; }
+.clinic .summary .sum-row b { display: inline-block; }
 
 @media (max-width: 1160px) {
   .clinic .site-header .nav { display: none; }
@@ -125,6 +165,8 @@ main [id] { scroll-margin-top: 94px; }
   .clinic .hero__visual::after { background: linear-gradient(180deg, #200812 0%, transparent 32%); }
   .hero__motion-control { right: 16px; bottom: 26px; }
   .care-options { margin-top: -18px; }
+  .visit__grid { grid-template-columns: 1fr; }
+  .visit__media { aspect-ratio: 1.6; border-top-right-radius: 56px; }
 }
 .laser-page .hero { background: linear-gradient(125deg, #edf6ff, #e4e3fa); }
 .laser-page .hero h1 .laser::after { display: none; }
@@ -173,5 +215,6 @@ main [id] { scroll-margin-top: 94px; }
 }
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
-  .hero *, .site-header, .quick-links *, .care-options *, .cross-sec * { animation-duration: .01ms !important; transition-duration: .01ms !important; }
+  .hero *, .site-header, .quick-links *, .care-options *, .visit *, .cross-sec * { animation-duration: .01ms !important; transition-duration: .01ms !important; }
+  .clinic-progress { display: none; }
 }
