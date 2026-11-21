@@ -67,29 +67,6 @@ const pageProgress = document.querySelector('.clinic-progress');
 const portraitScene = document.querySelector('.hero__visual');
 const hero = document.querySelector('.clinic .hero');
 const desktopDepth = matchMedia('(min-width: 761px)');
-const playback = portraitScene.querySelector('.hero__playback');
-let pausedByUser = false;
-let portraitInView = true;
-
-function syncPlayback() {
-  const enabled = !reducedMotion.matches;
-  playback.hidden = !enabled;
-  portraitScene.classList.toggle('has-autoplay', enabled);
-  portraitScene.classList.toggle('is-paused', pausedByUser || !portraitInView || document.hidden);
-}
-
-playback.addEventListener('click', () => {
-  pausedByUser = !pausedByUser;
-  playback.textContent = pausedByUser ? 'Reanudar movimiento' : 'Pausar movimiento';
-  syncPlayback();
-  if (!pausedByUser) updateProgress();
-});
-document.addEventListener('visibilitychange', syncPlayback);
-new IntersectionObserver(([entry]) => {
-  portraitInView = entry.isIntersecting;
-  syncPlayback();
-}).observe(portraitScene);
-syncPlayback();
 let pointerX = 0;
 let pointerY = 0;
 let depthProperties = {};
@@ -118,7 +95,7 @@ function syncPortrait() {
 }
 
 hero.addEventListener('pointermove', event => {
-  if (reducedMotion.matches || pausedByUser || !desktopDepth.matches || event.pointerType !== 'mouse') return;
+  if (reducedMotion.matches || !desktopDepth.matches || event.pointerType !== 'mouse') return;
   const box = portraitScene.getBoundingClientRect();
   pointerX = Math.max(-.5, Math.min(.5, (event.clientX - box.left) / box.width - .5));
   pointerY = Math.max(-.5, Math.min(.5, (event.clientY - box.top) / box.height - .5));
@@ -156,7 +133,7 @@ function updateProgress() {
     const pageHeight = document.documentElement.scrollHeight - innerHeight;
     const fraction = pageHeight > 0 ? Math.max(0, Math.min(1, scrollY / pageHeight)) : 0;
     pageProgress.style.transform = `scaleX(${fraction})`;
-    if (!reducedMotion.matches && !pausedByUser) syncPortrait();
+    if (!reducedMotion.matches) syncPortrait();
     syncVisit();
     progressFrame = 0;
   });
@@ -164,7 +141,6 @@ function updateProgress() {
 addEventListener('scroll', updateProgress, { passive: true });
 addEventListener('resize', updateProgress);
 reducedMotion.addEventListener('change', () => {
-  syncPlayback();
   if (reducedMotion.matches) Object.keys(depthProperties).forEach(property => portraitScene.style.removeProperty(property));
   else updateProgress();
 });
