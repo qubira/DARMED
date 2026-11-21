@@ -72,15 +72,22 @@ const entrances = new IntersectionObserver((entries, observer) => {
 for (const target of revealGroups.keys()) entrances.observe(target);
 
 const gallery = document.getElementById('careOptions');
-const galleryPhoto = gallery.querySelector('img');
-const initialPhoto = galleryPhoto.src;
-galleryPhoto.addEventListener('load', () => {
-  if (reducedMotion.matches || galleryPhoto.src === initialPhoto) return;
-  animate(galleryPhoto, { opacity: [.45, 1], transform: ['scale(1.07)', 'scale(1)'] }, { duration: .62, ease });
-});
+const galleryVisual = gallery.querySelector('.care-gallery__visual');
+const galleryInlay = gallery.querySelector('.care-gallery__inlay');
+const galleryAction = gallery.querySelector('.care-gallery__copy .btn');
+new IntersectionObserver(([entry], observer) => {
+  if (!entry.isIntersecting) return;
+  observer.disconnect();
+  if (reducedMotion.matches) return;
+  animate(galleryVisual, { opacity: [.45, 1], transform: ['perspective(1000px) translateZ(-65px) rotateY(9deg)', 'perspective(1000px) translateZ(0px) rotateY(0deg)'] }, { duration: .9, ease });
+}, { threshold: .2 }).observe(galleryVisual);
 new MutationObserver(() => {
   if (reducedMotion.matches) return;
-  animate(gallery.querySelector('.care-gallery__copy'), { opacity: [.4, 1], transform: ['translateY(14px)', 'translateY(0)'] }, { duration: .42, ease });
+  const copy = gallery.querySelectorAll('#care-description > h3, #care-description > p, .care-gallery__topics > li');
+  [...copy, galleryAction].forEach((piece, index) => {
+    animate(piece, { opacity: [.35, 1], transform: ['translateY(12px)', 'translateY(0)'] }, { delay: index * .045, duration: .36, ease });
+  });
+  animate(galleryInlay, { opacity: [.25, 1], transform: ['perspective(850px) translateZ(42px) rotateY(-7deg)', 'perspective(850px) translateZ(0px) rotateY(0deg)'] }, { duration: .62, ease });
 }).observe(gallery, { attributes: true, attributeFilter: ['data-scene'] });
 
 const quiz = document.getElementById('quizMain');
@@ -167,6 +174,12 @@ function updateProgress() {
     const fraction = pageHeight > 0 ? Math.max(0, Math.min(1, scrollY / pageHeight)) : 0;
     pageProgress.style.transform = `scaleX(${fraction})`;
     if (!reducedMotion.matches && !motionPaused) syncPortrait();
+    const photoBounds = galleryVisual.getBoundingClientRect();
+    if (photoBounds.bottom > 0 && photoBounds.top < innerHeight) {
+      const travel = Math.min(13, photoBounds.height * .03);
+      const progress = Math.max(-1, Math.min(1, 1 - 2 * (photoBounds.top + photoBounds.height / 2) / innerHeight));
+      gallery.style.setProperty('--gallery-drift', `${progress * travel}px`);
+    }
     syncVisit();
     progressFrame = 0;
   });
@@ -177,6 +190,7 @@ reducedMotion.addEventListener('change', () => {
   syncAmbientMotion();
   if (reducedMotion.matches) {
     endOpening();
+    gallery.style.removeProperty('--gallery-drift');
     Object.keys(depthProperties).forEach(property => portraitScene.style.removeProperty(property));
   }
   else updateProgress();

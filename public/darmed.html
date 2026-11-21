@@ -13,7 +13,7 @@
   <link rel="stylesheet" href="darmed.css" />
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="assets/experience.css?v=clinic-13">
-  <link rel="stylesheet" href="assets/clinic-opening.css?v=2">
+  <link rel="stylesheet" href="assets/clinic-opening.css?v=3">
 </head>
 <body class="clinic">
   <a class="skip-link" href="#inicio">Saltar al contenido</a>
@@ -127,13 +127,21 @@
           </nav>
         </header>
         <div class="care-gallery__stage">
-          <figure class="care-gallery__image">
-            <img src="https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?auto=format&amp;fit=crop&amp;w=1200&amp;q=82" alt="" loading="lazy">
-          </figure>
+          <div class="care-gallery__visual">
+            <figure class="care-gallery__image" aria-hidden="true">
+              <img data-photo="facial" src="https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?auto=format&amp;fit=crop&amp;w=960&amp;q=82" alt="" loading="lazy">
+              <img data-photo="corporal" src="https://images.unsplash.com/photo-1519823551278-64ac92734fb1?auto=format&amp;fit=crop&amp;w=960&amp;q=82" alt="" loading="lazy">
+              <img data-photo="capilar" src="https://images.unsplash.com/photo-1521590832167-7bcbfaa6381f?auto=format&amp;fit=crop&amp;w=960&amp;q=82" alt="" loading="lazy">
+            </figure>
+            <div class="care-gallery__inlay" aria-hidden="true"></div>
+          </div>
           <div class="care-gallery__copy">
             <div id="care-description" aria-live="polite">
               <h3>Piel y <em>armonización.</em></h3>
               <p>Explora opciones de cuidado facial, desde limpieza e hidratación hasta procedimientos de armonización.</p>
+              <ul class="care-gallery__topics" aria-label="Opciones en esta área">
+                <li>Limpieza facial</li><li>Hidratación</li><li>Armonización</li>
+              </ul>
             </div>
             <a class="btn" href="#tratamientos" data-area="facial">Ver tratamientos faciales</a>
           </div>
@@ -322,7 +330,7 @@
   </div></div>
 
   <script src="assets/base.js?v=clinic-2"></script>
-  <script src="darmed.js?v=clinic-6"></script>
-  <script type="module" src="assets/clinic-motion.js?v=12"></script>
+  <script src="darmed.js?v=clinic-7"></script>
+  <script type="module" src="assets/clinic-motion.js?v=13"></script>
 </body>
 </html>
