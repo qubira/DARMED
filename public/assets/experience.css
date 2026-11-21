@@ -63,22 +63,28 @@ main [id] { scroll-margin-top: 94px; }
 .clinic .header-actions { margin-left: auto; }
 .clinic .header-actions .icon-btn { width: 38px; }
 .clinic .hero {
-  padding-block: clamp(28px, 4vw, 56px);
-  background: #f8f0e7;
+  padding-block: clamp(32px, 5vw, 72px);
+  background: linear-gradient(110deg, #fcf9f4 35%, #f0e1d3 100%);
   color: var(--iiradia-ink);
 }
 .clinic .hero__grid { gap: clamp(24px, 5vw, 70px); }
-.clinic .hero h1 { max-width: 12ch; font-size: clamp(3rem, 6.2vw, 5.9rem); }
+.clinic .hero h1 { max-width: 15ch; font-size: clamp(3rem, 6.3vw, 6.25rem); text-wrap: initial; }
 .clinic .hero h1 em { color: #80513b; }
 .clinic .hero__lead { max-width: 42ch; color: var(--muted); }
 .clinic .hero__cta { margin: 26px 0 0; }
 .clinic .hero__cta .btn--ghost { color: var(--iiradia-ink); border-color: #b28c72; }
-.clinic .hero__visual { height: clamp(340px, 37vw, 485px); }
-.clinic .hero__img--a { inset: 0; border: 1px solid #d2ae8d; border-radius: 12px 96px 12px 12px; box-shadow: none; }
+.clinic .hero__visual { height: clamp(340px, 37vw, 485px); margin: 0; padding: 8px; border: 1px solid #ceb294; border-radius: 18px 126px 18px 18px; }
+.clinic .hero__img--a { position: relative; inset: auto; height: 100%; border-radius: 11px 119px 11px 11px; box-shadow: none; }
 .clinic .hero__img img { object-position: center 45%; }
-.clinic .quick-links { background: #fffdf9; border-bottom: 1px solid var(--line); }
-.clinic .quick-links a { background: var(--edition); }
-.clinic .quick-links a:hover { background: #e9d6c3; }
+.care-options { margin-top: clamp(16px, 3vw, 36px); }
+.care-options__grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; }
+.care-options__grid a { display: grid; gap: 4px; align-content: center; min-height: 92px; padding: 14px 20px; border: 1px solid var(--line); border-radius: 14px; background: #fffdf9; transition: background-color .2s, border-color .2s; }
+.care-options__grid a:hover { background: var(--edition); border-color: #b28c72; }
+.care-options__grid span { font: 400 1.9rem/1 var(--editorial); }
+.care-options__grid small { color: var(--muted); font-size: .875rem; }
+.clinic #areaTabs .chip { min-height: 44px; }
+.clinic .titem { min-height: 60px; border-radius: 12px; }
+.clinic .titem:hover { transform: none; border-color: #b28c72; }
 
 @media (max-width: 1160px) {
   .clinic .site-header .nav { display: none; }
@@ -114,12 +120,15 @@ main [id] { scroll-margin-top: 94px; }
 }
 @media (max-width: 540px) {
   .clinic .hero__visual { height: clamp(220px, 69vw, 340px); }
-  .clinic .hero__img--a { border-radius: 14px; }
+  .clinic .hero__visual { padding: 5px; border-radius: 16px 60px 16px 16px; }
+  .clinic .hero__img--a { border-radius: 11px 55px 11px 11px; }
   .clinic .site-header__inner { gap: 6px; min-height: 58px; }
   .clinic .site-header .icon-btn, .clinic .header-actions .icon-btn { width: 34px; height: 40px; }
   .clinic .brand-signature { width: 92px; }
   .clinic .hero h1 { margin-block: 14px; }
   .clinic .hero__cta .btn { padding-inline: 16px; }
+  .care-options__grid { grid-template-columns: 1fr; gap: 8px; }
+  .care-options__grid a { min-height: 65px; padding: 10px 14px; grid-template-columns: 5rem 1fr; align-items: center; }
   .quick-links .container { grid-template-columns: 1fr; gap: 7px; }
   .quick-links a { min-height: 44px; }
   .wellness .wait { flex-direction: column; border-radius: 16px; padding: 8px; }
@@ -128,5 +137,5 @@ main [id] { scroll-margin-top: 94px; }
 }
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
-  .hero *, .site-header, .quick-links *, .cross-sec * { animation-duration: .01ms !important; transition-duration: .01ms !important; }
+  .hero *, .site-header, .quick-links *, .care-options *, .cross-sec * { animation-duration: .01ms !important; transition-duration: .01ms !important; }
 }

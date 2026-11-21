@@ -31,8 +31,6 @@
 .titem{display:flex;align-items:center;gap:14px;padding:14px 16px;border-radius:18px;border:1px solid var(--line);background:var(--surface);text-align:left;transition:.25s}
 .titem:hover{border-color:var(--accent);transform:translateX(4px)}
 .titem.is-active{background:var(--text);color:#fff;border-color:var(--text)}
-.titem .num{width:34px;height:34px;border-radius:10px;display:grid;place-items:center;background:var(--soft);color:var(--primary);font-weight:800;font-size:.78rem;flex-shrink:0}
-.titem.is-active .num{background:rgba(255,255,255,.14);color:#fff}
 .titem div{flex:1}
 .titem b{display:block;font-size:.9rem}
 .titem small{opacity:.65;font-size:.75rem}

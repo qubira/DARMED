@@ -4,10 +4,6 @@ const IMG = (id, w = 900) => `https://images.unsplash.com/photo-${id}?auto=forma
 
 UI.init({ brand: 'darmed', whatsapp: false });
 
-/* ---------- Marcas ---------- */
-const brands = ['ALLERGAN', 'GALDERMA', 'MERZ', 'TEOXANE', 'SCULPTRA', 'RADIESSE', 'ISDIN', 'LA ROCHE-POSAY', 'SKINCEUTICALS', 'HYDRAFACIAL'];
-$('#brandTrack').innerHTML = [...brands, ...brands].map(b => `<span class="marquee__item">${b}</span>`).join('');
-
 /* ---------- Tratamientos ---------- */
 const AREAS = {
   facial: { label: 'Facial', img: '1570172619644-dfd03ed5d881', items: [
@@ -38,8 +34,8 @@ const AREAS = {
 };
 let area = 'facial', tIdx = 0;
 function renderAreas() {
-  $('#areaTabs').innerHTML = Object.entries(AREAS).map(([k, a]) => `<button class="chip ${k === area ? 'is-active' : ''}" data-area="${k}">${a.label} <small>${a.items.length}</small></button>`).join('');
-  $('#tList').innerHTML = AREAS[area].items.map((t, i) => `<button class="titem ${i === tIdx ? 'is-active' : ''}" data-t="${i}"><span class="num">${String(i + 1).padStart(2, '0')}</span><div><b>${t.n}</b><small>${t.time} · ${t.ses}</small></div><span class="from">${t.price ? 'S/ ' + t.price : 'Gratis'}</span></button>`).join('');
+  $('#areaTabs').innerHTML = Object.entries(AREAS).map(([k, a]) => `<button class="chip ${k === area ? 'is-active' : ''}" data-area="${k}" aria-pressed="${k === area}">${a.label}</button>`).join('');
+  $('#tList').innerHTML = AREAS[area].items.map((t, i) => `<button class="titem ${i === tIdx ? 'is-active' : ''}" data-t="${i}" aria-pressed="${i === tIdx}"><div><b>${t.n}</b><small>${t.time} · ${t.ses}</small></div><span class="from">${t.price ? 'S/ ' + t.price : 'Gratis'}</span></button>`).join('');
   const t = AREAS[area].items[tIdx];
   const steps = ['Día 1', 'Semana 1', 'Mes 1', 'Mes 3'];
   $('#tDetail').innerHTML = `<div class="tdetail" key="${area + tIdx}">
@@ -55,8 +51,28 @@ function renderAreas() {
         <div style="display:flex;gap:8px"><button class="btn btn--ghost btn--sm" data-plan="${t.n}">♡ Guardar</button><a href="#reservar" class="btn btn--sm" data-book="${t.n}">Reservar</a></div></div>
     </div></div>`;
 }
-$('#areaTabs').addEventListener('click', e => { const b = e.target.closest('[data-area]'); if (b) { area = b.dataset.area; tIdx = 0; renderAreas(); } });
-$('#tList').addEventListener('click', e => { const b = e.target.closest('[data-t]'); if (b) { tIdx = +b.dataset.t; renderAreas(); } });
+function selectArea(event) {
+  const control = event.target.closest('[data-area]');
+  if (!control || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
+  if (area !== control.dataset.area) {
+    area = control.dataset.area;
+    tIdx = 0;
+    renderAreas();
+  }
+  if (control.tagName === 'A') event.preventDefault();
+  const tab = $(`#areaTabs [data-area="${area}"]`);
+  tab.focus({ preventScroll: true });
+  if (control.tagName === 'A') $('#tratamientos').scrollIntoView();
+}
+$('#careOptions').addEventListener('click', selectArea);
+$('#areaTabs').addEventListener('click', selectArea);
+$('#tList').addEventListener('click', event => {
+  const control = event.target.closest('[data-t]');
+  if (!control || tIdx === Number(control.dataset.t)) return;
+  tIdx = Number(control.dataset.t);
+  renderAreas();
+  $(`#tList [data-t="${tIdx}"]`).focus({ preventScroll: true });
+});
 $('#tDetail').addEventListener('click', e => {
   const p = e.target.closest('[data-plan]'); if (p) toast(`<b>${p.dataset.plan}</b> guardado en tu plan`, '♡');
   const b = e.target.closest('[data-book]'); if (b) { $('#bTreat').value = b.dataset.book; updateSummary(); }

@@ -2,5 +2,6 @@
 .env.*
 .vercel
 node_modules/
+public/assets/clinic-motion.js
 _respaldo_original/
 server.js
