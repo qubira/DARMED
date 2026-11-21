@@ -4,12 +4,39 @@ const reducedMotion = matchMedia('(prefers-reduced-motion: reduce)');
 const ease = [0.22, 1, 0.36, 1];
 
 const portraitScene = document.querySelector('.hero__visual');
+const motionToggle = portraitScene.querySelector('.hero__motion-toggle');
+let motionPaused = false;
+let portraitVisible = true;
+
+function syncAmbientMotion() {
+  const enabled = !reducedMotion.matches;
+  portraitScene.classList.toggle('has-ambient-motion', enabled);
+  portraitScene.classList.toggle('is-motion-paused', motionPaused);
+  portraitScene.classList.toggle('is-offscreen', !portraitVisible || document.hidden);
+  motionToggle.hidden = !enabled;
+}
+
+motionToggle.addEventListener('click', () => {
+  motionPaused = !motionPaused;
+  const label = motionPaused ? 'Reanudar animación de portada' : 'Pausar animación de portada';
+  motionToggle.setAttribute('aria-label', label);
+  motionToggle.title = label;
+  syncAmbientMotion();
+  if (!motionPaused) updateProgress();
+});
+new IntersectionObserver(([entry]) => {
+  portraitVisible = entry.isIntersecting;
+  syncAmbientMotion();
+}).observe(portraitScene);
+document.addEventListener('visibilitychange', syncAmbientMotion);
+syncAmbientMotion();
+
 const endOpening = () => portraitScene.classList.remove('is-opening');
 portraitScene.addEventListener('focusin', endOpening);
 if (!reducedMotion.matches && !location.hash && scrollY < 100) {
   const openingImage = portraitScene.querySelector('.hero__opening');
   openingImage.decode().then(() => {
-    if (reducedMotion.matches || scrollY >= 100 || portraitScene.matches(':focus-within')) return;
+    if (reducedMotion.matches || motionPaused || scrollY >= 100 || portraitScene.matches(':focus-within')) return;
     portraitScene.classList.add('is-opening');
     portraitScene.querySelector('.hero__depth').addEventListener('animationend', event => {
       if (event.animationName === 'opening-camera') endOpening();
@@ -139,7 +166,7 @@ function updateProgress() {
     const pageHeight = document.documentElement.scrollHeight - innerHeight;
     const fraction = pageHeight > 0 ? Math.max(0, Math.min(1, scrollY / pageHeight)) : 0;
     pageProgress.style.transform = `scaleX(${fraction})`;
-    if (!reducedMotion.matches) syncPortrait();
+    if (!reducedMotion.matches && !motionPaused) syncPortrait();
     syncVisit();
     progressFrame = 0;
   });
@@ -147,6 +174,7 @@ function updateProgress() {
 addEventListener('scroll', updateProgress, { passive: true });
 addEventListener('resize', updateProgress);
 reducedMotion.addEventListener('change', () => {
+  syncAmbientMotion();
   if (reducedMotion.matches) {
     endOpening();
     Object.keys(depthProperties).forEach(property => portraitScene.style.removeProperty(property));

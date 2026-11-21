@@ -8,6 +8,52 @@
   display: none;
 }
 
+.hero__monogram { transform-style: preserve-3d; }
+.hero__relief {
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: 52%;
+  transform-style: preserve-3d;
+}
+.hero__relief::before, .hero__relief::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: #ad7439;
+  mask: url("irradia-symbol.webp") center / contain no-repeat;
+  transform: translateZ(1px);
+}
+.hero__relief::after { background: #d29b55; transform: translateZ(3px); }
+.hero__relief img { width: 100%; transform: translateZ(5px); }
+.hero__motion-toggle {
+  position: absolute;
+  z-index: 3;
+  right: 15px;
+  bottom: 15px;
+  width: 44px;
+  height: 44px;
+  border: 1px solid #f4d1a080;
+  border-radius: 50%;
+  color: #fff1dc;
+  background: #39172ce8;
+}
+.hero__motion-toggle:not([hidden]) { display: grid; place-items: center; }
+.hero__motion-toggle:hover { background: #63354c; }
+.hero__motion-toggle::before {
+  content: "";
+  width: 11px;
+  height: 14px;
+  border-inline: 3px solid currentColor;
+}
+.hero__visual.is-motion-paused .hero__motion-toggle::before {
+  width: 13px;
+  height: 15px;
+  border: 0;
+  background: currentColor;
+  clip-path: polygon(15% 0, 100% 50%, 15% 100%);
+}
+
 @media (prefers-reduced-motion: no-preference) {
   .clinic .hero__visual.is-opening .hero__depth {
     animation: opening-camera 3.1s cubic-bezier(.19, 1, .22, 1) both;
@@ -42,6 +88,27 @@
     animation: opening-card 1.55s 1.12s cubic-bezier(.19, 1, .22, 1) both;
   }
 
+  .clinic .hero__visual.has-ambient-motion:not(.is-opening) .hero__portrait {
+    animation: ambient-portrait 9s ease-in-out infinite;
+  }
+  .clinic .hero__visual.has-ambient-motion:not(.is-opening) .hero__frame {
+    animation: ambient-frame 9s ease-in-out infinite;
+  }
+  .clinic .hero__visual.has-ambient-motion:not(.is-opening) .hero__monogram {
+    animation: ambient-seal 7s ease-in-out infinite;
+  }
+  .clinic .hero__visual.has-ambient-motion:not(.is-opening) .hero__visit {
+    animation: ambient-card 8s ease-in-out infinite;
+  }
+  .clinic .hero__visual.has-ambient-motion:not(.is-opening) .hero__portrait::after {
+    animation: opening-light 9s ease-in-out infinite;
+  }
+  .clinic .hero__visual.is-motion-paused :is(.hero__portrait, .hero__frame, .hero__monogram, .hero__visit, .hero__depth, .hero__opening),
+  .clinic .hero__visual.is-motion-paused .hero__portrait::after,
+  .clinic .hero__visual.is-offscreen :is(.hero__portrait, .hero__frame, .hero__monogram, .hero__visit, .hero__depth, .hero__opening),
+  .clinic .hero__visual.is-offscreen .hero__portrait::after {
+    animation-play-state: paused;
+  }
 }
 
 @keyframes opening-camera {
@@ -73,4 +140,28 @@
 @keyframes opening-card {
   from { opacity: 0; transform: perspective(650px) translate3d(-25px, 28px, 100px) rotateX(-27deg) rotateY(13deg); }
   to { opacity: 1; transform: none; }
+}
+
+@keyframes ambient-portrait {
+  0%, 100% { rotate: y 0deg; }
+  36% { rotate: y -9deg; }
+  72% { rotate: y 5deg; }
+}
+
+@keyframes ambient-frame {
+  0%, 100% { translate: 0 0 0; rotate: y 0deg; }
+  36% { translate: -16px -7px 36px; rotate: y 5deg; border-color: #ffeaca; }
+  72% { translate: 7px 4px 16px; rotate: y -4deg; }
+}
+
+@keyframes ambient-seal {
+  0%, 100% { translate: 0 0 0; rotate: y 0deg; }
+  35% { translate: -11px 9px 56px; rotate: y 48deg; }
+  72% { translate: 3px -6px 26px; rotate: y -27deg; }
+}
+
+@keyframes ambient-card {
+  0%, 100% { transform: perspective(720px) translateZ(0); }
+  35% { transform: perspective(720px) translate3d(12px, -16px, 28px) rotateX(8deg) rotateY(-7deg); }
+  72% { transform: perspective(720px) translate3d(-4px, -6px, 12px) rotateX(-3deg) rotateY(5deg); }
 }
