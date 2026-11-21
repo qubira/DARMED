@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Agenda Clínica | Grupo DARMED</title>
+  <title>Agenda Clínica | iiradia</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -78,7 +78,7 @@
               <div class="docs" id="docFilter" style="margin-left:auto"></div>
             </div>
             <div class="cal-wrap"><div class="cal" id="cal"></div></div>
-            <p style="font-size:.76rem;color:var(--muted);margin-top:10px">💡 Haz clic en un espacio vacío para crear una cita ahí. Las citas con borde brillante llegaron desde la web de DARMED.</p>
+            <p style="font-size:.76rem;color:var(--muted);margin-top:10px">💡 Haz clic en un espacio vacío para crear una cita ahí. Las citas con borde brillante llegaron desde la web de IRRADIA.</p>
           </div>
           <div style="display:grid;gap:16px;align-content:start">
             <div class="card"><div class="card__head"><h3>Reservas desde la web</h3><span class="live-badge" style="font-size:.7rem;color:var(--ok);font-weight:700">● EN VIVO</span></div><div class="feed" id="webList"></div></div>
@@ -129,7 +129,7 @@
       { n: 'Dr. Martín Salazar', s: 'Dermatología', c: '#7a1a4f', brand: 'darmed' },
       { n: 'Dra. Lucía Ferreyra', s: 'Armonización facial', c: '#c8a06a', brand: 'darmed' },
       { n: 'Lic. Andrea Paredes', s: 'Cosmiatría corporal', c: '#5b6ef5', brand: 'darmed' },
-      { n: 'Lic. Paola Ríos', s: 'Láser DEPIZONE', c: '#0aa5e8', brand: 'depizone' }
+      { n: 'Lic. Paola Ríos', s: 'Láser STHETIC', c: '#0aa5e8', brand: 'depizone' }
     ];
     const TREATS = ['Evaluación facial', 'Toxina Botulínica', 'Ácido Hialurónico', 'Hydrafacial', 'Peeling químico', 'Bioestimuladores', 'Drenaje linfático', 'Reducción de medidas', 'Depilación láser', 'Plasma capilar'];
     const PAC = ['Valeria Ríos', 'Carmen Paz', 'Lucía Torres', 'Andrea Vega', 'Rosa Medina', 'Diego León', 'Fernanda Soto', 'Camila Ruiz', 'Sofía Herrera', 'Renzo Castro', 'Mafer Quispe', 'Gabriela Núñez'];
@@ -150,7 +150,7 @@
     }
     function apptsFor(dateStr) {
       const ov = overrides();
-      const saved = Group.bookings().filter(b => b.date === dateStr).map(b => ({ ...b, docIdx: b.docIdx ?? Math.max(0, DOCS.findIndex(d => d.n === b.doc)), prio: b.prio || 'Media', web: b.source === 'Web DARMED' }));
+      const saved = Group.bookings().filter(b => b.date === dateStr).map(b => ({ ...b, docIdx: b.docIdx ?? Math.max(0, DOCS.findIndex(d => d.n === b.doc)), prio: b.prio || 'Media', web: ['Web DARMED', 'Web IRRADIA'].includes(b.source) }));
       // las citas guardadas tienen prioridad: se eliminan semillas que choquen con ellas
       const seeds = seedFor(dateStr).filter(s => !saved.some(b => b.docIdx === s.docIdx && toMin(b.start) < toMin(s.end) && toMin(s.start) < toMin(b.end)));
       return [...seeds, ...saved].map(a => ({ ...a, status: ov[a.id] || a.status || 'Programado' }));
@@ -187,7 +187,7 @@
       $('#kpis').innerHTML = [['Citas hoy', today.length, Admin.I('cal')], ['Citas en la semana', week.length, Admin.I('chart')], ['Prioridad alta hoy', today.filter(a => a.prio === 'Alta').length, Admin.I('alert')], ['Reservas web', web.length, '🌐']].map(k => `<div class="card kpi"><span class="ico">${k[2]}</span><small>${k[0]}</small><b>${k[1]}</b></div>`).join('');
       $('#pillWeb').textContent = web.length;
       $('#webList').innerHTML = web.length ? web.slice().reverse().slice(0, 6).map(b => `<div class="feed-item" style="cursor:pointer" data-jump="${b.date}"><span class="dot">🌐</span><div><b>${esc(b.client)}</b> · ${esc(b.treat)}<small>${new Date(b.date + 'T12:00').toLocaleDateString('es-PE', { weekday: 'short', day: 'numeric', month: 'short' })} · ${b.start} · ${esc(b.doc || '')}</small></div></div>`).join('')
-        : '<p style="color:var(--muted);font-size:.84rem">Aún no hay reservas web. <a href="darmed.html#reservar" target="_blank" style="color:var(--primary);font-weight:700">Haz una en DARMED ↗</a> y aparecerá aquí al instante.</p>';
+        : '<p style="color:var(--muted);font-size:.84rem">Aún no hay reservas web. <a href="darmed.html#reservar" target="_blank" style="color:var(--primary);font-weight:700">Haz una en IRRADIA ↗</a> y aparecerá aquí al instante.</p>';
       $('#avail').innerHTML = DOCS.map((d, i) => { const mins = today.filter(a => a.docIdx === i).reduce((s, a) => s + toMin(a.end) - toMin(a.start), 0); const p = Math.round(mins / ((H1 - H0) * 60) * 100); return `<div><span class="av-s" style="background:${d.c};width:26px;height:26px;font-size:.6rem">${d.n.split(' ')[1][0]}${d.n.split(' ')[2][0]}</span><div class="meter"><span style="width:${p}%;background:${d.c}"></span></div><b style="font-size:.78rem;width:36px;text-align:right">${p}%</b></div>`; }).join('');
     }
     $('#prevW').onclick = () => { weekStart.setDate(weekStart.getDate() - 7); renderAgenda(); };

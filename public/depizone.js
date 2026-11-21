@@ -1,7 +1,7 @@
-/* DEPIZONE · datos de maqueta + interacciones */
+/* STHETIC · datos de maqueta + interacciones */
 const { $, $$, money, toast, productArt, productCard } = UI;
 const IMG = (id, w = 800) => `https://images.unsplash.com/photo-${id}?auto=format&fit=crop&w=${w}&q=80`;
-UI.init({ brand: 'depizone', waText: 'Hola DEPIZONE, quiero cotizar depilación láser', waBubble: '¿Cotizamos tus zonas? 💙' });
+UI.init({ brand: 'depizone', waText: 'Hola STHETIC, quiero cotizar depilación láser', waBubble: '¿Cotizamos tus zonas? 💙' });
 const cart = UI.Cart({ brand: 'depizone', freeShip: 300, shipCost: 0, extraLabel: 'Evaluación', freeLabel: 'un facial de regalo', installments: 6, title: 'Tu plan', checkoutLabel: 'Reservar y pagar', checkoutMsg: '¡Plan reservado! Te escribimos por WhatsApp para agendar 💙' });
 
 /* ---------- Zonas (precio por sesión) ---------- */
@@ -89,7 +89,7 @@ $('#plans').addEventListener('click', e => { const b = e.target.closest('[data-p
 $('#qAdd').addEventListener('click', () => {
   if (!sel.size) return toast('Selecciona al menos una zona', '👆');
   const c = calc();
-  cart.add({ id: 'plan-' + [...sel].sort().join('-') + '-' + plan, name: `Láser · ${[...sel].map(k => Z[k].n).join(', ')}`, brand: 'DEPIZONE', variant: c.pl.n, price: c.total, shape: 'device', c1: '#bff0ff', c2: '#0aa5e8', bg: '#eaf7fd' });
+  cart.add({ id: 'plan-' + [...sel].sort().join('-') + '-' + plan, name: `Láser · ${[...sel].map(k => Z[k].n).join(', ')}`, brand: 'STHETIC', variant: c.pl.n, price: c.total, shape: 'device', c1: '#bff0ff', c2: '#0aa5e8', bg: '#eaf7fd' });
 });
 renderQuote();
 
@@ -103,7 +103,7 @@ function renderHero() {
   $('#heroOld').textContent = 'S/ ' + Math.round(Z[hz].p + 37);
 }
 $('#heroZones').addEventListener('click', e => { const b = e.target.closest('[data-hz]'); if (b) { hz = b.dataset.hz; renderHero(); } });
-$('#heroAdd').addEventListener('click', () => { const p = +$('#heroPrice').textContent.replace('S/ ', ''); cart.add({ id: 'hero-' + hz, name: `Pack 8 sesiones · ${Z[hz].n}`, brand: 'DEPIZONE', price: p * 8, shape: 'device', c1: '#bff0ff', c2: '#0aa5e8', bg: '#eaf7fd' }); });
+$('#heroAdd').addEventListener('click', () => { const p = +$('#heroPrice').textContent.replace('S/ ', ''); cart.add({ id: 'hero-' + hz, name: `Pack 8 sesiones · ${Z[hz].n}`, brand: 'STHETIC', price: p * 8, shape: 'device', c1: '#bff0ff', c2: '#0aa5e8', bg: '#eaf7fd' }); });
 renderHero();
 
 /* ---------- Servicios ---------- */
@@ -117,7 +117,7 @@ const SVC = [
 $('#services').innerHTML = SVC.map((s, i) => `<a href="#promos" class="svc" data-reveal data-delay="${i * 80}"><div class="ic">${s[0]}</div><h4>${s[1]}</h4><p>${s[2]}</p><span>${s[3]} →</span></a>`).join('');
 
 /* ---------- Promos (tratamientos como productos) ---------- */
-const T = (id, name, price, old, tag, c1, c2, shape = 'device') => ({ id, brand: 'DEPIZONE', name, price, old, shape, c1, c2, bg: '#eef8fd', rating: 4.9, reviews: 120 + id.length * 37, tags: tag ? [{ t: tag, c: 'tag--pri' }] : [] });
+const T = (id, name, price, old, tag, c1, c2, shape = 'device') => ({ id, brand: 'STHETIC', name, price, old, shape, c1, c2, bg: '#eef8fd', rating: 4.9, reviews: 120 + id.length * 37, tags: tag ? [{ t: tag, c: 'tag--pri' }] : [] });
 const PROMOS = [
   T('t1', 'Depilación Láser – Axilas (8 ses.)', 392, 768, 'Más pedido', '#bff0ff', '#0aa5e8'),
   T('t2', 'Depilación Láser – Bikini Brasilero', 330, null, 'Destacado', '#d9d2ff', '#7b61ff'),
@@ -157,7 +157,7 @@ function renderCalc() {
   $('#cSes').textContent = ses;
   $('#sessBar').innerHTML = Array.from({ length: 10 }, (_, i) => `<span class="${i < ses ? 'on' : ''}"></span>`).join('');
   $('#cTxt').innerHTML = `Para <b>${Z[zk].n.toLowerCase()}</b> con fototipo <b>${['I', 'II', 'III', 'IV', 'V', 'VI'][ft]}</b> y vello <b>${['fino', 'medio', 'grueso'][g - 1]}</b>, cada 4–6 semanas. Precio estimado: <b>S/ ${Math.round(Z[zk].p * ses * .6)}</b> con descuento de pack.`;
-  $('#cAdd').onclick = () => cart.add({ id: 'calc-' + zk + ses, name: `${ses} sesiones · ${Z[zk].n}`, brand: 'DEPIZONE', price: Math.round(Z[zk].p * ses * .6), shape: 'device', c1: '#bff0ff', c2: '#7b61ff' });
+  $('#cAdd').onclick = () => cart.add({ id: 'calc-' + zk + ses, name: `${ses} sesiones · ${Z[zk].n}`, brand: 'STHETIC', price: Math.round(Z[zk].p * ses * .6), shape: 'device', c1: '#bff0ff', c2: '#7b61ff' });
 }
 $('#fototipos').addEventListener('click', e => { const b = e.target.closest('[data-ft]'); if (b) { ft = +b.dataset.ft; renderCalc(); } });
 $('#grosor').addEventListener('input', renderCalc);
@@ -173,7 +173,7 @@ $('#baRow').innerHTML = BA.map((b, i) => `<div data-reveal data-delay="${i * 120
 /* ---------- Sedes ---------- */
 const SEDES = [['Miraflores', 'Av. José Pardo 610', '🌊', true], ['San Isidro', 'Av. Javier Prado Este 480', '🏙️', true], ['Surco', 'C.C. Jockey Plaza, 2do piso', '🛍️', true], ['San Miguel', 'C.C. Plaza San Miguel', '🎡', false], ['Los Olivos', 'C.C. MegaPlaza, Local 214', '🌳', true], ['Arequipa', 'C.C. Real Plaza Cayma', '🌋', true]];
 $('#sedesGrid').innerHTML = SEDES.slice(0, 4).concat(SEDES.slice(4)).map((s, i) => `<div class="sede-c" data-reveal data-delay="${i * 60}"><div class="sede-c__top">${s[2]}<span class="open"><span class="dot-live" style="${s[3] ? '' : 'background:#e0475f'}"></span>${s[3] ? 'Abierto ahora' : 'Cierra pronto'}</span></div>
-  <div class="sede-c__body"><b>DEPIZONE ${s[0]}</b><small>${s[1]}</small><small>Lun–Sáb 9:00–21:00 · Dom 10:00–18:00</small><a href="https://wa.me/51943387184" target="_blank" rel="noopener" style="color:var(--primary);font-weight:700;margin-top:6px">Agendar aquí →</a></div></div>`).join('');
+  <div class="sede-c__body"><b>STHETIC ${s[0]}</b><small>${s[1]}</small><small>Lun–Sáb 9:00–21:00 · Dom 10:00–18:00</small><a href="https://wa.me/51943387184" target="_blank" rel="noopener" style="color:var(--primary);font-weight:700;margin-top:6px">Agendar aquí →</a></div></div>`).join('');
 
 /* ---------- FAQ ---------- */
 const FAQ = [

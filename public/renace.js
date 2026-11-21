@@ -1,7 +1,7 @@
-/* RENACE · datos de maqueta + interacciones */
+/* NUTRI · datos de maqueta + interacciones */
 const { $, $$, money, toast, productArt, productCard } = UI;
 const IMG = (id, w = 600) => `https://images.unsplash.com/photo-${id}?auto=format&fit=crop&w=${w}&q=80`;
-UI.init({ brand: 'renace', waText: 'Hola RENACE, quiero hacer un pedido', waBubble: '¿Te ayudamos a elegir? 💕' });
+UI.init({ brand: 'renace', waText: 'Hola NUTRI, quiero hacer un pedido', waBubble: '¿Te ayudamos a elegir? 💕' });
 
 /* ---------- Catálogo ---------- */
 const P = (id, brand, name, price, old, cat, shape, c1, c2, bg, rating, reviews, extra = {}) => ({ id, brand, name, price, old, cat, shape, c1, c2, bg, rating, reviews, ...extra });
@@ -60,7 +60,7 @@ $('#sDots').addEventListener('click', e => { const b = e.target.closest('[data-s
 goSlide(0);
 $('#sideB').innerHTML = `
   <a href="#coreana" class="side-b" style="background:#111;color:#fff">${productArt(PRODUCTS[1])}<span class="tag tag--hot" style="align-self:flex-start;margin-bottom:10px">K-Beauty</span><h3>Rutina coreana<br>-15%</h3></a>
-  <a href="#points" class="side-b" style="background:#fff3c9">${productArt(PRODUCTS[2])}<span class="tag" style="align-self:flex-start;margin-bottom:10px">Renace Points</span><h3>Regalos en<br>tooodas tus compras</h3></a>`;
+  <a href="#points" class="side-b" style="background:#fff3c9">${productArt(PRODUCTS[2])}<span class="tag" style="align-self:flex-start;margin-bottom:10px">NUTRI Points</span><h3>Regalos en<br>tooodas tus compras</h3></a>`;
 
 /* ---------- Categorías ---------- */
 const CIRCLES = [['Coreana', 'r2'], ['Skincare', 'r5'], ['Dermo', 'r7'], ['Maquillaje', 'r18'], ['Cabello', 'r19'], ['Corporal', 'r23'], ['Fragancias', 'r24'], ['Ofertas', 'r16']];

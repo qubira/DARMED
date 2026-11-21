@@ -1,8 +1,8 @@
-/* DARMED · datos de maqueta + interacciones */
+/* IRRADIA · datos de maqueta + interacciones */
 const { $, $$, money, toast, productArt, productCard } = UI;
 const IMG = (id, w = 900) => `https://images.unsplash.com/photo-${id}?auto=format&fit=crop&w=${w}&q=80`;
 
-UI.init({ brand: 'darmed', waText: 'Hola DARMED, quiero información sobre sus tratamientos', waBubble: '¿Agendamos tu evaluación gratis? 💬' });
+UI.init({ brand: 'darmed', waText: 'Hola IRRADIA, quiero información sobre sus tratamientos', waBubble: '¿Agendamos tu evaluación gratis? 💬' });
 
 /* ---------- Palabra rotativa ---------- */
 (() => {
@@ -108,15 +108,15 @@ const PRODUCTS = [
   { id: 'd3', brand: 'ISDIN', name: 'Isdinceutics Flavo-C Ultraglican', price: 189, old: 215, cat: 'Antiedad', shape: 'dropper', c1: '#ffd0c2', c2: '#d9534f', bg: '#fff0ec', rating: 4.7, reviews: 386 },
   { id: 'd4', brand: 'Avène', name: 'Cicalfate+ Crema Reparadora Post-tratamiento', price: 79, cat: 'Post-tratamiento', shape: 'tube', c1: '#e3f1ff', c2: '#3b7dd8', bg: '#eef6ff', rating: 4.9, reviews: 958, tags: [{ t: 'Post láser' }] },
   { id: 'd5', brand: 'CeraVe', name: 'Limpiador Espumoso para piel grasa 236 ml', price: 69, cat: 'Limpieza', shape: 'pump', c1: '#dff3ff', c2: '#1b6fb3', bg: '#eef8ff', rating: 4.8, reviews: 2140 },
-  { id: 'd6', brand: 'DARMED Lab', name: 'Ácido Hialurónico Multi-peso 2% Booster', price: 129, old: 159, cat: 'Sérums', shape: 'dropper', c1: '#f3d3e0', c2: '#7a1a4f', bg: '#fbeff4', rating: 5, reviews: 233, tags: [{ t: 'Exclusivo', c: 'tag--new' }] },
+  { id: 'd6', brand: 'IRRADIA Lab', name: 'Ácido Hialurónico Multi-peso 2% Booster', price: 129, old: 159, cat: 'Sérums', shape: 'dropper', c1: '#f3d3e0', c2: '#7a1a4f', bg: '#fbeff4', rating: 5, reviews: 233, tags: [{ t: 'Exclusivo', c: 'tag--new' }] },
   { id: 'd7', brand: 'Bioderma', name: 'Sensibio H2O Agua Micelar 500 ml', price: 89, cat: 'Limpieza', shape: 'bottle', c1: '#ffe0ea', c2: '#e05d8a', bg: '#fff1f5', rating: 4.8, reviews: 3011 },
   { id: 'd8', brand: 'Heliocare', name: '360° Water Gel SPF50+ Color', price: 135, old: 149, cat: 'Protección', shape: 'tube', c1: '#f4dcc8', c2: '#a8673d', bg: '#fbf1e9', rating: 4.7, reviews: 512 },
-  { id: 'd9', brand: 'DARMED Lab', name: 'Retinal 0.1% Crema Noche Renovadora', price: 159, cat: 'Antiedad', shape: 'jar', c1: '#e8d5f5', c2: '#6b3fa0', bg: '#f6effc', rating: 4.9, reviews: 178, tags: [{ t: 'Nuevo', c: 'tag--new' }] },
+  { id: 'd9', brand: 'IRRADIA Lab', name: 'Retinal 0.1% Crema Noche Renovadora', price: 159, cat: 'Antiedad', shape: 'jar', c1: '#e8d5f5', c2: '#6b3fa0', bg: '#f6effc', rating: 4.9, reviews: 178, tags: [{ t: 'Nuevo', c: 'tag--new' }] },
   { id: 'd10', brand: 'SkinCeuticals', name: 'Hydrating B5 Gel Hidratante 30 ml', price: 389, cat: 'Sérums', shape: 'dropper', c1: '#d9f3f5', c2: '#2a9aa6', bg: '#eefafb', rating: 4.8, reviews: 301 },
   { id: 'd11', brand: 'Uriage', name: 'Bariéderm Cica-Crema Reparadora', price: 72, old: 89, cat: 'Post-tratamiento', shape: 'tube', c1: '#e4f4ea', c2: '#2f8f5b', bg: '#f0faf4', rating: 4.6, reviews: 274 },
-  { id: 'd12', brand: 'DARMED Lab', name: 'Kit Post-Botox: limpiador + sérum + SPF', price: 249, old: 320, cat: 'Post-tratamiento', shape: 'jar', c1: '#f6dbe6', c2: '#c8a06a', bg: '#fdf3f6', rating: 5, reviews: 96, tags: [{ t: 'Kit', c: 'tag--pri' }] }
+  { id: 'd12', brand: 'IRRADIA Lab', name: 'Kit Post-Botox: limpiador + sérum + SPF', price: 249, old: 320, cat: 'Post-tratamiento', shape: 'jar', c1: '#f6dbe6', c2: '#c8a06a', bg: '#fdf3f6', rating: 5, reviews: 96, tags: [{ t: 'Kit', c: 'tag--pri' }] }
 ];
-const cart = UI.Cart({ brand: 'darmed', freeShip: 199, installments: 6, checkoutMsg: '¡Pedido DARMED simulado! Te llegará en 24 h 🚚' });
+const cart = UI.Cart({ brand: 'darmed', freeShip: 199, installments: 6, checkoutMsg: '¡Pedido IRRADIA simulado! Te llegará en 24 h 🚚' });
 UI.quickView(PRODUCTS, cart);
 const CATS = ['Todos', ...new Set(PRODUCTS.map(p => p.cat))];
 let cat = 'Todos';
@@ -201,7 +201,7 @@ document.addEventListener('click', e => {
   const b = e.target.closest('[data-bday]'); if (b) { bDay = +b.dataset.bday; bSlot = null; renderBooking(); }
   const c = e.target.closest('[data-slot]'); if (c) { bSlot = c.dataset.slot; renderBooking(); }
   const d = e.target.closest('[data-doc]'); if (d) { bDoc = +d.dataset.doc; renderBooking(); }
-  const k = e.target.closest('[data-pack]'); if (k) { cart.add({ id: 'pk' + k.dataset.pack, name: 'Adelanto · ' + PACKS[k.dataset.pack].n, brand: 'Paquete DARMED', price: 50, shape: 'syringe', c1: '#f3d3e0', c2: '#7a1a4f' }); const c2 = $('#cupos'); c2.textContent = Math.max(1, +c2.textContent - 1); }
+  const k = e.target.closest('[data-pack]'); if (k) { cart.add({ id: 'pk' + k.dataset.pack, name: 'Adelanto · ' + PACKS[k.dataset.pack].n, brand: 'Paquete IRRADIA', price: 50, shape: 'syringe', c1: '#f3d3e0', c2: '#7a1a4f' }); const c2 = $('#cupos'); c2.textContent = Math.max(1, +c2.textContent - 1); }
 });
 $('#bTreat').addEventListener('change', updateSummary);
 $('#bConfirm').addEventListener('click', () => {
@@ -212,7 +212,7 @@ $('#bConfirm').addEventListener('click', () => {
   const t = allT.find(x => x.n === $('#bTreat').value) || allT[0];
   const d = new Date(today); d.setDate(d.getDate() + bDay);
   const [hh, mm] = bSlot.split(':').map(Number);
-  UI.Group.addBooking({ brand: 'darmed', client: name, phone: $('#bPhone').value.trim(), treat: t.n, doc: TEAM[bDoc].n, docIdx: bDoc, date: d.toISOString().slice(0, 10), start: bSlot, end: `${String(hh + 1).padStart(2, '0')}:${String(mm).padStart(2, '0')}`, price: t.price, status: 'Programado', source: 'Web DARMED' });
+  UI.Group.addBooking({ brand: 'darmed', client: name, phone: $('#bPhone').value.trim(), treat: t.n, doc: TEAM[bDoc].n, docIdx: bDoc, date: d.toISOString().slice(0, 10), start: bSlot, end: `${String(hh + 1).padStart(2, '0')}:${String(mm).padStart(2, '0')}`, price: t.price, status: 'Programado', source: 'Web IRRADIA' });
   $('#okText').insertAdjacentHTML('beforeend', '<br><br><a href="agendamiento.html" style="color:var(--primary);font-weight:700;text-decoration:underline">Ver la cita en la agenda clínica →</a>');
   bSlot = null; renderBooking();
   UI.openModal('okModal');
@@ -249,10 +249,10 @@ const SEDES = [
 ];
 let sede = 0;
 function renderSedes() {
-  $('#sedes').innerHTML = SEDES.map((s, i) => `<div class="sede ${i === sede ? 'is-active' : ''}" data-sede="${i}"><b>📍 DARMED ${s.n}</b><small>${s.a}</small><small>🕘 ${s.h}</small></div>`).join('') +
+  $('#sedes').innerHTML = SEDES.map((s, i) => `<div class="sede ${i === sede ? 'is-active' : ''}" data-sede="${i}"><b>📍 IRRADIA ${s.n}</b><small>${s.a}</small><small>🕘 ${s.h}</small></div>`).join('') +
     `<a class="btn" href="https://wa.me/51943387184" target="_blank" rel="noopener">WhatsApp · 943 387 184</a>`;
   const s = SEDES[sede]; $('#pin').style.left = s.x + '%'; $('#pin').style.top = s.y + '%';
-  $('#pinCard').innerHTML = `<b>DARMED ${s.n}</b><br><small>${s.a}</small>`;
+  $('#pinCard').innerHTML = `<b>IRRADIA ${s.n}</b><br><small>${s.a}</small>`;
 }
 $('#sedes').addEventListener('click', e => { const b = e.target.closest('[data-sede]'); if (b) { sede = +b.dataset.sede; renderSedes(); } });
 renderSedes();

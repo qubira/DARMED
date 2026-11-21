@@ -1,5 +1,5 @@
 /* =========================================================
-   GRUPO DARMED · Master (todos los módulos) — maqueta con datos
+   iiradia · Master (todos los módulos) — maqueta con datos
    ========================================================= */
 const { $, $$, toast, Group, esc, store } = UI;
 const { I, BRANDS } = Admin;
@@ -66,7 +66,7 @@ function go(v) {
   if (!VIEWS[v]) v = 'dashboard'; cur = v;
   $$('.view').forEach(x => x.classList.toggle('on', x.id === 'v-' + v));
   $$('.side [data-nav]').forEach(a => a.classList.toggle('on', a.dataset.nav === v));
-  Admin.setTitle(VIEWS[v][0]); document.title = VIEWS[v][0] + ' | Grupo DARMED';
+  Admin.setTitle(VIEWS[v][0]); document.title = VIEWS[v][0] + ' | iiradia';
   VIEWS[v][1]($('#v-' + v)); scrollTo({ top: 0 });
 }
 function boot() {
@@ -92,7 +92,7 @@ function vDashboard(el) {
   const greet = new Date().getHours() < 12 ? 'Buenos días' : new Date().getHours() < 19 ? 'Buenas tardes' : 'Buenas noches';
   el.innerHTML = head(`${greet}, ${user ? esc(user.name.split(' ')[0]) : 'equipo'}`, `Resumen de ${Admin.BRANDS[Admin.state.brand].n.toLowerCase()} · ${new Date().toLocaleDateString('es-PE', { weekday: 'long', day: 'numeric', month: 'long' })}`,
     `<div class="seg" id="rng">${[7, 30, 90].map(r => `<button class="${r === range ? 'on' : ''}" data-r="${r}">${r} días</button>`).join('')}</div><button class="btn btn--ghost" onclick="UI.toast('Reporte exportado (maqueta)','⤓')">${I('down')} Exportar</button>`) +
-    `<div class="banner"><span class="ic">${I('globe')}</span><p style="flex:1">Las <b>ventas, reservas y registros</b> hechos en las webs del grupo se integran aquí en tiempo real. ${ev.length ? `Hay <b>${ev.length} eventos web</b> registrados.` : 'Aún no hay eventos web: prueba una compra en una tienda.'}</p><a class="btn btn--ghost btn--sm" href="renace.html" target="_blank">Abrir RENACE ${I('ext')}</a></div>
+    `<div class="banner"><span class="ic">${I('globe')}</span><p style="flex:1">Las <b>ventas, reservas y registros</b> hechos en las webs del grupo se integran aquí en tiempo real. ${ev.length ? `Hay <b>${ev.length} eventos web</b> registrados.` : 'Aún no hay eventos web: prueba una compra en una tienda.'}</p><a class="btn btn--ghost btn--sm" href="renace.html" target="_blank">Abrir NUTRI ${I('ext')}</a></div>
     <div class="kpis">
       ${kpi('Ingresos', 'cash', S(sum), '12,4%', true, daily, '#a8336f')}
       ${kpi('Citas agendadas', 'cal', (Group.bookings().length + Math.round(range * 7.1)).toLocaleString('es-PE'), '8,1%', true, daily.map((v, i) => v * .7 + i * 50), '#4252d6')}
@@ -391,7 +391,7 @@ function vConfig(el) {
   const tg = (k, n, d) => `<div class="tog-row"><div><b style="font-size:.86rem;font-weight:600">${n}</b><p style="color:var(--muted);font-size:.78rem">${d}</p></div><button class="switch ${cfg[k] ? 'on' : ''}" data-tg="${k}" aria-label="${n}"></button></div>`;
   const TABS = [['general', 'General', 'gear'], ['marcas', 'Marcas', 'globe'], ['pagos', 'Pagos y facturación', 'cash'], ['notif', 'Notificaciones', 'bell'], ['seg', 'Seguridad', 'lock'], ['integ', 'Integraciones', 'spark']];
   const body = {
-    general: `<div class="set-row"><div><h4>Datos de la empresa</h4><p>Se muestran en comprobantes y reportes.</p></div><div style="display:grid;gap:10px"><input class="inp" value="Grupo DARMED S.A.C."><input class="inp" value="RUC 20612345678"><input class="inp" value="López de Ayala 1515, San Isidro, Lima"></div></div>
+    general: `<div class="set-row"><div><h4>Datos de la empresa</h4><p>Se muestran en comprobantes y reportes.</p></div><div style="display:grid;gap:10px"><input class="inp" value="iiradia S.A.C."><input class="inp" value="RUC 20612345678"><input class="inp" value="López de Ayala 1515, San Isidro, Lima"></div></div>
       <div class="set-row"><div><h4>Zona horaria y moneda</h4><p>Aplica a todas las sedes.</p></div><div style="display:grid;grid-template-columns:1fr 1fr;gap:10px"><select class="inp"><option>America/Lima (GMT-5)</option></select><select class="inp"><option>Sol peruano (S/)</option><option>Dólar (US$)</option></select></div></div>
       <div class="set-row"><div><h4>Horario de atención</h4><p>Horario por defecto para la agenda.</p></div><div style="display:grid;grid-template-columns:1fr 1fr;gap:10px"><input class="inp" type="time" value="09:00"><input class="inp" type="time" value="20:00"></div></div>`,
     marcas: `${KEYS.map(k => `<div class="set-row"><div><h4>${bchip(k)}</h4><p>Web pública: ${BM[k].h}</p></div><div style="display:grid;grid-template-columns:auto 1fr auto;gap:10px;align-items:center"><input type="color" value="${BM[k].c}" style="width:40px;height:36px;border:1px solid var(--line);border-radius:8px;background:none"><input class="inp" value="www.${k}.pe"><a class="btn btn--ghost btn--sm" href="${BM[k].h}" target="_blank">Ver ${I('ext')}</a></div></div>`).join('')}`,

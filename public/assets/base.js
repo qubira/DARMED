@@ -1,5 +1,5 @@
 /* =========================================================
-   GRUPO DARMED · Interacciones compartidas (maqueta)
+   iiradia · Interacciones compartidas (maqueta)
    ========================================================= */
 (function () {
   const $ = (s, r = document) => r.querySelector(s);
@@ -13,10 +13,10 @@
 
   /* ---------- Estado compartido entre páginas (Grupo) ---------- */
   const BRAND_META = {
-    darmed: { n: 'DARMED', c: '#b5487f', h: 'darmed.html' },
-    renace: { n: 'RENACE', c: '#ff5c93', h: 'renace.html' },
-    integrativa: { n: 'INTEGRATIVA', c: '#4f9a6b', h: 'integrativa.html' },
-    depizone: { n: 'DEPIZONE', c: '#0aa5e8', h: 'depizone.html' }
+    darmed: { n: 'IRRADIA', c: '#b5487f', h: 'darmed.html' },
+    renace: { n: 'NUTRI', c: '#ff5c93', h: 'renace.html' },
+    integrativa: { n: 'SMALL', c: '#4f9a6b', h: 'integrativa.html' },
+    depizone: { n: 'STHETIC', c: '#0aa5e8', h: 'depizone.html' }
   };
   const Group = {
     user() { return store.get('gd-user', null); },
@@ -93,10 +93,10 @@
   /* ---------- Barra del grupo + flotantes ---------- */
   function mountChrome(opts = {}) {
     const brands = [
-      ['darmed', 'DARMED', 'darmed.html', '#c25a8c'],
-      ['renace', 'RENACE', 'renace.html', '#f4a6c0'],
-      ['integrativa', 'INTEGRATIVA', 'integrativa.html', '#8fbf9f'],
-      ['depizone', 'DEPIZONE', 'depizone.html', '#38c6f4']
+      ['darmed', 'IRRADIA', 'darmed.html', '#c25a8c'],
+      ['renace', 'NUTRI', 'renace.html', '#f4a6c0'],
+      ['integrativa', 'SMALL', 'integrativa.html', '#8fbf9f'],
+      ['depizone', 'STHETIC', 'depizone.html', '#38c6f4']
     ];
     const bar = $('[data-group-bar]');
     const paintBar = () => {
@@ -104,8 +104,8 @@
       const u = Group.user();
       bar.className = 'group-bar';
       bar.innerHTML = `<div class="container group-bar__inner">
-        <span class="group-bar__label">Grupo DARMED</span>
-        <nav class="group-bar__tabs">${brands.map(([k, n, h, c]) => { const cc = Group.cartCount(k); return `<a class="group-tab ${k === opts.brand ? 'is-active' : ''}" href="${h}" style="--dot:${c}" title="${cc ? cc + ' producto(s) en tu carrito ' + n : n}"><i></i>${n}${cc ? `<span class="group-tab__n">${cc}</span>` : ''}</a>`; }).join('')}</nav>
+        <a class="group-bar__label" href="index.html" aria-label="iiradia, inicio">iiradia<span aria-hidden="true">.</span></a>
+        <nav class="group-bar__tabs" aria-label="Líneas de iiradia">${brands.map(([k, n, h, c]) => { const cc = Group.cartCount(k); const active = k === opts.brand; return `<a class="group-tab${active ? ' is-active' : ''}" href="${h}"${active ? ' aria-current="page"' : ''} style="--dot:${c}" title="${cc ? cc + ' producto(s) en tu carrito ' + n : n}"><i></i>${n}${cc ? `<span class="group-tab__n">${cc}</span>` : ''}</a>`; }).join('')}</nav>
         ${u ? `<a class="group-bar__login" href="master.html" title="Ir al panel master"><span class="group-bar__av">${esc(u.name[0])}</span> Hola, ${esc(u.name.split(' ')[0])} · Panel</a>`
             : `<a class="group-bar__login" href="loger.html">${ICON.user.replace('<svg', '<svg width="15" height="15"')} Intranet</a>`}
       </div>`;
@@ -384,10 +384,10 @@
   function crossSell(el, current) {
     if (!el) return;
     const SUG = {
-      darmed: [['renace', 'Lleva tu rutina post-tratamiento', 'Sérums, SPF y K-beauty con delivery en 1 h.'], ['depizone', '¿Y la depilación láser?', 'Pacientes DARMED tienen 15% en su primer pack.']],
-      renace: [['darmed', 'Potencia tu skincare con un tratamiento', 'Evaluación facial gratis con médicos DARMED.'], ['depizone', 'Piel suave para siempre', 'Láser diodo desde S/ 49 la sesión.']],
-      depizone: [['renace', 'Cuida tu piel entre sesiones', 'Protectores y calmantes en RENACE.'], ['darmed', 'Tratamientos médicos estéticos', 'Botox, rellenos y bioestimuladores.']],
-      integrativa: [['darmed', 'Estética con respaldo médico', 'Conoce DARMED, nuestra clínica insignia.'], ['renace', 'Bienestar también en casa', 'Skincare y cuidado corporal.']]
+      darmed: [['renace', 'Lleva tu rutina post-tratamiento', 'Sérums, SPF y K-beauty con delivery en 1 h.'], ['depizone', '¿Y la depilación láser?', 'Pacientes IRRADIA tienen 15% en su primer pack.']],
+      renace: [['darmed', 'Potencia tu skincare con un tratamiento', 'Evaluación facial gratis con médicos IRRADIA.'], ['depizone', 'Piel suave para siempre', 'Láser diodo desde S/ 49 la sesión.']],
+      depizone: [['renace', 'Cuida tu piel entre sesiones', 'Protectores y calmantes en NUTRI.'], ['darmed', 'Tratamientos médicos estéticos', 'Botox, rellenos y bioestimuladores.']],
+      integrativa: [['darmed', 'Estética con respaldo médico', 'Conoce IRRADIA, nuestra clínica insignia.'], ['renace', 'Bienestar también en casa', 'Skincare y cuidado corporal.']]
     }[current] || [];
     el.innerHTML = `<div class="container cross">${SUG.map(([b, t, d]) => { const m = BRAND_META[b]; const cc = Group.cartCount(b); return `<a href="${m.h}" class="cross__card" style="--bc:${m.c}"><span class="cross__brand">${m.n}</span><b>${t}</b><small>${d}</small>${cc ? `<span class="cross__cart">🛍️ Tienes ${cc} en tu carrito ${m.n}</span>` : ''}<span class="cross__go">Ir a ${m.n} →</span></a>`; }).join('')}</div>`;
   }

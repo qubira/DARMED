@@ -1,5 +1,5 @@
 /* =========================================================
-   GRUPO DARMED · Marco de la suite administrativa
+   iiradia · Marco de la suite administrativa
    Sidebar, topbar, Ctrl+K, notificaciones, tema, tablas, sheets
    ========================================================= */
 (function () {
@@ -48,7 +48,7 @@
   };
   const I = (n, cls = '') => `<svg class="i ${cls}" viewBox="0 0 24 24">${P[n] || ''}</svg>`;
 
-  const BRANDS = { all: { n: 'Todas las marcas', c: '#0f1117' }, darmed: { n: 'DARMED', c: '#a8336f' }, renace: { n: 'RENACE', c: '#ea4c89' }, integrativa: { n: 'INTEGRATIVA', c: '#2f8a5b' }, depizone: { n: 'DEPIZONE', c: '#0b97d4' } };
+  const BRANDS = { all: { n: 'Todas las marcas', c: '#0f1117' }, darmed: { n: 'IRRADIA', c: '#a8336f' }, renace: { n: 'NUTRI', c: '#ea4c89' }, integrativa: { n: 'SMALL', c: '#2f8a5b' }, depizone: { n: 'STHETIC', c: '#0b97d4' } };
 
   const NAV = [
     { g: 'General', items: [['dashboard', 'Dashboard', 'dash'], ['reportes', 'Reportes', 'chart']] },
@@ -73,7 +73,7 @@
     $('.side').innerHTML = `
       <div class="ws" id="ws" style="--wsc:${BRANDS[state.brand].c}">
         <span class="ws__logo">D</span>
-        <div class="ws__txt"><b>Grupo DARMED</b><small><i></i>${BRANDS[state.brand].n}</small></div>
+        <div class="ws__txt"><b>iiradia</b><small><i></i>${BRANDS[state.brand].n}</small></div>
         ${I('sort')}
         <div class="ws__menu">${Object.entries(BRANDS).map(([k, b]) => `<button data-ws="${k}" class="${k === state.brand ? 'on' : ''}"><span class="dot" style="background:${b.c}"></span>${b.n}</button>`).join('')}</div>
       </div>
@@ -86,7 +86,7 @@
     $('.topbar').innerHTML = `
       <button class="ib menu-t" id="mOpen">${I('menu')}</button>
       <button class="ib" id="collapseB" title="Contraer menú">${I('panel')}</button>
-      <div class="crumbs"><span>Grupo DARMED</span><span>/</span><b id="crumbT">${opts.title || ''}</b></div>
+      <div class="crumbs"><span>iiradia</span><span>/</span><b id="crumbT">${opts.title || ''}</b></div>
       <div class="topbar__r">
         <div class="kbar" id="kOpen">${I('search')}<span>Buscar o ir a…</span><kbd>Ctrl K</kbd></div>
         <button class="ib" id="themeB" title="Cambiar tema">${I(state.theme === 'dark' ? 'sun' : 'moon')}</button>
