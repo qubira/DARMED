@@ -3,13 +3,20 @@ import { animate } from 'framer-motion/dom/mini';
 const reducedMotion = matchMedia('(prefers-reduced-motion: reduce)');
 const ease = [0.22, 1, 0.36, 1];
 
-if (!reducedMotion.matches && !location.hash) {
-  document.querySelectorAll('.hero__copy > *').forEach((element, index) => {
-    animate(element, { opacity: [.55, 1], transform: ['translateY(15px)', 'translateY(0)'] }, { delay: index * .055, duration: .5, ease });
+const portraitScene = document.querySelector('.hero__visual');
+const endOpening = () => portraitScene.classList.remove('is-opening');
+portraitScene.addEventListener('focusin', endOpening);
+if (!reducedMotion.matches && !location.hash && scrollY < 100) {
+  const openingImage = portraitScene.querySelector('.hero__opening');
+  openingImage.decode().then(() => {
+    if (reducedMotion.matches || scrollY >= 100 || portraitScene.matches(':focus-within')) return;
+    portraitScene.classList.add('is-opening');
+    portraitScene.querySelector('.hero__depth').addEventListener('animationend', event => {
+      if (event.animationName === 'opening-camera') endOpening();
+    });
+  }).catch(() => {
+    // The main portrait stays visible if the opening image cannot be decoded.
   });
-  animate('.hero__portrait img', { transform: ['scale(1.04)', 'scale(1)'] }, { duration: .85, ease });
-  animate('.hero__visit', { opacity: [.45, 1], transform: ['translateY(14px)', 'translateY(0)'] }, { delay: .17, duration: .58, ease });
-  animate('.hero__monogram img', { transform: ['perspective(220px) rotateY(-65deg)', 'perspective(220px) rotateY(0deg)'] }, { delay: .12, duration: .95, ease });
 }
 
 const detail = document.getElementById('tDetail');
@@ -64,7 +71,6 @@ new MutationObserver(records => {
 }).observe(summary, { childList: true, subtree: true });
 
 const pageProgress = document.querySelector('.clinic-progress');
-const portraitScene = document.querySelector('.hero__visual');
 const hero = document.querySelector('.clinic .hero');
 const desktopDepth = matchMedia('(min-width: 761px)');
 let pointerX = 0;
@@ -141,7 +147,10 @@ function updateProgress() {
 addEventListener('scroll', updateProgress, { passive: true });
 addEventListener('resize', updateProgress);
 reducedMotion.addEventListener('change', () => {
-  if (reducedMotion.matches) Object.keys(depthProperties).forEach(property => portraitScene.style.removeProperty(property));
+  if (reducedMotion.matches) {
+    endOpening();
+    Object.keys(depthProperties).forEach(property => portraitScene.style.removeProperty(property));
+  }
   else updateProgress();
 });
 updateProgress();
