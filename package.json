@@ -2,11 +2,10 @@
   "name": "irradia",
   "private": true,
   "scripts": {
-    "build": "esbuild src/clinic-motion.mjs --bundle --splitting --minify --legal-comments=eof --format=esm --outdir=public/assets --chunk-names=clinic-motion-[hash]"
+    "build": "esbuild src/clinic-motion.mjs --bundle --minify --legal-comments=eof --format=esm --outfile=public/assets/clinic-motion.js"
   },
   "dependencies": {
-    "framer-motion": "14.14.0",
-    "three": "0.187.0"
+    "framer-motion": "14.14.0"
   },
   "devDependencies": {
     "esbuild": "0.28.2"

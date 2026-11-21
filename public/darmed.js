@@ -91,6 +91,7 @@ gallery.addEventListener('click', event => {
   gallery.dataset.scene = key;
 });
 $('#areaTabs').addEventListener('click', selectArea);
+$('#heroAreas').addEventListener('click', selectArea);
 $('#tList').addEventListener('click', event => {
   const control = event.target.closest('[data-t]');
   if (!control || tIdx === Number(control.dataset.t)) return;

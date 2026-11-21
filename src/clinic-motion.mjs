@@ -4,22 +4,12 @@ const reducedMotion = matchMedia('(prefers-reduced-motion: reduce)');
 const ease = [0.22, 1, 0.36, 1];
 
 if (!reducedMotion.matches && !location.hash) {
-  animate('.hero__copy', { opacity: [0.65, 1], transform: ['translateY(10px)', 'translateY(0)'] }, { duration: 0.45, ease });
-  animate('.hero__visual', { opacity: [0.75, 1] }, { duration: 0.5, ease });
+  document.querySelectorAll('.hero__copy > *').forEach((element, index) => {
+    animate(element, { opacity: [.55, 1], transform: ['translateY(15px)', 'translateY(0)'] }, { delay: index * .055, duration: .5, ease });
+  });
+  animate('.hero__portrait img', { transform: ['scale(1.04)', 'scale(1)'] }, { duration: .85, ease });
+  animate('.hero__visit', { opacity: [.45, 1], transform: ['translateY(14px)', 'translateY(0)'] }, { delay: .17, duration: .58, ease });
 }
-
-const studio = document.querySelector('.clinic .hero');
-function loadStudio() {
-  if (reducedMotion.matches) return;
-  reducedMotion.removeEventListener('change', loadStudio);
-  import('./irradia-scene.mjs')
-    .then(({ mountScene }) => mountScene(studio, reducedMotion))
-    .catch(() => {
-      // The original artwork is visible if WebGL or the animation module is unavailable.
-    });
-}
-if (reducedMotion.matches) reducedMotion.addEventListener('change', loadStudio);
-else loadStudio();
 
 const detail = document.getElementById('tDetail');
 new MutationObserver(() => {
