@@ -29,7 +29,7 @@ new MutationObserver(() => {
 }).observe(detail, { childList: true });
 
 const revealGroups = new Map([
-  [document.getElementById('careOptions'), ':scope > a'],
+  [document.querySelector('.care-gallery__header'), 'h2, nav'],
   [document.querySelector('.visit__content'), 'h2, li'],
   [document.getElementById('team'), ':scope > *']
 ]);
@@ -52,6 +52,18 @@ const entrances = new IntersectionObserver((entries, observer) => {
 }, { threshold: .16 });
 entrances.observe(document.querySelector('.visit__media'));
 for (const target of revealGroups.keys()) entrances.observe(target);
+
+const gallery = document.getElementById('careOptions');
+const galleryPhoto = gallery.querySelector('img');
+const initialPhoto = galleryPhoto.src;
+galleryPhoto.addEventListener('load', () => {
+  if (reducedMotion.matches || galleryPhoto.src === initialPhoto) return;
+  animate(galleryPhoto, { opacity: [.45, 1], transform: ['scale(1.07)', 'scale(1)'] }, { duration: .62, ease });
+});
+new MutationObserver(() => {
+  if (reducedMotion.matches) return;
+  animate(gallery.querySelector('.care-gallery__copy'), { opacity: [.4, 1], transform: ['translateY(14px)', 'translateY(0)'] }, { duration: .42, ease });
+}).observe(gallery, { attributes: true, attributeFilter: ['data-scene'] });
 
 const quiz = document.getElementById('quizMain');
 new MutationObserver(() => {

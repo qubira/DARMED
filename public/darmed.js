@@ -64,7 +64,32 @@ function selectArea(event) {
   tab.focus({ preventScroll: true });
   if (control.tagName === 'A') $('#tratamientos').scrollIntoView();
 }
-$('#careOptions').addEventListener('click', selectArea);
+const gallery = $('#careOptions');
+const galleryScenes = {
+  facial: { title: 'Piel y <em>armonización.</em>', description: 'Explora opciones de cuidado facial, desde limpieza e hidratación hasta procedimientos de armonización.', action: 'Ver tratamientos faciales' },
+  corporal: { title: 'Cuidado del <em>contorno corporal.</em>', description: 'Consulta opciones para firmeza, contorno, estrías y cuidado posoperatorio.', action: 'Ver tratamientos corporales' },
+  capilar: { title: 'Cuidado desde <em>la raíz.</em>', description: 'Conoce la evaluación del cuero cabelludo y las opciones para la caída o pérdida de densidad.', action: 'Ver tratamientos capilares' }
+};
+gallery.addEventListener('click', event => {
+  const link = event.target.closest('[data-scene-link]');
+  if (!link) {
+    selectArea(event);
+    return;
+  }
+  if (event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
+  event.preventDefault();
+  const key = link.dataset.sceneLink;
+  if (key === gallery.dataset.scene) return;
+  const next = galleryScenes[key];
+  $('.care-gallery__nav [aria-current]', gallery).removeAttribute('aria-current');
+  link.setAttribute('aria-current', 'true');
+  $('#care-description').innerHTML = `<h3>${next.title}</h3><p>${next.description}</p>`;
+  const action = $('[data-area]', gallery);
+  action.dataset.area = key;
+  action.textContent = next.action;
+  $('.care-gallery__image img', gallery).src = IMG(AREAS[key].img, 1200);
+  gallery.dataset.scene = key;
+});
 $('#areaTabs').addEventListener('click', selectArea);
 $('#tList').addEventListener('click', event => {
   const control = event.target.closest('[data-t]');

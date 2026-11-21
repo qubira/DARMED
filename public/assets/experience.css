@@ -100,14 +100,52 @@ main [id] { scroll-margin-top: 94px; }
   font-size: .875rem;
 }
 .hero__motion-control:hover { background: #462038; }
-.care-options { position: relative; z-index: 1; margin-top: -36px; }
-.care-options__grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); background: #f9eee0; border: 1px solid #e0c6ab; border-radius: 16px; box-shadow: 0 18px 36px -24px #3a132b70; }
-.care-options__grid a { display: grid; gap: 4px; align-content: center; min-height: 84px; padding: 10px clamp(14px, 3vw, 38px); border-inline-start: 1px solid #e0c6ab; transition: background-color .2s; }
-.care-options__grid a:first-child { border-inline-start: 0; border-radius: 15px 0 0 15px; }
-.care-options__grid a:last-child { border-radius: 0 15px 15px 0; }
-.care-options__grid a:hover { background: #fff8ed; }
-.care-options__grid span { font: 400 1.9rem/1 var(--editorial); }
-.care-options__grid small { color: var(--muted); font-size: .875rem; }
+.care-gallery {
+  --gallery-surface: #efe1d2;
+  --gallery-ink: #3a1425;
+  --gallery-muted: #634552;
+  --gallery-accent: #81543d;
+  padding-block: clamp(36px, 6vw, 88px);
+  background: #fcf8f2;
+}
+.care-gallery[data-scene="corporal"] { --gallery-surface: #28433e; --gallery-ink: #f7eee0; --gallery-muted: #e4dcd0; --gallery-accent: #eacba5; }
+.care-gallery[data-scene="capilar"] { --gallery-surface: #2f293e; --gallery-ink: #faf2e6; --gallery-muted: #e9dfeb; --gallery-accent: #e4bfd8; }
+.care-gallery__header { display: flex; justify-content: space-between; align-items: end; flex-wrap: wrap; gap: 18px; margin-bottom: 21px; }
+.care-gallery__header h2 { font: 400 clamp(2.5rem, 5vw, 4.85rem)/.95 var(--editorial); }
+.care-gallery__nav { display: flex; flex-wrap: wrap; gap: 5px; padding: 5px; border: 1px solid #e2cdb5; border-radius: 30px; }
+.care-gallery__nav a { display: grid; place-items: center; min-height: 40px; padding-inline: clamp(12px, 2vw, 23px); border-radius: 24px; font-weight: 700; }
+.care-gallery__nav a[aria-current] { background: #390e23; color: #fff7eb; }
+.care-gallery__nav a:hover:not([aria-current]) { background: #f0e4d8; }
+.care-gallery__stage {
+  display: grid;
+  grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr);
+  align-items: center;
+  min-height: 420px;
+  padding: clamp(12px, 2vw, 24px);
+  gap: clamp(24px, 4vw, 72px);
+  overflow: hidden;
+  border-radius: 26px;
+  background: var(--gallery-surface);
+  color: var(--gallery-ink);
+  transition: background-color .45s, color .45s;
+}
+.care-gallery__image { margin: 0; height: 100%; min-height: 372px; position: relative; border-radius: 14px 85px 14px 14px; overflow: hidden; background: #956d59; }
+.care-gallery__image img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.care-gallery__copy { padding: clamp(4px, 2vw, 26px); }
+.care-gallery__copy h3 { font: 400 clamp(3rem, 6vw, 6rem)/.89 var(--editorial); letter-spacing: -.025em; }
+.care-gallery__copy em { color: var(--gallery-accent); }
+.care-gallery__copy p { max-width: 40ch; margin-top: 18px; color: var(--gallery-muted); }
+.care-gallery__copy .btn { margin-top: 24px; white-space: normal; height: auto; min-height: 50px; text-align: center; background: #390e23; color: #fff7eb; }
+.care-gallery:not([data-scene="facial"]) .care-gallery__copy .btn { background: #f3dbb7; color: #390e23; }
+.care-gallery__stage :focus-visible { outline-color: var(--gallery-accent); }
+.clinic #tratamientos { border-top: 1px solid #ede0d1; }
+.clinic .tlist { padding: 6px; border-radius: 18px; background: #f2e6db; }
+.clinic .titem.is-active { background: #4b1c32; }
+@media (max-width: 760px) {
+  .care-gallery__stage { min-height: 0; grid-template-columns: 1fr; }
+  .care-gallery__image { min-height: 0; height: auto; aspect-ratio: 1.65; border-top-right-radius: 56px; }
+  .care-gallery__copy { padding: 0 10px 12px; }
+}
 .clinic #areaTabs .chip { min-height: 44px; }
 .clinic .titem { min-height: 60px; border-radius: 12px; }
 .clinic .titem:hover { transform: none; border-color: #b28c72; }
@@ -164,7 +202,6 @@ main [id] { scroll-margin-top: 94px; }
   .clinic .hero__visual img { object-position: right 54%; }
   .clinic .hero__visual::after { background: linear-gradient(180deg, #200812 0%, transparent 32%); }
   .hero__motion-control { right: 16px; bottom: 26px; }
-  .care-options { margin-top: -18px; }
   .visit__grid { grid-template-columns: 1fr; }
   .visit__media { aspect-ratio: 1.6; border-top-right-radius: 56px; }
 }
@@ -202,11 +239,6 @@ main [id] { scroll-margin-top: 94px; }
   .clinic .brand-signature { width: 92px; }
   .clinic .hero h1 { margin-block: 14px; }
   .clinic .hero__cta .btn { padding-inline: 16px; }
-  .care-options__grid { grid-template-columns: 1fr; }
-  .care-options__grid a, .care-options__grid a:last-child { min-height: 56px; padding: 8px 14px; grid-template-columns: 5rem 1fr; align-items: center; border-inline: 0; border-radius: 0; }
-  .care-options__grid a:first-child { border-radius: 15px 15px 0 0; }
-  .care-options__grid a:last-child { border-radius: 0 0 15px 15px; }
-  .care-options__grid a + a { border-top: 1px solid #e0c6ab; }
   .quick-links .container { grid-template-columns: 1fr; gap: 7px; }
   .quick-links a { min-height: 44px; }
   .wellness .wait { flex-direction: column; border-radius: 16px; padding: 8px; }
@@ -215,6 +247,6 @@ main [id] { scroll-margin-top: 94px; }
 }
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
-  .hero *, .site-header, .quick-links *, .care-options *, .visit *, .cross-sec * { animation-duration: .01ms !important; transition-duration: .01ms !important; }
+  .hero *, .site-header, .quick-links *, .care-gallery *, .visit *, .cross-sec * { animation-duration: .01ms !important; transition-duration: .01ms !important; }
   .clinic-progress { display: none; }
 }

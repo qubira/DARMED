@@ -12,7 +12,7 @@
   <link rel="stylesheet" href="assets/base.css?v=clinic-2" />
   <link rel="stylesheet" href="darmed.css" />
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="assets/experience.css?v=clinic-7">
+  <link rel="stylesheet" href="assets/experience.css?v=clinic-8">
 </head>
 <body class="clinic">
   <a class="skip-link" href="#inicio">Saltar al contenido</a>
@@ -64,13 +64,30 @@
       <button class="hero__motion-control" type="button" hidden>Pausar animación</button>
     </section>
 
-    <div class="care-options">
-      <nav aria-label="Áreas de tratamiento" class="container care-options__grid" id="careOptions">
-        <a href="#tratamientos" data-area="facial"><span>Facial</span><small>Piel y armonización</small></a>
-        <a href="#tratamientos" data-area="corporal"><span>Corporal</span><small>Firmeza y contorno</small></a>
-        <a href="#tratamientos" data-area="capilar"><span>Capilar</span><small>Evaluación del cuero cabelludo</small></a>
-      </nav>
-    </div>
+    <section class="care-gallery" id="careOptions" aria-labelledby="care-title" data-scene="facial">
+      <div class="container care-gallery__inner">
+        <header class="care-gallery__header">
+          <h2 id="care-title">Explora tu área de cuidado</h2>
+          <nav class="care-gallery__nav" aria-label="Escenas de tratamiento">
+            <a href="#tratamientos" data-scene-link="facial" aria-current="true">Facial</a>
+            <a href="#tratamientos" data-scene-link="corporal">Corporal</a>
+            <a href="#tratamientos" data-scene-link="capilar">Capilar</a>
+          </nav>
+        </header>
+        <div class="care-gallery__stage">
+          <figure class="care-gallery__image">
+            <img src="https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?auto=format&amp;fit=crop&amp;w=1200&amp;q=82" alt="" loading="lazy">
+          </figure>
+          <div class="care-gallery__copy">
+            <div id="care-description" aria-live="polite">
+              <h3>Piel y <em>armonización.</em></h3>
+              <p>Explora opciones de cuidado facial, desde limpieza e hidratación hasta procedimientos de armonización.</p>
+            </div>
+            <a class="btn" href="#tratamientos" data-area="facial">Ver tratamientos faciales</a>
+          </div>
+        </div>
+      </div>
+    </section>
 
     <!-- TRATAMIENTOS -->
     <section class="section" id="tratamientos">
@@ -269,7 +286,7 @@
   </div></div>
 
   <script src="assets/base.js?v=clinic-2"></script>
-  <script src="darmed.js?v=clinic-4"></script>
-  <script type="module" src="assets/clinic-motion.js?v=4"></script>
+  <script src="darmed.js?v=clinic-5"></script>
+  <script type="module" src="assets/clinic-motion.js?v=5"></script>
 </body>
 </html>
