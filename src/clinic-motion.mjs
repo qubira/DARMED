@@ -9,28 +9,17 @@ if (!reducedMotion.matches && !location.hash) {
 }
 
 const studio = document.querySelector('.clinic .hero');
-const artwork = studio.querySelector('.hero__visual img');
-const interactiveStudio = matchMedia('(hover: hover) and (pointer: fine) and (min-width: 761px) and (prefers-reduced-motion: no-preference)');
-
-function resetStudio() {
-  artwork.style.removeProperty('--studio-x');
-  artwork.style.removeProperty('--studio-y');
+function loadStudio() {
+  if (reducedMotion.matches) return;
+  reducedMotion.removeEventListener('change', loadStudio);
+  import('./irradia-scene.mjs')
+    .then(({ mountScene }) => mountScene(studio, reducedMotion))
+    .catch(() => {
+      // The original artwork is visible if WebGL or the animation module is unavailable.
+    });
 }
-
-function syncStudio() {
-  artwork.classList.toggle('is-interactive', interactiveStudio.matches);
-  resetStudio();
-}
-
-studio.addEventListener('pointermove', event => {
-  if (!interactiveStudio.matches || event.pointerType !== 'mouse') return;
-  const bounds = studio.getBoundingClientRect();
-  artwork.style.setProperty('--studio-x', `${(event.clientX - bounds.left - bounds.width / 2) / bounds.width * 16}px`);
-  artwork.style.setProperty('--studio-y', `${(event.clientY - bounds.top - bounds.height / 2) / bounds.height * 12}px`);
-}, { passive: true });
-studio.addEventListener('pointerleave', resetStudio);
-interactiveStudio.addEventListener('change', syncStudio);
-syncStudio();
+if (reducedMotion.matches) reducedMotion.addEventListener('change', loadStudio);
+else loadStudio();
 
 const detail = document.getElementById('tDetail');
 new MutationObserver(() => {

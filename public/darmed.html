@@ -12,7 +12,7 @@
   <link rel="stylesheet" href="assets/base.css?v=clinic-2" />
   <link rel="stylesheet" href="darmed.css" />
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="assets/experience.css?v=clinic-5">
+  <link rel="stylesheet" href="assets/experience.css?v=clinic-6">
 </head>
 <body class="clinic">
   <a class="skip-link" href="#inicio">Saltar al contenido</a>
@@ -58,7 +58,9 @@
       </div>
       <figure class="hero__visual" aria-hidden="true">
         <img src="assets/irradia-studio.webp" alt="" fetchpriority="high">
+        <canvas class="hero__scene" hidden></canvas>
       </figure>
+      <button class="hero__motion-control" type="button" hidden>Pausar animación</button>
     </section>
 
     <div class="care-options">
@@ -251,6 +253,6 @@
 
   <script src="assets/base.js?v=clinic-2"></script>
   <script src="darmed.js?v=clinic-3"></script>
-  <script type="module" src="assets/clinic-motion.js?v=2"></script>
+  <script type="module" src="assets/clinic-motion.js?v=3"></script>
 </body>
 </html>

@@ -81,7 +81,25 @@ main [id] { scroll-margin-top: 94px; }
 .clinic .hero__visual { position: absolute; z-index: -1; inset: 0 0 0 27%; height: auto; margin: 0; overflow: hidden; }
 .clinic .hero__visual::after { content: ""; position: absolute; inset: 0; background: linear-gradient(90deg, #200812, #20081299 19%, transparent 42%); }
 .clinic .hero__visual img { width: 100%; height: 100%; object-fit: cover; object-position: 66% 54%; }
-.clinic .hero__visual img.is-interactive { transform: translate(var(--studio-x, 0), var(--studio-y, 0)) scale(1.035); transition: transform .45s cubic-bezier(.22,1,.36,1); }
+.clinic .hero__visual.is-rendered {
+  background: radial-gradient(ellipse at 70% 12%, #9f4933 0%, #57212d 31%, #2b0b1d 64%, #200812 82%);
+}
+.clinic .hero__visual.is-rendered img { visibility: hidden; }
+.hero__scene { position: absolute; inset: 0; width: 100%; height: 100%; }
+.hero__motion-control {
+  position: absolute;
+  z-index: 1;
+  right: max(20px, calc((100% - 1240px) / 2));
+  bottom: 50px;
+  min-height: 44px;
+  padding: 8px 15px;
+  border: 1px solid #e2c4a090;
+  border-radius: 100px;
+  background: #290f21;
+  color: #fff6ea;
+  font-size: .875rem;
+}
+.hero__motion-control:hover { background: #462038; }
 .care-options { position: relative; z-index: 1; margin-top: -36px; }
 .care-options__grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); background: #f9eee0; border: 1px solid #e0c6ab; border-radius: 16px; box-shadow: 0 18px 36px -24px #3a132b70; }
 .care-options__grid a { display: grid; gap: 4px; align-content: center; min-height: 84px; padding: 10px clamp(14px, 3vw, 38px); border-inline-start: 1px solid #e0c6ab; transition: background-color .2s; }
@@ -105,6 +123,7 @@ main [id] { scroll-margin-top: 94px; }
   .clinic .hero__visual { position: relative; inset: auto; height: clamp(225px, 64vw, 390px); }
   .clinic .hero__visual img { object-position: right 54%; }
   .clinic .hero__visual::after { background: linear-gradient(180deg, #200812 0%, transparent 32%); }
+  .hero__motion-control { right: 16px; bottom: 26px; }
   .care-options { margin-top: -18px; }
 }
 .laser-page .hero { background: linear-gradient(125deg, #edf6ff, #e4e3fa); }
