@@ -96,6 +96,11 @@ main [id] { scroll-margin-top: 94px; }
 .hero__areas a { display: inline-flex; align-items: center; min-height: 42px; font-weight: 700; }
 .hero__areas a:hover { text-decoration: underline; text-underline-offset: 5px; }
 .clinic .hero__visual { position: relative; height: auto; margin: 0; padding: 0 0 28px 24px; }
+.hero__depth {
+  position: relative;
+  perspective: 1000px;
+  perspective-origin: 54% 52%;
+}
 .hero__portrait {
   height: clamp(400px, 41vw, 550px);
   margin: 0;
@@ -104,15 +109,31 @@ main [id] { scroll-margin-top: 94px; }
   border-radius: 128px 14px 14px 14px;
   overflow: hidden;
   background: #633a46;
+  transform: translate3d(var(--portrait-x, 0px), var(--portrait-y, 0px), 0) rotateY(var(--portrait-yaw, 0deg)) rotateX(var(--portrait-pitch, 0deg));
 }
-.hero__portrait::after {
-  content: "";
+.hero__frame {
   position: absolute;
   inset: 10px;
   border: 1px solid #ffecd58f;
   border-radius: 119px 9px 9px 9px;
   pointer-events: none;
+  transform: translate3d(var(--frame-x, 0px), var(--frame-y, 0px), var(--frame-z, 0px)) rotateY(var(--portrait-yaw, 0deg));
 }
+.hero__monogram {
+  position: absolute;
+  top: 23px;
+  right: 24px;
+  display: grid;
+  place-items: center;
+  width: clamp(46px, 5vw, 65px);
+  aspect-ratio: 1;
+  border: 1px solid #f1cc95a8;
+  border-radius: 50%;
+  background: radial-gradient(circle at 25% 10%, #703045, #39172c 74%);
+  box-shadow: 5px 9px 18px #22091780, inset 0 0 0 3px #613048;
+  transform: translate3d(var(--mark-x, 0px), var(--mark-y, 0px), var(--mark-z, 0px)) rotateY(var(--mark-yaw, 0deg));
+}
+.hero__monogram img { width: 52%; height: auto; filter: drop-shadow(2px 3px 1px #381124); }
 .hero__portrait img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 38%; }
 .hero__visit {
   position: absolute;
@@ -129,6 +150,7 @@ main [id] { scroll-margin-top: 94px; }
   background: #fffaf1;
   box-shadow: 0 16px 32px -16px #3c1a2e70;
   transition: box-shadow .25s;
+  translate: var(--visit-card-x, 0px) var(--visit-card-y, 0px);
 }
 .hero__visit:hover { box-shadow: 0 16px 32px -10px #3c1a2e82; }
 .hero__visit:hover strong { text-decoration: underline; text-underline-offset: 4px; }
@@ -249,7 +271,8 @@ main [id] { scroll-margin-top: 94px; }
   .clinic .hero h1 { max-width: 16ch; }
   .clinic .hero__visual { padding-left: 10px; }
   .hero__portrait { height: clamp(295px, 65vw, 470px); border-top-left-radius: 74px; }
-  .hero__portrait::after { border-top-left-radius: 66px; }
+  .hero__frame { border-top-left-radius: 66px; }
+  .hero__monogram { top: 17px; right: 18px; }
   .visit__grid { grid-template-columns: 1fr; }
   .visit__media { top: 68px; z-index: 1; border-top-right-radius: 40px; }
   .visit__frames { height: clamp(125px, 30vh, 245px); }

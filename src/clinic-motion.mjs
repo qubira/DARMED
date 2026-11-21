@@ -9,6 +9,7 @@ if (!reducedMotion.matches && !location.hash) {
   });
   animate('.hero__portrait img', { transform: ['scale(1.04)', 'scale(1)'] }, { duration: .85, ease });
   animate('.hero__visit', { opacity: [.45, 1], transform: ['translateY(14px)', 'translateY(0)'] }, { delay: .17, duration: .58, ease });
+  animate('.hero__monogram img', { transform: ['perspective(220px) rotateY(-65deg)', 'perspective(220px) rotateY(0deg)'] }, { delay: .12, duration: .95, ease });
 }
 
 const detail = document.getElementById('tDetail');
@@ -63,6 +64,48 @@ new MutationObserver(records => {
 }).observe(summary, { childList: true, subtree: true });
 
 const pageProgress = document.querySelector('.clinic-progress');
+const portraitScene = document.querySelector('.hero__visual');
+const hero = document.querySelector('.clinic .hero');
+const desktopDepth = matchMedia('(min-width: 761px)');
+let pointerX = 0;
+let pointerY = 0;
+let depthProperties = {};
+
+function syncPortrait() {
+  const { top, bottom, height } = hero.getBoundingClientRect();
+  if (bottom < 0 || top > innerHeight) return;
+  const movement = Math.min(1, Math.max(0, (72 - top) / height));
+  const horizontal = desktopDepth.matches ? 1 : .35;
+  depthProperties = {
+    '--portrait-x': `${pointerX * 4 * horizontal}px`,
+    '--portrait-y': `${movement * 18}px`,
+    '--portrait-yaw': `${(movement * -11 + pointerX * 4) * horizontal}deg`,
+    '--portrait-pitch': `${movement * 4 - pointerY * 3}deg`,
+    '--frame-x': `${(movement * -14 + pointerX * 9) * horizontal}px`,
+    '--frame-y': `${movement * -4}px`,
+    '--frame-z': `${movement * 38 * horizontal}px`,
+    '--mark-x': `${(movement * -18 + pointerX * 16) * horizontal}px`,
+    '--mark-y': `${movement * -26 + pointerY * 10}px`,
+    '--mark-z': `${movement * 55 * horizontal}px`,
+    '--mark-yaw': `${(movement * 23 + pointerX * 12) * horizontal}deg`,
+    '--visit-card-x': `${(movement * 17 + pointerX * 8) * horizontal}px`,
+    '--visit-card-y': `${movement * -36}px`
+  };
+  for (const [property, value] of Object.entries(depthProperties)) portraitScene.style.setProperty(property, value);
+}
+
+hero.addEventListener('pointermove', event => {
+  if (reducedMotion.matches || !desktopDepth.matches || event.pointerType !== 'mouse') return;
+  const box = portraitScene.getBoundingClientRect();
+  pointerX = Math.max(-.5, Math.min(.5, (event.clientX - box.left) / box.width - .5));
+  pointerY = Math.max(-.5, Math.min(.5, (event.clientY - box.top) / box.height - .5));
+  updateProgress();
+}, { passive: true });
+hero.addEventListener('pointerleave', () => {
+  pointerX = 0;
+  pointerY = 0;
+  updateProgress();
+});
 const visit = document.getElementById('experiencia');
 const visitFrames = [...visit.querySelectorAll('.visit__frames img')];
 const visitSteps = [...visit.querySelectorAll('.visit__steps li')];
@@ -90,11 +133,15 @@ function updateProgress() {
     const pageHeight = document.documentElement.scrollHeight - innerHeight;
     const fraction = pageHeight > 0 ? Math.max(0, Math.min(1, scrollY / pageHeight)) : 0;
     pageProgress.style.transform = `scaleX(${fraction})`;
+    if (!reducedMotion.matches) syncPortrait();
     syncVisit();
     progressFrame = 0;
   });
 }
 addEventListener('scroll', updateProgress, { passive: true });
 addEventListener('resize', updateProgress);
-reducedMotion.addEventListener('change', updateProgress);
+reducedMotion.addEventListener('change', () => {
+  if (reducedMotion.matches) Object.keys(depthProperties).forEach(property => portraitScene.style.removeProperty(property));
+  else updateProgress();
+});
 updateProgress();

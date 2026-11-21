@@ -12,7 +12,7 @@
   <link rel="stylesheet" href="assets/base.css?v=clinic-2" />
   <link rel="stylesheet" href="darmed.css" />
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="assets/experience.css?v=clinic-10">
+  <link rel="stylesheet" href="assets/experience.css?v=clinic-11">
 </head>
 <body class="clinic">
   <a class="skip-link" href="#inicio">Saltar al contenido</a>
@@ -61,9 +61,15 @@
           </nav>
         </div>
         <div class="hero__visual">
-          <figure class="hero__portrait">
-            <img src="assets/irradia-retrato.webp" width="1024" height="1280" alt="" fetchpriority="high">
-          </figure>
+          <div class="hero__depth">
+            <figure class="hero__portrait">
+              <img src="assets/irradia-retrato.webp" width="1024" height="1280" alt="" fetchpriority="high">
+            </figure>
+            <div class="hero__frame" aria-hidden="true"></div>
+            <div class="hero__monogram" aria-hidden="true">
+              <img src="assets/irradia-symbol.webp" width="171" height="192" alt="">
+            </div>
+          </div>
           <a class="hero__visit" href="#experiencia">
             <img src="assets/irradia-consulta.webp" width="1440" height="960" alt="">
             <span><strong>Tu primera visita</strong><small>Qué esperar de la evaluación</small></span>
@@ -312,6 +318,6 @@
 
   <script src="assets/base.js?v=clinic-2"></script>
   <script src="darmed.js?v=clinic-6"></script>
-  <script type="module" src="assets/clinic-motion.js?v=7"></script>
+  <script type="module" src="assets/clinic-motion.js?v=8"></script>
 </body>
 </html>
