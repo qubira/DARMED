@@ -12,7 +12,7 @@
   <link rel="stylesheet" href="assets/base.css?v=clinic-2" />
   <link rel="stylesheet" href="darmed.css" />
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="assets/experience.css?v=clinic-8">
+  <link rel="stylesheet" href="assets/experience.css?v=clinic-9">
 </head>
 <body class="clinic">
   <a class="skip-link" href="#inicio">Saltar al contenido</a>
@@ -53,7 +53,7 @@
           <p class="hero__lead">Cuéntanos qué te gustaría cuidar. En tu evaluación podrás revisar las opciones faciales, corporales y capilares con un especialista.</p>
           <div class="hero__cta">
             <a href="#reservar" class="btn">Reservar evaluación</a>
-            <a href="#careOptions" class="btn btn--ghost">Explorar tratamientos</a>
+            <a href="#experiencia" class="btn btn--ghost">Descubrir la experiencia</a>
           </div>
         </div>
       </div>
@@ -62,6 +62,39 @@
         <canvas class="hero__scene" hidden></canvas>
       </figure>
       <button class="hero__motion-control" type="button" hidden>Pausar animación</button>
+    </section>
+
+    <section class="section visit" id="experiencia" aria-labelledby="visita-titulo">
+      <div class="container visit__grid">
+        <figure class="visit__media">
+          <div class="visit__frames" aria-hidden="true">
+            <img class="is-active" src="assets/irradia-atelier.webp" width="1440" height="960" alt="" loading="lazy">
+            <img src="assets/irradia-consulta.webp" width="1440" height="960" alt="" loading="lazy">
+            <img src="assets/irradia-studio.webp" width="1536" height="1024" alt="" loading="lazy">
+          </div>
+          <figcaption>Visualización conceptual de Irradia</figcaption>
+        </figure>
+        <div class="visit__content">
+          <h2 class="display" id="visita-titulo">Tu primera <em>visita</em></h2>
+          <ol class="visit__steps">
+            <li>
+              <h3>Descubre tu punto de partida</h3>
+              <p>Explora las áreas Facial, Corporal y Capilar antes de decidir qué te gustaría consultar.</p>
+              <a class="btn btn--ghost" href="#careOptions">Explorar las tres áreas</a>
+            </li>
+            <li>
+              <h3>Conversa con un especialista</h3>
+              <p>En la evaluación podrás compartir tus objetivos, hacer preguntas y revisar las opciones de cuidado.</p>
+              <a class="btn btn--ghost" href="#equipo">Conocer al equipo</a>
+            </li>
+            <li>
+              <h3>Elige tu horario</h3>
+              <p>Selecciona un tratamiento, especialista y horario en el formulario de reserva.</p>
+              <a class="btn" href="#reservar">Reservar evaluación</a>
+            </li>
+          </ol>
+        </div>
+      </div>
     </section>
 
     <section class="care-gallery" id="careOptions" aria-labelledby="care-title" data-scene="facial">
@@ -164,22 +197,6 @@
       <div class="container">
         <div class="sec-head" data-reveal><div><span class="eyebrow">Nuestro equipo</span><h2>Manos <em>expertas</em>, mirada estética</h2></div><p>Médicos colegiados, dermatólogos y cosmiatras con formación internacional.</p></div>
         <div class="team" id="team"></div>
-      </div>
-    </section>
-
-    <section class="section visit" aria-labelledby="visita-titulo">
-      <div class="container visit__grid">
-        <figure class="visit__media">
-          <img src="https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?auto=format&amp;fit=crop&amp;w=1000&amp;q=82" width="640" height="720" loading="lazy" alt="Aplicación de un tratamiento facial">
-        </figure>
-        <div class="visit__content">
-          <h2 class="display" id="visita-titulo">Tu primera <em>visita</em></h2>
-          <ol class="visit__steps">
-            <li><a href="#tratamientos"><strong>Explora tus opciones</strong><span>Consulta las áreas de tratamiento, duración y precios referenciales.</span></a></li>
-            <li><a href="#equipo"><strong>Conoce a los especialistas</strong><span>Revisa quién atiende cada área antes de elegir con quién conversar.</span></a></li>
-            <li><a href="#reservar"><strong>Elige tu horario</strong><span>Completa el formulario de reserva para tu evaluación.</span></a></li>
-          </ol>
-        </div>
       </div>
     </section>
 
@@ -287,6 +304,6 @@
 
   <script src="assets/base.js?v=clinic-2"></script>
   <script src="darmed.js?v=clinic-5"></script>
-  <script type="module" src="assets/clinic-motion.js?v=5"></script>
+  <script type="module" src="assets/clinic-motion.js?v=6"></script>
 </body>
 </html>

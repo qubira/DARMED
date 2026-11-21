@@ -38,19 +38,12 @@ const entrances = new IntersectionObserver((entries, observer) => {
     if (!entry.isIntersecting) continue;
     observer.unobserve(entry.target);
     if (reducedMotion.matches) continue;
-    if (entry.target.matches('.visit__media')) {
-      animate(entry.target, { clipPath: ['inset(0 24% 0 0 round 12px)', 'inset(0 0 0 0 round 12px)'] }, { duration: .76, ease })
-        .then(() => entry.target.style.removeProperty('clip-path'));
-      animate(entry.target.querySelector('img'), { transform: ['scale(1.09)', 'scale(1)'] }, { duration: .85, ease });
-      continue;
-    }
     const pieces = entry.target.querySelectorAll(revealGroups.get(entry.target));
     pieces.forEach((piece, index) => {
       animate(piece, { opacity: [.25, 1], transform: ['translateY(18px)', 'translateY(0)'] }, { delay: index * .075, duration: .48, ease });
     });
   }
 }, { threshold: .16 });
-entrances.observe(document.querySelector('.visit__media'));
 for (const target of revealGroups.keys()) entrances.observe(target);
 
 const gallery = document.getElementById('careOptions');
@@ -80,6 +73,26 @@ new MutationObserver(records => {
 }).observe(summary, { childList: true, subtree: true });
 
 const pageProgress = document.querySelector('.clinic-progress');
+const visit = document.getElementById('experiencia');
+const visitFrames = [...visit.querySelectorAll('.visit__frames img')];
+const visitSteps = [...visit.querySelectorAll('.visit__steps li')];
+let activeVisit = -1;
+function syncVisit() {
+  const bounds = visit.getBoundingClientRect();
+  if (bounds.bottom <= 0 || bounds.top >= innerHeight) return;
+  const marker = innerHeight * .67;
+  let selected = 0;
+  for (const [index, step] of visitSteps.entries()) {
+    if (step.getBoundingClientRect().top <= marker) selected = index;
+  }
+  if (activeVisit !== selected) {
+    activeVisit = selected;
+    visitFrames.forEach((frame, index) => frame.classList.toggle('is-active', index === selected));
+    visitSteps.forEach((step, index) => step.classList.toggle('is-active', index === selected));
+  }
+  const fraction = Math.max(0, Math.min(1, -bounds.top / Math.max(1, bounds.height - innerHeight)));
+  visit.style.setProperty('--visit-offset', `${(fraction - .5) * 18}px`);
+}
 let progressFrame = 0;
 function updateProgress() {
   if (reducedMotion.matches || progressFrame) return;
@@ -87,6 +100,7 @@ function updateProgress() {
     const pageHeight = document.documentElement.scrollHeight - innerHeight;
     const fraction = pageHeight > 0 ? Math.max(0, Math.min(1, scrollY / pageHeight)) : 0;
     pageProgress.style.transform = `scaleX(${fraction})`;
+    syncVisit();
     progressFrame = 0;
   });
 }
