@@ -29,7 +29,8 @@
 .workspace-page .topbar { background: var(--surface); }
 .workspace-page .ws { min-height: 72px; }
 .workspace-page .ws__logo, .workspace-page .me .av { background: #654589; }
-.workspace-page .ws__logo { border-radius: 50%; font: 1.35rem/1 var(--editorial); }
+.workspace-page .ws__logo { border-radius: 50%; background: #390e23; }
+.ws__logo .brand-symbol { width: 18px; height: 22px; object-fit: contain; }
 .workspace-page .ws__txt b { font: 1.55rem/1.05 var(--editorial); }
 .workspace-page .nav-i { min-height: 38px; border-radius: 10px; }
 [data-theme="dark"] .workspace-page .nav-i.on { color: #edd9ff; }
@@ -57,11 +58,12 @@
 .login-page .login__art {
   padding: clamp(26px, 5vw, 74px);
   gap: 36px;
-  background: radial-gradient(ellipse at 8% 80%, #593d79, transparent 65%), #211b32;
+  background: radial-gradient(ellipse at 8% 80%, #67283d, transparent 65%), #390e23;
 }
 .login-page .login__art::before { display: none; }
-.login-page .l-brand { display: inline-flex; align-self: start; gap: 0; font: 400 clamp(3rem, 5vw, 4.4rem)/.8 var(--editorial); }
-.login-page .l-brand span, .login-page .l-title span { color: #dfc5fa; background: none; }
+.login-page .l-brand { display: inline-flex; align-self: start; gap: 12px; font: 400 clamp(3rem, 5vw, 4.4rem)/.8 var(--editorial); }
+.login-page .l-brand .brand-symbol { width: 44px; height: auto; }
+.login-page .l-brand span, .login-page .l-title span { color: #efd2a0; background: none; }
 .login-page .l-title { font: 400 clamp(3rem, 6vw, 6.25rem)/.92 var(--editorial); }
 .login-page .orb { border-radius: 12px; animation: none; }
 .login-page .login__form { padding: clamp(16px, 4vw, 40px); }

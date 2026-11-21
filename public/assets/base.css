@@ -26,10 +26,10 @@ input,select,textarea{font:inherit;color:inherit}
 ::selection{background:var(--primary);color:var(--primary-ink)}
 
 /* ---------- Barra de marcas del grupo ---------- */
-.group-bar{background:#211b32;color:#fff;font-size:.875rem;position:relative;z-index:60}
+.group-bar{background:#390e23;color:#fff;font-size:.875rem;position:relative;z-index:60}
 .group-bar__inner{display:flex;align-items:center;justify-content:space-between;gap:12px;min-height:52px;padding-block:4px}
-.group-bar__label{font:1.7rem/1 Georgia,serif;letter-spacing:-.05em;color:#fff}
-.group-bar__label span{color:#d8b9ff}
+.group-bar__label{display:inline-flex;align-items:center;gap:8px;font:1.3rem/1 Georgia,serif;color:#fae8cc}
+.group-bar__label img{width:21px;height:24px;object-fit:contain}
 .group-bar__tabs{display:flex;gap:4px;flex-wrap:wrap}
 .group-bar__tabs::-webkit-scrollbar{display:none}
 .group-tab{padding:7px 14px;border-radius:999px;font-weight:600;letter-spacing:.08em;opacity:.7;transition:.25s;white-space:nowrap;display:inline-flex;align-items:center;gap:7px}
@@ -38,7 +38,7 @@ input,select,textarea{font:inherit;color:inherit}
 .group-tab.is-active{opacity:1;background:rgba(255,255,255,.14)}
 .group-bar__login{display:inline-flex;align-items:center;gap:6px;opacity:.8;white-space:nowrap}
 .group-bar__login:hover{opacity:1}
-.group-bar a:focus-visible{outline:2px solid #d8b9ff;outline-offset:2px}
+.group-bar a:focus-visible{outline:2px solid #efd2a0;outline-offset:2px}
 @media(max-width:620px){
   .group-bar__inner{flex-wrap:wrap;gap:4px 12px;padding-block:8px}
   .group-bar__tabs{order:1;width:100%;justify-content:space-between}

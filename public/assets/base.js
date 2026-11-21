@@ -104,7 +104,7 @@
       const u = Group.user();
       bar.className = 'group-bar';
       bar.innerHTML = `<div class="container group-bar__inner">
-        <a class="group-bar__label" href="index.html" aria-label="iiradia, inicio">iiradia<span aria-hidden="true">.</span></a>
+        <a class="group-bar__label" href="index.html" aria-label="Irradia, inicio"><img src="assets/irradia-symbol.webp" width="171" height="192" alt=""><span>Irradia</span></a>
         <nav class="group-bar__tabs" aria-label="Líneas de iiradia">${brands.map(([k, n, h, c]) => { const cc = Group.cartCount(k); const active = k === opts.brand; return `<a class="group-tab${active ? ' is-active' : ''}" href="${h}"${active ? ' aria-current="page"' : ''} style="--dot:${c}" title="${cc ? cc + ' producto(s) en tu carrito ' + n : n}"><i></i>${n}${cc ? `<span class="group-tab__n">${cc}</span>` : ''}</a>`; }).join('')}</nav>
         ${u ? `<a class="group-bar__login" href="master.html" title="Ir al panel master"><span class="group-bar__av">${esc(u.name[0])}</span> Hola, ${esc(u.name.split(' ')[0])} · Panel</a>`
             : `<a class="group-bar__login" href="loger.html">${ICON.user.replace('<svg', '<svg width="15" height="15"')} Intranet</a>`}

@@ -2,6 +2,7 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8" />
+  <link rel="icon" href="assets/irradia-symbol.webp" type="image/webp">
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>IRRADIA | Clínica de Estética y Bienestar</title>
   <meta name="description" content="IRRADIA: medicina estética facial, corporal y capilar con especialistas certificados en Lima." />
@@ -25,7 +26,7 @@
   <header class="site-header">
     <div class="container site-header__inner">
       <button class="icon-btn menu-btn" data-menu-open aria-label="Menú"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 7h16M4 12h16M4 17h10"/></svg></button>
-      <a href="#inicio" class="logo"><span class="logo__mark">ii</span><span class="logo__text"><span class="logo__name">IRRADIA</span><span class="logo__tag">Estética &amp; Bienestar</span></span></a>
+      <a href="#inicio" class="logo clinic-identity" aria-label="Irradia Estética, inicio"><img class="brand-symbol" src="assets/irradia-symbol.webp" width="171" height="192" alt=""><img class="brand-signature" src="assets/irradia-signature.webp" width="540" height="156" alt=""></a>
       <nav class="nav">
         <a href="#tratamientos" class="has-mega">Tratamientos</a>
         <a href="#promos">Promociones</a>
@@ -45,38 +46,24 @@
   </header>
 
   <div class="mobile-nav"><div class="scrim"></div><div class="mobile-nav__panel">
-    <div class="logo" style="margin-bottom:16px"><span class="logo__mark">ii</span><span class="logo__name">IRRADIA</span></div>
+    <div class="logo" style="margin-bottom:16px"><img class="brand-symbol" src="assets/irradia-symbol.webp" width="171" height="192" alt=""><span class="logo__name">IRRADIA</span></div>
     <a href="#tratamientos">Tratamientos</a><a href="#promos">Promociones</a><a href="#resultados">Resultados</a><a href="#diagnostico">Diagnóstico de piel</a><a href="#tienda">Tienda</a><a href="#equipo">Especialistas</a><a href="#reservar">Reservar cita</a><a href="#contacto">Sedes</a>
   </div></div>
 
   <main tabindex="-1" id="inicio">
-    <!-- HERO -->
-    <section class="hero">
+    <section class="hero" aria-labelledby="clinica-titulo">
       <div class="container hero__grid">
-        <div>
-          <span class="hero__pill" data-reveal><b>NUEVO</b> Bioestimuladores de colágeno 2026 ✨</span>
-          <h1 data-reveal data-delay="100">Tu mejor versión,<br><span class="rotator" id="rotator"><span class="on">natural.</span><span>radiante.</span><span>segura.</span><span>tuya.</span></span></h1>
-          <p class="hero__lead" data-reveal data-delay="200">Medicina estética facial, corporal y capilar con médicos certificados, tecnología de última generación y resultados que se notan — sin que se note.</p>
-          <div class="hero__cta" data-reveal data-delay="300">
-            <a href="#reservar" class="btn">Agenda tu evaluación gratis <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
-            <a href="#diagnostico" class="btn btn--ghost">Haz tu diagnóstico de piel</a>
-          </div>
-          <div class="hero__proof" data-reveal data-delay="400">
-            <div class="avatars">
-              <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=120&q=70" alt="">
-              <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=120&q=70" alt="">
-              <img src="https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=120&q=70" alt="">
-              <img src="https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=120&q=70" alt="">
-            </div>
-            <div><b><span class="stars">★★★★★</span> 4.9/5</b><small>+2,380 reseñas en Google</small></div>
+        <div class="hero__copy">
+          <p class="eyebrow">Medicina estética · Lima</p>
+          <h1 id="clinica-titulo">Estética que respeta <em>tu esencia.</em></h1>
+          <p class="hero__lead">Explora tratamientos faciales, corporales y capilares. Empieza con una evaluación para conversar sobre tus objetivos y las opciones de cuidado.</p>
+          <div class="hero__cta">
+            <a href="#reservar" class="btn">Reservar una evaluación</a>
+            <a href="#tratamientos" class="btn btn--ghost">Ver tratamientos</a>
           </div>
         </div>
-        <div class="hero__visual" data-reveal="zoom">
-          <div class="hero__img hero__img--a"><img src="https://images.unsplash.com/photo-1515377905703-c4788e51af15?auto=format&fit=crop&w=1100&q=80" alt="" fetchpriority="high"></div>
-          <div class="hero__img hero__img--b"><img src="https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?auto=format&fit=crop&w=600&q=80" alt="Tratamiento facial"></div>
-          <div class="float-card float-card--1"><span class="ic">💉</span><div><b data-count="12500" data-prefix="+">0</b><small>pacientes atendidos</small></div></div>
-          <div class="float-card float-card--2"><span class="live-dot"></span><div><b>Hoy 4:30 pm</b><small>próxima cita disponible</small></div></div>
-          <div class="float-card float-card--3"><span class="ic">🏆</span><div><b>Top 10 Lima</b><small>Clínicas estéticas 2026</small></div></div>
+        <div class="hero__visual">
+          <div class="hero__img hero__img--a"><img src="https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?auto=format&amp;fit=crop&amp;w=1200&amp;q=82" alt="Aplicación de un tratamiento facial" fetchpriority="high"></div>
         </div>
       </div>
     </section>
@@ -243,7 +230,7 @@
     <div class="container">
       <div class="footer__grid">
         <div class="footer__brand">
-          <div class="logo"><span class="logo__mark">ii</span><span class="logo__name">IRRADIA</span></div>
+          <div class="logo"><img class="brand-symbol" src="assets/irradia-symbol.webp" width="171" height="192" alt=""><span class="logo__name">IRRADIA</span></div>
           <p style="margin-top:16px;max-width:320px">Clínica de medicina estética y bienestar. Resultados naturales con respaldo médico.</p>
           <form class="newsletter" onsubmit="event.preventDefault();UI.Group.log('lead','darmed',{label:'Newsletter · '+UI.esc(this.querySelector('input').value)});UI.toast('¡Suscrita! Te enviamos un cupón de 10% 💌');this.reset()"><input type="email" placeholder="Tu correo para promos" required><button class="btn btn--sm">Suscribirme</button></form>
           <div class="socials"><a href="#">FB</a><a href="#">IG</a><a href="#">TK</a><a href="#">YT</a><a href="#">IN</a></div>

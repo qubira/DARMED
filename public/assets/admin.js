@@ -72,7 +72,7 @@
     const href = (id, ext) => ext || (opts.page === 'master' ? `#${id}` : `master.html#${id}`);
     $('.side').innerHTML = `
       <div class="ws" id="ws" style="--wsc:${BRANDS[state.brand].c}">
-        <span class="ws__logo">ii</span>
+        <span class="ws__logo"><img class="brand-symbol" src="assets/irradia-symbol.webp" width="171" height="192" alt=""></span>
         <div class="ws__txt"><b>iiradia</b><small><i></i>${BRANDS[state.brand].n}</small></div>
         ${I('sort')}
         <div class="ws__menu">${Object.entries(BRANDS).map(([k, b]) => `<button data-ws="${k}" class="${k === state.brand ? 'on' : ''}"><span class="dot" style="background:${b.c}"></span>${b.n}</button>`).join('')}</div>

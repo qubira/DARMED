@@ -4,16 +4,6 @@ const IMG = (id, w = 900) => `https://images.unsplash.com/photo-${id}?auto=forma
 
 UI.init({ brand: 'darmed', waText: 'Hola IRRADIA, quiero información sobre sus tratamientos', waBubble: '¿Agendamos tu evaluación gratis? 💬' });
 
-/* ---------- Palabra rotativa ---------- */
-(() => {
-  const els = $$('#rotator span'); let i = 0;
-  setInterval(() => {
-    const prev = els[i]; i = (i + 1) % els.length;
-    els.forEach(e => e.className = '');
-    prev.className = 'off'; els[i].className = 'on';
-  }, 2400);
-})();
-
 /* ---------- Marcas ---------- */
 const brands = ['ALLERGAN', 'GALDERMA', 'MERZ', 'TEOXANE', 'SCULPTRA', 'RADIESSE', 'ISDIN', 'LA ROCHE-POSAY', 'SKINCEUTICALS', 'HYDRAFACIAL'];
 $('#brandTrack').innerHTML = [...brands, ...brands].map(b => `<span class="marquee__item">${b}</span>`).join('');
