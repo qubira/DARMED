@@ -2,7 +2,7 @@
 const { $, $$, money, toast, productArt, productCard } = UI;
 const IMG = (id, w = 900) => `https://images.unsplash.com/photo-${id}?auto=format&fit=crop&w=${w}&q=80`;
 
-UI.init({ brand: 'darmed', waText: 'Hola IRRADIA, quiero información sobre sus tratamientos', waBubble: '¿Agendamos tu evaluación gratis? 💬' });
+UI.init({ brand: 'darmed', whatsapp: false });
 
 /* ---------- Marcas ---------- */
 const brands = ['ALLERGAN', 'GALDERMA', 'MERZ', 'TEOXANE', 'SCULPTRA', 'RADIESSE', 'ISDIN', 'LA ROCHE-POSAY', 'SKINCEUTICALS', 'HYDRAFACIAL'];
@@ -256,13 +256,6 @@ $('#searchInput').addEventListener('input', e => {
 });
 $('#searchInput').dispatchEvent(new Event('input'));
 $('#searchRes').addEventListener('click', e => { const c = e.target.closest('.chip'); if (c) { $('#searchInput').value = c.textContent; $('#searchInput').dispatchEvent(new Event('input')); } });
-
-/* ---------- Prueba social ---------- */
-UI.socialProof([
-  { who: 'Andrea de Surco', what: 'reservó <b>Hydrafacial</b>', when: 'hace 3 min', art: productArt(PRODUCTS[5]) },
-  { who: 'Lucía de Miraflores', what: 'compró <b>C E Ferulic</b>', when: 'hace 8 min', art: productArt(PRODUCTS[0]) },
-  { who: 'Carlos de La Molina', what: 'separó <b>Body Sculpt</b>', when: 'hace 12 min', art: productArt(PRODUCTS[11]) }
-]);
 
 UI.crossSell($('#cross'), 'darmed');
 UI.Group.onChange(() => UI.crossSell($('#cross'), 'darmed'));
