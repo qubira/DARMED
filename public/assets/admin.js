@@ -72,7 +72,7 @@
     const href = (id, ext) => ext || (opts.page === 'master' ? `#${id}` : `master.html#${id}`);
     $('.side').innerHTML = `
       <div class="ws" id="ws" style="--wsc:${BRANDS[state.brand].c}">
-        <span class="ws__logo">D</span>
+        <span class="ws__logo">ii</span>
         <div class="ws__txt"><b>iiradia</b><small><i></i>${BRANDS[state.brand].n}</small></div>
         ${I('sort')}
         <div class="ws__menu">${Object.entries(BRANDS).map(([k, b]) => `<button data-ws="${k}" class="${k === state.brand ? 'on' : ''}"><span class="dot" style="background:${b.c}"></span>${b.n}</button>`).join('')}</div>
@@ -84,7 +84,7 @@
       <div class="side__foot"><div class="me"><span class="av">${u ? esc(u.name[0]) : '?'}</span><div style="min-width:0;flex:1"><b>${u ? esc(u.name) : 'Invitado'}</b><small>${u ? esc(u.role) + ' · ' + esc(u.email || '') : 'Sin sesión'}</small></div><button class="ib" id="logoutB" title="Cerrar sesión">${I('out')}</button></div></div>`;
 
     $('.topbar').innerHTML = `
-      <button class="ib menu-t" id="mOpen">${I('menu')}</button>
+      <button class="ib menu-t" id="mOpen" aria-label="Abrir menú">${I('menu')}</button>
       <button class="ib" id="collapseB" title="Contraer menú">${I('panel')}</button>
       <div class="crumbs"><span>iiradia</span><span>/</span><b id="crumbT">${opts.title || ''}</b></div>
       <div class="topbar__r">

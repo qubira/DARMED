@@ -46,17 +46,26 @@ const SLIDES = [
   { bg: 'linear-gradient(120deg,#e9e1ff,#cbb8ff)', eb: 'Fragancias', t: 'Haz match<br>con tu aroma', d: 'Mists y perfumes para cada vibe. Gourmand, floral o fresco.', p: ['r24', 'r25', 'r26'] },
   { bg: 'linear-gradient(120deg,#dff2ff,#b8e2ff)', eb: 'Cabello', t: 'Resetea tu<br>cabello', d: 'Repara, nutre y suaviza post verano con Olaplex y Salon In.', p: ['r19', 'r20', 'r21'] }
 ];
-let sI = 0, sTimer;
+const slideControls = $('#sDots');
 $('#slider').insertAdjacentHTML('afterbegin', SLIDES.map((s, i) => `<div class="slide ${i === 0 ? 'is-on' : ''}" style="background:${s.bg}">
   <div class="slide__txt"><span class="tag">${s.eb}</span><h2>${s.t}</h2><p>${s.d}</p><a href="#catalogo" class="btn">Ver todo →</a></div>
   <div class="slide__art">${s.p.map(id => `<div class="p">${productArt(PRODUCTS.find(x => x.id === id))}</div>`).join('')}</div></div>`).join(''));
-function goSlide(i) {
-  sI = (i + SLIDES.length) % SLIDES.length;
-  $$('.slide').forEach((s, k) => s.classList.toggle('is-on', k === sI));
-  $('#sDots').innerHTML = SLIDES.map((_, k) => `<button class="${k === sI ? 'is-on' : ''}" data-s="${k}" aria-label="Slide ${k + 1}"></button>`).join('');
-  clearTimeout(sTimer); sTimer = setTimeout(() => goSlide(sI + 1), 6000);
+slideControls.innerHTML = SLIDES.map((slide, i) => `<button type="button" data-s="${i}" aria-label="Ver ${slide.eb}"></button>`).join('');
+const slides = $$('.slide', $('#slider'));
+const slideButtons = $$('[data-s]', slideControls);
+function goSlide(index) {
+  slides.forEach((slide, i) => {
+    const active = i === index;
+    slide.classList.toggle('is-on', active);
+    slide.inert = !active;
+    slideButtons[i].classList.toggle('is-on', active);
+    slideButtons[i].setAttribute('aria-pressed', String(active));
+  });
 }
-$('#sDots').addEventListener('click', e => { const b = e.target.closest('[data-s]'); if (b) goSlide(+b.dataset.s); });
+slideControls.addEventListener('click', e => {
+  const button = e.target.closest('[data-s]');
+  if (button) goSlide(Number(button.dataset.s));
+});
 goSlide(0);
 $('#sideB').innerHTML = `
   <a href="#coreana" class="side-b" style="background:#111;color:#fff">${productArt(PRODUCTS[1])}<span class="tag tag--hot" style="align-self:flex-start;margin-bottom:10px">K-Beauty</span><h3>Rutina coreana<br>-15%</h3></a>

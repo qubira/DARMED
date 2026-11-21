@@ -58,8 +58,10 @@
     .avail div{display:flex;align-items:center;gap:10px;font-size:.84rem}
     .avail .meter{flex:1;margin:0}
   </style>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/workspace.css">
 </head>
-<body>
+<body class="workspace-page">
   <div class="app">
     <aside class="side"></aside>
 
@@ -77,7 +79,7 @@
               <h3 id="wLabel"></h3>
               <div class="docs" id="docFilter" style="margin-left:auto"></div>
             </div>
-            <div class="cal-wrap"><div class="cal" id="cal"></div></div>
+            <div class="cal-wrap" role="region" aria-label="Calendario semanal" tabindex="0"><div class="cal" id="cal"></div></div>
             <p style="font-size:.76rem;color:var(--muted);margin-top:10px">💡 Haz clic en un espacio vacío para crear una cita ahí. Las citas con borde brillante llegaron desde la web de IRRADIA.</p>
           </div>
           <div style="display:grid;gap:16px;align-content:start">

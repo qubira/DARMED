@@ -1,0 +1,88 @@
+/* Shared public experience. Each line supplies its own accent. */
+:root {
+  --iiradia-ink: #211b32;
+  --editorial: "Instrument Serif", Georgia, serif;
+  --font-body: "DM Sans", system-ui, sans-serif;
+}
+.clinic { --edition: #efe2f6; --edition-ink: #632957; }
+.shop { --edition: #f9e4eb; --edition-ink: #99264e; }
+.wellness { --edition: #e3eee1; --edition-ink: #28543c; }
+.laser-page { --edition: #e2eefb; --edition-ink: #164c7d; }
+:focus-visible { outline: 3px solid var(--edition-ink); outline-offset: 4px; }
+.footer :focus-visible { outline-color: #e4c8ff; }
+.skip-link { position: fixed; z-index: 150; top: 12px; left: 12px; padding: 10px 16px; background: white; color: var(--iiradia-ink); border-radius: 8px; transform: translateY(-160%); }
+.skip-link:focus { transform: none; }
+main [id] { scroll-margin-top: 94px; }
+.site-header { background: color-mix(in srgb, white 94%, var(--edition)); }
+.site-header .logo__name { font: 400 1.85rem/1 var(--editorial); letter-spacing: .025em; text-transform: uppercase; }
+.site-header .logo__mark { border-radius: 50%; background: var(--edition); color: var(--edition-ink); box-shadow: none; }
+.site-header .nav a { color: var(--iiradia-ink); }
+.site-header .nav a:hover, .site-header .nav a.is-active { background: var(--edition); color: var(--edition-ink); }
+.hero h1, .shop .slide h2 {
+  font-family: var(--editorial);
+  font-weight: 400;
+  letter-spacing: -.035em;
+  text-wrap: balance;
+}
+.hero h1 { font-size: clamp(3rem, 7.4vw, 7rem); }
+.section { padding-block: clamp(56px, 7.5vw, 112px); }
+.section--tight { padding-block: clamp(36px, 5vw, 68px); }
+.section--soft { background: color-mix(in srgb, var(--edition) 45%, white); }
+.sec-head h2 { font: 400 clamp(2.6rem, 5.2vw, 5rem)/.98 var(--editorial); letter-spacing: -.025em; text-wrap: balance; }
+.sec-head h2 em, .eyebrow { color: var(--edition-ink); }
+.eyebrow { font-size: .875rem; letter-spacing: .085em; }
+.footer { background: var(--iiradia-ink); padding-top: clamp(48px, 7vw, 84px); }
+.cross-sec { background: var(--edition); }
+.cross__card { border: 0; border-radius: 18px; }
+
+.quick-links { padding-block: 18px; background: var(--edition); color: var(--edition-ink); }
+.quick-links .container { display: grid; grid-template-columns: auto repeat(3, minmax(0, 1fr)); align-items: stretch; gap: 10px; }
+.quick-links h2 { align-self: center; margin-right: 14px; font: 400 clamp(1.6rem, 2.5vw, 2rem)/1 var(--editorial); }
+.quick-links a { display: flex; min-height: 48px; align-items: center; padding: 10px 16px; border-radius: 10px; background: #ffffffa8; font-weight: 700; }
+.quick-links a:hover { background: white; text-decoration: underline; text-underline-offset: 4px; }
+
+.clinic .hero { background: #f5eaf4; }
+.clinic .hero::before { display: none; }
+.clinic .hero__visual { height: clamp(400px, 47vw, 580px); }
+.clinic .hero__img--a { inset: 0 14% 3% 0; border-radius: 48% 48% 22px 22px / 35% 35% 22px 22px; }
+.clinic .hero__img--b { border-color: #f5eaf4; }
+.laser-page .hero { background: linear-gradient(125deg, #edf6ff, #e4e3fa); }
+.laser-page .hero h1 .laser::after { display: none; }
+.laser-page .hero__card { border-radius: 24px; box-shadow: 0 28px 56px -38px #204f80; }
+.shop .ticker { background: #922649; animation: none; }
+.shop .slide { visibility: hidden; }
+.shop .slide.is-on { visibility: visible; }
+.shop .slider__dots { gap: 6px; }
+.shop .slider__dots button { width: 40px; height: 28px; padding: 0 6px; background: transparent; }
+.shop .slider__dots button::before { content: ""; display: block; width: 100%; height: 4px; border-radius: 8px; background: currentColor; opacity: .4; }
+.shop .slider__dots button.is-on::before { opacity: 1; }
+.shop .slider__dots button.is-on::after { content: none; }
+
+.wellness .hero { display: block; min-height: 0; padding: clamp(24px, 5.5vw, 76px) 0; background: #edf3e9; }
+.wellness .hero__inner { display: grid; grid-template-columns: 1fr .85fr; gap: clamp(24px, 5vw, 78px); max-width: none; align-items: center; text-align: left; }
+.wellness .hero h1 { font-size: clamp(3.15rem, 6.5vw, 6.35rem); }
+.wellness .hero p, .wellness .wait { margin-inline: 0; }
+.wellness .hero .countdown, .wellness .wait-meta { justify-content: flex-start; }
+.wellness .hero .countdown { margin-block: 24px; }
+.wellness .hero .countdown div { min-width: 58px; padding: 8px; }
+.wellness .hero .countdown b { font-size: 1.6rem; }
+.wellness .hero-photo { width: 100%; height: clamp(420px, 49vw, 610px); object-fit: cover; border-radius: 24px 48% 24px 24px / 24px 28% 24px 24px; }
+
+@media (max-width: 900px) {
+  .wellness .hero__inner { grid-template-columns: 1fr; }
+  .wellness .hero-photo { height: clamp(220px, 60vw, 440px); border-radius: 18px; }
+  .quick-links .container { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .quick-links h2 { grid-column: 1 / -1; }
+}
+@media (max-width: 540px) {
+  .clinic .hero__visual { height: clamp(260px, 93vw, 390px); }
+  .quick-links .container { grid-template-columns: 1fr; gap: 7px; }
+  .quick-links a { min-height: 44px; }
+  .wellness .wait { flex-direction: column; border-radius: 16px; padding: 8px; }
+  .wellness .wait input { min-height: 48px; }
+  .wellness .hero .countdown { gap: 5px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .hero *, .site-header, .quick-links *, .cross-sec * { animation-duration: .01ms !important; transition-duration: .01ms !important; }
+}

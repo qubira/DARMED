@@ -1,0 +1,90 @@
+/* iiradia intranet, dashboard and clinical agenda */
+:root {
+  --editorial: "Instrument Serif", Georgia, serif;
+  --font-body: "DM Sans", system-ui, sans-serif;
+  --r-lg: 18px;
+}
+:root:not([data-theme="dark"]) {
+  --primary: #604185;
+  --primary-2: #4a306b;
+  --primary-soft: #eee6f8;
+  --bg: #f6f3fa;
+  --surface-2: #fcfaff;
+  --soft: #f0eaf6;
+  --hover: #f5effb;
+  --text: #241c32;
+  --text-2: #433850;
+  --muted: #61556e;
+  --faint: #746880;
+  --line: #e3dbea;
+  --line-2: #eee8f3;
+  --sh-1: 0 2px 8px #241c320a;
+}
+[data-theme="dark"] {
+  --primary: #8361a6;
+  --primary-2: #694888;
+  --primary-soft: #38294c;
+}
+:focus-visible { outline: 3px solid #8b6aac; outline-offset: 3px; }
+.workspace-page .topbar { background: var(--surface); }
+.workspace-page .ws { min-height: 72px; }
+.workspace-page .ws__logo, .workspace-page .me .av { background: #654589; }
+.workspace-page .ws__logo { border-radius: 50%; font: 1.35rem/1 var(--editorial); }
+.workspace-page .ws__txt b { font: 1.55rem/1.05 var(--editorial); }
+.workspace-page .nav-i { min-height: 38px; border-radius: 10px; }
+[data-theme="dark"] .workspace-page .nav-i.on { color: #edd9ff; }
+.workspace-page .content { padding-top: clamp(18px, 3vw, 36px); }
+.workspace-page .ph {
+  min-height: 124px;
+  align-items: center;
+  padding: clamp(16px, 3vw, 30px);
+  background: linear-gradient(115deg, var(--primary-soft), var(--surface));
+  border: 1px solid var(--line);
+  border-radius: var(--r-lg);
+}
+.workspace-page .ph h1 { font: 400 clamp(2.25rem, 4.8vw, 4rem)/.95 var(--editorial); letter-spacing: -.025em; }
+.workspace-page .ph p { margin-top: 8px; font-size: .95rem; }
+.workspace-page .card__head h3 { font-size: 1rem; }
+.workspace-page .kpis { gap: clamp(10px, 1.5vw, 20px); }
+.workspace-page .kpi { border-top: 3px solid var(--primary-soft); }
+.workspace-page .cal__h { background: var(--soft); }
+.workspace-page .ev.st-done { background: var(--ok-bg); }
+.workspace-page .cal-wrap { scrollbar-color: var(--primary) var(--soft); }
+.workspace-page .dchip.off { opacity: 1; color: var(--muted); background: var(--soft); }
+.workspace-page .dchip.off .av-s { opacity: .55; }
+
+.login-page .login { grid-template-columns: 1fr 1fr; min-height: 100svh; }
+.login-page .login__art {
+  padding: clamp(26px, 5vw, 74px);
+  gap: 36px;
+  background: radial-gradient(ellipse at 8% 80%, #593d79, transparent 65%), #211b32;
+}
+.login-page .login__art::before { display: none; }
+.login-page .l-brand { display: inline-flex; align-self: start; gap: 0; font: 400 clamp(3rem, 5vw, 4.4rem)/.8 var(--editorial); }
+.login-page .l-brand span, .login-page .l-title span { color: #dfc5fa; background: none; }
+.login-page .l-title { font: 400 clamp(3rem, 6vw, 6.25rem)/.92 var(--editorial); }
+.login-page .orb { border-radius: 12px; animation: none; }
+.login-page .login__form { padding: clamp(16px, 4vw, 40px); }
+.login-page .lf { width: min(520px, 100%); padding: clamp(16px, 3vw, 34px); background: var(--surface); border: 1px solid var(--line); border-radius: 24px; box-shadow: 0 20px 55px -35px #4a306b70; }
+.login-page .lf h1 { font: 400 clamp(2.5rem, 5vw, 3.75rem)/.95 var(--editorial); margin-bottom: 8px; }
+.login-page .role { min-height: 65px; font-size: .875rem; }
+.login-page .role.is-on { background: var(--primary-soft); box-shadow: none; }
+.login-page .lf .btn { min-height: 48px; }
+.login-page #pass { padding-right: 74px; }
+
+@media (max-width: 900px) {
+  .login-page .login { grid-template-columns: 1fr; }
+  .login-page .login__art { gap: 22px; }
+  .login-page .l-title { max-width: 15ch; }
+}
+@media (max-width: 600px) {
+  .workspace-page .ph { min-height: 0; }
+  .workspace-page .topbar { gap: 4px; }
+  .workspace-page .topbar__r { gap: 4px; }
+  .workspace-page .topbar .kbar kbd { display: none; }
+  .workspace-page .kpi svg.spark { display: none; }
+  .workspace-page .kpi b { max-width: 100%; font-size: 1.25rem; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .workspace-page *, .login-page * { scroll-behavior: auto !important; animation-duration: .01ms !important; transition-duration: .01ms !important; }
+}

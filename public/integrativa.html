@@ -103,8 +103,11 @@
     .drip>*,.score>*{min-width:0}
     @media(max-width:620px){.hero .countdown div{min-width:62px;padding:12px 6px}.hero .countdown b{font-size:1.7rem}.wait{flex-wrap:wrap;border-radius:20px}.wait input{height:44px;flex:1 1 100%}.wait .btn{flex:1}.bag{width:160px;height:240px}.ring{width:200px;height:200px}.ring svg{width:200px;height:200px}}
   </style>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/experience.css">
 </head>
-<body>
+<body class="wellness">
+  <a class="skip-link" href="#top">Saltar al contenido</a>
   <div data-group-bar></div>
   <header class="site-header">
     <div class="container site-header__inner">
@@ -116,18 +119,29 @@
   </header>
   <div class="mobile-nav"><div class="scrim"></div><div class="mobile-nav__panel"><b style="font-family:var(--font-display);font-size:1.6rem;margin-bottom:10px">SMALL</b><a href="#pilares">Especialidades</a><a href="#sueros">Arma tu suero</a><a href="#programas">Programas</a><a href="#score">Wellness score</a><a href="#equipo">Equipo</a></div></div>
 
-  <main id="top">
+  <main tabindex="-1" id="top">
     <section class="hero">
-      <span class="blob blob--1"></span><span class="blob blob--2"></span><span class="blob blob--3"></span>
       <div class="container hero__inner">
+        <div class="hero-copy">
         <span class="launch" data-reveal><span class="dot"></span> Gran apertura · Enero 2027 · San Isidro</span>
         <h1 data-reveal data-delay="100">Medicina que mira<br>a la persona <em>completa</em></h1>
         <p data-reveal data-delay="200">Sueroterapia, nutrición funcional, medicina regenerativa y longevidad en un solo espacio. Únete a la lista de espera y obtén tu primera consulta gratis.</p>
         <div data-countdown="1200" data-reveal data-delay="300"></div>
-        <form class="wait" id="waitForm" data-reveal data-delay="400"><input type="email" required placeholder="Tu correo electrónico" id="waitMail"><button class="btn">Quiero mi lugar</button></form>
+        <form class="wait" id="waitForm" data-reveal data-delay="400"><input type="email" required placeholder="Tu correo electrónico" id="waitMail" aria-label="Tu correo electrónico"><button class="btn">Quiero mi lugar</button></form>
         <div class="wait-meta" data-reveal data-delay="500"><div class="avatars"><span style="background:#2f6b4f">VR</span><span style="background:#c98b5e">MC</span><span style="background:#7fb48f">AL</span><span style="background:#18291f">+</span></div><span><b id="waitN">1,284</b> personas ya están en la lista</span></div>
+        </div>
+        <img class="hero-photo" src="https://images.unsplash.com/photo-1490645935967-10de6ba17061?auto=format&amp;fit=crop&amp;w=1200&amp;q=82" alt="Mesa con ingredientes frescos" fetchpriority="high">
       </div>
     </section>
+
+    <nav class="quick-links" aria-label="Accesos directos">
+      <div class="container">
+        <h2>¿Qué buscas hoy?</h2>
+        <a href="#pilares">Conocer especialidades</a>
+        <a href="#programas">Ver programas</a>
+        <a href="#score">Evaluar mi bienestar</a>
+      </div>
+    </nav>
 
     <section class="section" id="pilares">
       <div class="container">

@@ -46,29 +46,31 @@
     @keyframes spin{to{transform:rotate(360deg)}}
     @media(max-width:900px){.login{grid-template-columns:1fr}.login__art{min-height:auto;padding:28px;gap:24px}.orbit{display:none}}
   </style>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/workspace.css">
 </head>
-<body>
-  <div class="login">
+<body class="login-page">
+  <main class="login">
     <section class="login__art">
-      <div class="l-brand"><span class="logo__mark">ii</span><div><b>IRRADIA</b><small>PLATAFORMA CORPORATIVA</small></div></div>
+      <a class="l-brand" href="index.html" aria-label="iiradia, inicio">iiradia<span>.</span></a>
       <div>
         <h2 class="l-title">Un solo acceso para <span>todo el grupo.</span></h2>
-        <p style="opacity:.7;max-width:460px;margin-top:14px">Caja, agendamientos, inventario, clientes y reportes de las 4 marcas en una interfaz moderna y segura.</p>
+        <p style="opacity:.7;max-width:460px;margin-top:14px">Caja, agendamientos, inventario, clientes y reportes de las 4 marcas desde un mismo panel.</p>
         <div class="orbit" id="orbit"></div>
       </div>
-      <small style="opacity:.5">© 2026 iiradia · Acceso privado para personal autorizado</small>
+      <small style="opacity:.5">© 2026 iiradia · Intranet de demostración</small>
     </section>
 
     <section class="login__form">
       <form class="lf" id="lf">
-        <div><span class="eyebrow">Ingreso empresarial</span><h1 style="margin-top:8px">Bienvenido de nuevo 👋</h1><p style="color:var(--muted);font-size:.9rem">Elige tu rol (demo) y entra al panel correspondiente.</p></div>
+        <div><h1>Acceso al equipo</h1><p style="color:var(--muted);font-size:.9rem">Elige tu rol (demo) y entra al panel correspondiente.</p></div>
         <div class="roles" id="roles">
           <button type="button" class="role is-on" data-role="master"><span>👑</span>Master</button>
           <button type="button" class="role" data-role="agendador"><span>📅</span>Agendador</button>
           <button type="button" class="role" data-role="doctor"><span>🩺</span>Doctor</button>
         </div>
-        <div class="field"><label>Correo corporativo</label><input class="input" type="email" id="email" required></div>
-        <div class="field"><label>Contraseña</label><div class="pw"><input class="input" type="password" id="pass" required><button type="button" id="showPw">Mostrar</button></div></div>
+        <div class="field"><label for="email">Correo corporativo</label><input class="input" type="email" id="email" required></div>
+        <div class="field"><label for="pass">Contraseña</label><div class="pw"><input class="input" type="password" id="pass" required><button type="button" id="showPw">Mostrar</button></div></div>
         <div class="row-b"><label><input type="checkbox" checked> Recordarme</label><a href="#" style="color:var(--primary);font-weight:600" onclick="UI.toast('Enlace de recuperación enviado (maqueta)','✉️');return false">¿Olvidaste tu contraseña?</a></div>
         <button class="btn btn--block" id="go">Ingresar al sistema</button>
         <div class="divider">o continúa con</div>
@@ -76,7 +78,7 @@
         <p style="text-align:center;font-size:.82rem;color:var(--muted)">¿Solo quieres ver las tiendas? <a href="index.html" style="color:var(--primary);font-weight:700">Ir a la web pública</a></p>
       </form>
     </section>
-  </div>
+  </main>
 
   <script src="assets/base.js"></script>
   <script>

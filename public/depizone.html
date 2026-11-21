@@ -10,8 +10,11 @@
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="assets/base.css" />
   <link rel="stylesheet" href="depizone.css" />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/experience.css">
 </head>
-<body>
+<body class="laser-page">
+  <a class="skip-link" href="#contenido">Saltar al contenido</a>
   <div data-group-bar></div>
   <div class="ticker"><div class="ticker__track">
     <span>Hasta 6 CUOTAS SIN INTERESES</span><span>Axilas desde S/ 49 la sesión</span><span>Evaluación de piel gratis</span><span>Láser diodo triple onda · casi indoloro</span><span>Paga 6 sesiones y llévate 8</span>
@@ -37,12 +40,12 @@
     <a href="#cotizador">Cotizador por zonas</a><a href="#servicios">Tratamientos</a><a href="#calculadora">¿Cuántas sesiones necesito?</a><a href="#tecnologia">Tecnología</a><a href="#productos">BLUESKIN</a><a href="#sedes">Sedes</a><a href="#corporativo">Ventas corporativas</a>
   </div></div>
 
-  <main>
+  <main id="contenido" tabindex="-1">
     <section class="hero">
       <div class="container hero__grid">
         <div>
           <span class="tag tag--pri" data-reveal>⚡ Promo de temporada</span>
-          <h1 data-reveal data-delay="100">Piel suave,<br><span class="laser">para siempre.</span></h1>
+          <h1 data-reveal data-delay="100">Depilación láser,<br><span class="laser">zona por zona.</span></h1>
           <p class="hero__lead" data-reveal data-delay="200">Depilación láser diodo triple onda, casi indolora y apta para todo tipo de piel. Resultados desde la primera sesión con especialistas certificadas.</p>
           <div style="display:flex;gap:12px;margin-top:30px;flex-wrap:wrap" data-reveal data-delay="300"><a href="#cotizador" class="btn">Arma tu paquete</a><a href="#calculadora" class="btn btn--ghost">¿Cuántas sesiones necesito?</a></div>
           <div class="hero__badges" data-reveal data-delay="400">
@@ -63,6 +66,15 @@
         </div>
       </div>
     </section>
+
+    <nav class="quick-links" aria-label="Accesos directos">
+      <div class="container">
+        <h2>¿Qué buscas hoy?</h2>
+        <a href="#cotizador">Cotizar por zonas</a>
+        <a href="#tecnologia">Conocer la tecnología</a>
+        <a href="#sedes">Ver sedes</a>
+      </div>
+    </nav>
 
     <section class="section" id="cotizador">
       <div class="container">
